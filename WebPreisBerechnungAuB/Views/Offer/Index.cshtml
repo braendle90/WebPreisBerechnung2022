@@ -1,0 +1,89 @@
+﻿@model List<WebPreisBerechnungAuB.Models.ViewModel.OfferVM>
+
+@{
+    ViewData["Title"] = "OverView";
+    var test1 = Model;
+    int count = 0;
+
+
+}
+
+<style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
+
+    .iconsStyle {
+        font-size: 1.5rem;
+        color: black;
+    }
+</style>
+
+<table class="table table-hover table-head-fixed text-nowrap" style="border-collapse:collapse;">
+
+    @foreach (var OfferId in Model)
+    {
+        <tbody>
+            <tr data-toggle="collapse" data-target="#client_@count" class="accordion-toggle">
+                <td>
+                    <div class="row">
+
+                        @if (OfferId.Offer != null)
+                        {
+                            <div class="col">@OfferId.Offer.OfferName</div>
+                        }
+
+                        @if (OfferId.Offer == null)
+                        {
+                            <div class="col">@OfferId.OfferId</div>
+                        }
+
+
+                        <div class="col">
+                            <a asp-action="Index" asp-controller="OrderTextil" asp-route-Id="@OfferId.OfferId">
+                                <i class="bi bi-pencil-square iconsStyle"></i>
+                            </a>
+                           
+                            <a asp-action="Index" asp-controller="Logo"  asp-route-id="@OfferId.OfferId">
+                                <i class="bi bi-plus-circle iconsStyle"></i>
+                            </a>
+                            <a asp-action="Index" asp-controller="Calculation" asp-route-id="@OfferId.OfferId">
+                                <i class="bi bi-envelope iconsStyle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            @foreach (var opl in OfferId.OrderPostionLogoListe)
+            {
+                <tr>
+                    <td class="hiddenRow">
+                        <div class="row">
+                            <div class="accordian-body collapse col" id="client_@count">@opl.Order.NumberOfPieces Stück</div>
+                            @if (opl.Order.TextilColor == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                <div class="accordian-body collapse col" id="client_@count">@opl.Order.TextilColor.TextilColorName TextilCOlorName</div>
+                            }
+                            @if (opl.Order.Textil == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                <div class="accordian-body collapse col" id="client_@count">@opl.Order.Textil.TextilName TexilName</div>
+                            }
+                        </div>
+                </tr>
+            }
+
+        </tbody>
+        count++;
+    }
+</table>
+
+
+

@@ -1,0 +1,45 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.PositionVM
+
+<h4>PositionVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="OrderId" class="control-label"></label>
+                <input asp-for="OrderId" class="form-control" />
+                <span asp-validation-for="OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfferId" class="control-label"></label>
+                <input asp-for="OfferId" class="form-control" />
+                <span asp-validation-for="OfferId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextilName" class="control-label"></label>
+                <input asp-for="TextilName" class="form-control" />
+                <span asp-validation-for="TextilName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoId" class="control-label"></label>
+                <select asp-for="LogoId" class="form-control" asp-items="ViewBag.LogoId"></select>
+                <span asp-validation-for="LogoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PositionId" class="control-label"></label>
+                <select asp-for="PositionId" class="form-control" asp-items="ViewBag.PositionId"></select>
+                <span asp-validation-for="PositionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

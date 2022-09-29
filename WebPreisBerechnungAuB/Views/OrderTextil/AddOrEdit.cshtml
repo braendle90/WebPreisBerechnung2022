@@ -1,0 +1,56 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.OrderVM
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+}
+
+<h1>AddOrEdit</h1>
+
+<h4>OrderVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="OfferId" class="control-label"></label>
+                <input asp-for="OfferId" class="form-control" />
+                <span asp-validation-for="OfferId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfPieces" class="control-label"></label>
+                <input asp-for="NumberOfPieces" class="form-control" />
+                <span asp-validation-for="NumberOfPieces" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextilColorId" class="control-label"></label>
+                <input asp-for="TextilColorId" class="form-control" />
+                <span asp-validation-for="TextilColorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextilColorName" class="control-label"></label>
+                <input asp-for="TextilColorName" class="form-control" />
+                <span asp-validation-for="TextilColorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextilId" class="control-label"></label>
+                <input asp-for="TextilId" class="form-control" />
+                <span asp-validation-for="TextilId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextilName" class="control-label"></label>
+                <input asp-for="TextilName" class="form-control" />
+                <span asp-validation-for="TextilName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

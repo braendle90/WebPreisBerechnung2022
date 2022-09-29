@@ -1,0 +1,157 @@
+﻿@model IEnumerable<WebPreisBerechnungAuB.Models.ViewModel.PositionVM>
+
+@{
+    ViewData["Title"] = "OverView";
+    var test1 = Model;
+    int count = 0;
+
+
+}
+
+<style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
+
+    .iconsStyle {
+        font-size: 1.5rem;
+        color: black;
+    }
+</style>
+
+<div class="text-center mb-5">
+
+    <h1>Position Logo</h1>
+
+</div>
+
+
+<table class="table table-hover table-head-fixed text-nowrap" style="border-collapse:collapse;">
+
+    @foreach (var textil in Model)
+    {
+        <tbody>
+            <tr data-toggle="collapse" data-target="#client_@count" class="accordion-toggle">
+                <th>
+                    <div class="row">
+                        <div class="col">@textil.TextilName</div>
+
+                        <div class="col">
+
+                            <a onclick="showInPopupPosition('@Url.Action("AddOrEdit","Position",null,Context.Request.Scheme)','Position hinzufügen', 0,@textil.OrderPositionId, '@Model.FirstOrDefault().OfferId' )" data-dismiss="modal"><i class="float-right bi bi-plus-circle iconsStyle"></i> </a>
+
+                            @*
+                                <a asp-action="EditClient" asp-controller="Client" asp-route-Id="@textil.OfferId">
+                                <i class="bi bi-pencil-square iconsStyle"></i>
+                                </a>
+                                <i class="bi bi-trash iconsStyle"></i>*@
+                            @*                            <a asp-action="AddPacket" asp-controller="Packet" asp-route-clientId="@textil.OfferId">
+                                <i class="bi bi-plus-circle iconsStyle"></i>
+                                </a>*@
+                            @*  <a asp-action="SendMail" asp-controller="Home" asp-route-clientId="@textil.OfferId">
+                                <i class="bi bi-envelope iconsStyle"></i>
+                                </a>*@
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            @foreach (var logo in textil.positionLogoList)
+            {
+                <tr>
+                    <td class="hiddenRow ">
+                        <div class="row ml-5">
+                            <div class="accordian-body collapse show col" id="client_@count">Logo Name: @logo.Logo.LogoName </div>
+                            @if (logo.Logo.Color == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                <div class="accordian-body collapse show col" id="client_@count">Farbanzahl: @logo.Logo.Color.NumberOfColors</div>
+                            }
+                            @if (logo.Logo.Color == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+
+                                <div class="accordian-body collapse show col" id="client_@count">Position: @logo.Position.PositionName</div>
+
+
+                                <div class="accordian-body collapse show col" id="client_@count">
+
+
+                                    <a onclick="showInPopupPosition('@Url.Action("AddOrEdit","Position",null,Context.Request.Scheme)','Position Ändern', @logo.Id,@textil.OrderPositionId, '@Model.FirstOrDefault().OfferId' )" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
+
+
+                                    <form style="display: inline;" asp-action="Delete" asp-route-id="@logo.Id" onclick="return jQueryAjaxDelete(this)" class="float-right bi bi-trash iconsStyle">@*<i class="bi bi-trash iconsStyle"></i>*@ </form>
+
+
+
+                                </div>
+
+
+                            }
+                        </div>
+                </tr>
+            }
+
+        </tbody>
+        count++;
+    }
+</table>
+
+
+
+
+<div>
+
+    <div class="float-left">
+                     <form method="get" asp-action="Index" asp-controller="Logo" asp-route-id="@Model.FirstOrDefault().OfferId">
+
+                <input type="submit" value="Zurück" class="btn btn-primary" />
+            </form>
+
+    </div>
+
+
+@{
+
+   if (Model.FirstOrDefault().positionLogoList.Count() >= 1)
+    {
+        <div class="text-center">
+
+            <form method="get" asp-action="Index" asp-controller="Calculation" asp-route-id="@Model.FirstOrDefault().OfferId">
+
+                <input type="submit" value="Weiter" class="btn btn-primary" />
+            </form>
+
+
+        </div>
+
+
+    }
+}
+
+</div>
+
+
+@*@{
+
+    if (Model.FirstOrDefault().positionLogoList.Count() >= 1)
+    {
+        <div class="text-center">
+
+            <form method="get" asp-action="Index" asp-controller="Calculation" asp-route-id="@Model.FirstOrDefault().OfferId">
+
+                <input type="submit" value="Weiter" class="btn btn-primary" />
+            </form>
+
+
+        </div>
+
+
+    }
+}
+*@

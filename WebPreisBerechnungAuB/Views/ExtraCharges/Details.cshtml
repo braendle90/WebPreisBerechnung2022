@@ -1,0 +1,42 @@
+﻿@model WebPreisBerechnungAuB.Models.ExtraCharge
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ExtraCharge</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChargeName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChargeName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChargePrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChargePrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChargeTyp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChargeTyp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.isOneTimeCharge)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.isOneTimeCharge)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,203 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.LogoVM
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+    Layout = null;
+}
+
+
+
+<link href="~/css/cropper.css" rel="stylesheet" />
+<script src="~/lib\cropper\cropper.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+
+<form method="post" enctype="multipart/form-data" asp-action="AddOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryAjaxPost(this);">
+
+    <div class="row">
+
+        <div class="col">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Model.OfferId" asp-for="OfferId" />
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ShowUserLogos" />
+            <div class="form-group">
+                <label asp-for="Logo.LogoName" class="control-label"></label>
+                <input asp-for="Logo.LogoName" class="form-control" />
+                <span asp-validation-for="Logo.LogoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logo.SurfaceWidht" class="control-label"></label>
+                <input oninput="CalculateImageSizeInMilimeterWidth(this)" id="width" type="number" asp-for="Logo.SurfaceWidht" class="form-control" />
+                <span asp-validation-for="Logo.SurfaceWidht" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-group-text">@Html.DisplayNameFor(m => m.ColorList.FirstOrDefault().ColorName)</label>
+                <select name="ColorId" id="ColorId" class="custom-select" asp-items="@(new SelectList(Model.ColorList,"Id","ColorName"))"></select>
+                <span asp-validation-for="ColorList.FirstOrDefault().ColorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logo.SurfaceHight" class="control-label"></label>
+                <input oninput="CalculateImageSizeInMilimeterWidth(this)" type="number" id="hight" asp-for="Logo.SurfaceHight" class="form-control" />
+                <span asp-validation-for="Logo.SurfaceHight" class="text-danger"></span>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    @*   <div class="row">
+        <div class="mx-auto">
+
+        @Html.LabelFor(model => model.ExtraChargeId, "Extra Charge")
+        <br />
+        @Html.ListBoxFor(m => m.ExtraChargeId, Model.ExtraChargeList)
+        <br />
+        <br />
+
+        </div>
+
+        </div>*@
+
+    <div class="row">
+
+        <div class="mx-auto">
+
+
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+
+                @*onsubmit="return jQueryAjaxPost(this)*@
+
+
+                <div class="custom-file">
+                    <input type="file" onchange="return jQueryAjaxSendImage(this);" class="custom-file-input" id="inputGroupFile01" name="file" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    <input type="hidden" name="Image" id="Image" />
+                </div>
+
+                @*                <div class="custom-file">
+                    <input type="file" onchange="fileToImage(event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    <input type="hidden" name="Image" id="Image" />
+                    </div>*@
+            </div>
+
+
+@*
+            C:\Users\domin\Desktop\WebPreisBerechnungAuB-master\WebPreisBerechnungAuB\wwwroot\src\bg_repeat.png*@
+
+            <div id="croppDiv" class='container'>
+
+
+                <div class="row">
+
+                    @if (Model.Logo.File == null)
+                    {
+                        <img width="400" height="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png");  object-fit: contain' hidden id="imgShow" />
+                    }
+                    else
+                    {
+                        <img width="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow" src="@Model.Logo.File.FilePath" />
+                    }
+
+                </div>
+
+                <div class="rowPreisberechnung d-flex justify-content-between">
+
+                    <a onclick="CropImage(event)" class="btn btn-primary ">Zuschneiden</a>
+                    <br />
+                    <a onclick="Save(event)" class="btn btn-primary ">Speichern</a>
+                    <br />
+@*
+                    //ICONS To Test 
+                    <a onclick="Save(event)" type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.rotate(-45)">
+                            <span class="fa fa-undo-alt"></span>
+                        </span>
+                    </a>*@
+                </div>
+
+            </div>
+            @*            <div style="height:350px; margin:10px;">
+                <img id="rsDiagram" src="" class="partDiagram">
+                </div>*@
+
+            @*                    <img id="imgShow" src="~/img/bildTest.png" />
+                <a onclick="CropImage(event)" class="btn btn-primary">Zuschneiden</a>
+                <br />
+                <a onclick="Save(event)" class="btn btn-primary">Speichern</a>
+                <br />*@
+
+
+            <br />
+
+            @*
+                <div class="form-group">
+                <label asp-for="Logo.File.FileData" class="control-label"></label>
+                <input type="file" asp-for="Logo.File.FileData" class="form-control" />
+                <span asp-validation-for="Logo.File.FileData" class="text-danger"></span>
+                </div>*@
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="mx-auto">
+
+
+
+            @for (int i = 0; i < @Model.ExtraChargeListsModel.Count; i++)
+            {
+
+                // hier wurde der id=@Model.ExtraChargeListsModel[@i].ExtraCharge.ChargeName in Id verändert und der name=@Model.ExtraChargeListsModel[@i].ExtraCharge.ChargeName hinzugefügt
+                <div>@Html.CheckBoxFor(x => Model.ExtraChargeListsModel[@i].IsSelected, new {id=@Model.ExtraChargeListsModel[@i].ExtraCharge.Id , name=@Model.ExtraChargeListsModel[@i].ExtraCharge.ChargeName})  @Model.ExtraChargeListsModel[@i].ExtraCharge.ChargeName (@Model.ExtraChargeListsModel[@i].ExtraCharge.ChargePrice €)</div>
+                <div>@Html.HiddenFor(x => Model.ExtraChargeListsModel[@i].ExtraCharge.Id)</div>
+                //This will give you the ExtraCharg.id
+                <div>@Html.HiddenFor(x => Model.ExtraChargeListsModel[@i].Id)</div>
+                //This will give you the id
+            }
+
+
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="mx-auto">
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</form>
+
+@section scripts {
+
+<script>
+
+
+
+
+</script>
+
+}

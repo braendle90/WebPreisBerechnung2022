@@ -1,0 +1,39 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.OrderVM
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+    var test = Model;
+    Layout = null;
+}
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryAjaxPost(this);">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <input readonly asp-for="OfferId" class="form-control" />
+                 
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfPieces" class="control-label"></label>
+                    <input asp-for="NumberOfPieces" class="form-control" />
+                    <span asp-validation-for="NumberOfPieces" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-group-text">@Html.DisplayNameFor(m => m.TextilList.FirstOrDefault().TextilName)</label>
+                    <select name="TextilId" id="TextilId" class="custom-select" asp-items="@(new SelectList(Model.TextilList,"Id","TextilName"))"></select>
+                    <span asp-validation-for="TextilList.FirstOrDefault().TextilName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-group-text">@Html.DisplayNameFor(m => m.TextilColorList.FirstOrDefault().TextilColorName)</label>
+                    <select name="TextilColorId" id="TextilColorId" class="custom-select" asp-items="@(new SelectList(Model.TextilColorList,"Id","TextilColorName"))"></select>
+                    <span asp-validation-for="TextilColorList.FirstOrDefault().TextilColorName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+

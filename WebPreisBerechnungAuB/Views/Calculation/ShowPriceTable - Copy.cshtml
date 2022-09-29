@@ -1,0 +1,275 @@
+﻿@using System.Globalization
+@model IEnumerable<WebPreisBerechnungAuB.Models.CalculationVM>
+
+@{
+    ViewData["Title"] = "ShowTable";
+    var test = Model;
+    int count = 0;
+}
+
+@*<style>
+    .hiddenRow {
+    padding: 0 !important;
+    }
+
+    thead tr {
+    border-bottom: 10px solid white;
+    }
+
+    .iconsStyle {
+    font-size: 1.5rem;
+    color: black;
+    }
+    </style>*@
+
+<div class="text-center mb-5">
+
+    <h1>Kalkulierter Preis</h1>
+
+</div>
+
+
+
+
+
+
+
+@foreach (var item in Model)
+{
+
+    <table class="table  table-striped ">
+
+        <thead>
+            <tr>
+
+
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.Textil.TextilName)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.TextilColor.TextilColorName)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.NumberOfPieces)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceTransfer)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceScreenPrint)</th>
+                <th scope="col">Ändern</th>
+                <th scope="col">Löschen</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody class="">
+            <tr class="table-light">
+
+                <td scope="col">@item.OrderPositionLogo.Order.Textil.TextilName</td>
+                <td scope="col">@item.OrderPositionLogo.Order.TextilColor.TextilColorName</td>
+                <td scope="col">@item.OrderPositionLogo.Order.NumberOfPieces</td>
+                <td scope="col">@item.OrderPositionLogo.Order.PriceTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td scope="col">@item.OrderPositionLogo.Order.PriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td scope="col">
+
+                    <a style="font-size: 2rem" onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",Context.Request.Scheme)','Texil ändern','@item.OrderPositionLogo.Id','@item.OrderPositionLogo.Order.OfferId')" data-dismiss="modal" class="bi bi-pencil-square iconsStyle"></a>
+
+                </td>
+
+                <td scope="col">
+
+                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.OrderPositionLogo.Id" onclick="return jQueryAjaxDelete(this)" class=" bi bi-trash iconsStyle">
+                        <input type="hidden" asp-for="@item.OrderPositionLogo.Id" />
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <table class="table table-dark table-striped ">
+
+        <thead class="table-dark">
+
+            <tr class="pb-5 text-primary pb-5 border-bottom border-top">
+
+                <th scope="col" id="client_@count">Logo Name</th>
+
+                <th scope="col" id="client_@count">Größe Logo </th>
+
+                <th scope="col" id="client_@count">Position</th>
+                <th scope="col" id="client_@count">Farbanzahl </th>
+                <th scope="col" id="client_@count">Stückzahl </th>
+
+                <th scope="col" id="client_@count">Transferpreis</th>
+
+                <th scope="col" id="client_@count">Siebdruckpreis</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var data in item.ShowPriceModel)
+            {
+                <tr class="border-bottom">
+
+
+                    <td scope="col" id="client_@count"> @data.Logo.LogoName</td>
+
+                    <td scope="col" id="client_@count"> @data.Logo.SurfaceHight x @data.Logo.SurfaceWidht mm </td>
+
+                    <td scope="col" id="client_@count">@data.Position.PositionName</td>
+                    <td scope="col" id="client_@count">@data.Logo.Color.NumberOfColors</td>
+                    <td scope="col" id="client_@count">@data.OrderPositionLogo.Order.NumberOfPieces Stk.</td>
+
+
+                    <td scope="col" id="client_@count"> @data.PricePerPicesTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
+
+                    <td scope="col" id="client_@count">  @data.PricePerPices.ToString("C", CultureInfo.CurrentCulture)</td>
+
+
+                </tr>
+
+
+
+                <tr>
+
+                    <td scope="col" id="client_@count">@Html.DisplayNameFor(model => model.FirstOrDefault().ShowPriceModel.FirstOrDefault().Anbringung)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    @if (data.Anbringung > 1)
+                    {
+                        <td scope="col" id="client_@count">  @data.Anbringung.ToString("C", CultureInfo.CurrentCulture)</td>
+                    }
+
+
+
+                    <td></td>
+
+
+                </tr>
+
+
+
+                @foreach (var extraCharge in data.extraChargeLists)
+                {
+                    @if (extraCharge.ExtraCharge.ChargeTyp == "Logo")
+                    {
+                        <tr>
+
+                            <td scope="col" id="client_@count">@extraCharge.ExtraCharge.ChargeName</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            @if (extraCharge.ExtraCharge.ChargeTyp == "Logo")
+                            {
+                                <td scope="col" id="client_@count">  @extraCharge.ExtraCharge.ChargePrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        </tr>
+                    }
+
+                }
+
+
+                // total price
+                <tr>
+
+                    <th scope="col" id="client_@count">Preis Logo</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th scope="col" id="client_@count">  @data.TotalPriceTransfer.ToString("C", CultureInfo.CurrentCulture)</th>
+                    <th scope="col" id="client_@count">  @data.TotalPriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</th>
+
+                </tr>
+
+                <tr class="table-light">
+
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+            }
+
+
+        </tbody>
+    </table>
+    count++;
+
+}
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+
+    <div class="float-left">
+        <form method="get" asp-action="Index" asp-controller="Position" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+
+            <input type="submit" value="Zurück" class="btn btn-primary" />
+        </form>
+
+    </div>
+
+
+    @{
+
+        if (Model.FirstOrDefault().ShowPriceModel.Count() >= 1)
+        {
+            //<div class="text-center">
+
+            //    <form method="get" asp-action="Index" asp-controller="Calculation" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+
+            //        <input type="submit" value="Drucken" class="btn btn-primary" />
+            //    </form>
+
+
+            //</div>
+
+
+            <div class="text-center">
+
+                <input type="button" onclick="display()" value="Drucken" class="btn btn-primary" />
+
+
+
+            </div>
+
+
+        }
+    }
+
+</div>
+
+
+

@@ -1,0 +1,57 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.LogoVM
+
+@{
+    ViewData["Title"] = "Deine Logos";
+    var test = Model;
+}
+
+<div class="text-center mb-5">
+
+    <h1>Deine Logos</h1>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().LogoName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().Color.ColorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().LogoSurfaceSize)
+            </th>
+            <th>
+                <a onclick="showInPopupLogo('@Url.Action("AddOrEdit","Logo",null,Context.Request.Scheme)','Logo hinzufügen', 0,'','@Model.ShowUserLogos'  )" data-dismiss="modal" class="btn btn-success text-white"><i></i> Logo Hinzufügen</a>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LogoList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogoName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color.ColorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogoSurfaceSize)
+                </td>
+                <td>
+                    <a style="font-size: 2rem" onclick="showInPopupLogo('@Url.Action("AddOrEdit","Logo",Context.Request.Scheme)','Logo ändern','@item.Id','@Model.OfferId','@Model.ShowUserLogos')" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
+                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.Id" asp-route-showUserLogos="@Model.ShowUserLogos" onclick="return jQueryAjaxDelete(this)" class="float-right bi bi-trash iconsStyle">
+                        <input type="hidden" asp-for="@item.Id" />
+
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

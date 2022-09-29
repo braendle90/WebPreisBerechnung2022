@@ -1,0 +1,101 @@
+﻿@model IEnumerable<WebPreisBerechnungAuB.Models.ViewModel.OrderVM>
+
+@{
+    var test = Model;
+    ViewData["Title"] = "Partial";
+    var offerId = "";
+
+    try
+    {
+        offerId = @Model.FirstOrDefault().OfferId;
+    }
+    catch (NullReferenceException e)
+    {
+        offerId = "0";
+    }
+
+}
+
+<div class="text-center">
+
+    <h1>Textilien</h1>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OfferId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfPieces)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TextilColorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TextilId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TextilName)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Order",null,Context.Request.Scheme)','Texil hinzufügen', 0, '@offerId' )" data-dismiss="modal" class="btn btn-success text-white"><i></i> Textil Hinzufügen</a>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfferId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPieces)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextilColorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextilId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextilName)
+                </td>
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Order",Context.Request.Scheme)','Texil ändern','@item.Id','@item.OfferId')" data-dismiss="modal" class="btn btn-primary text-white"><i></i> Textil Ändern</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)" class="btn btn-danger">
+                        <input type="hidden" asp-for="@item.Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@{
+
+    if (Model.Count() >= 1)
+    {
+        <div class="text-center">
+            <form method="get" asp-action="index" asp-controller="Logo" asp-route-OfferId="@Model.FirstOrDefault().OfferId">
+                <input type="submit" value="Weiter zu Logos" class="btn btn-primary" />
+            </form>
+        </div>
+
+
+    }
+}

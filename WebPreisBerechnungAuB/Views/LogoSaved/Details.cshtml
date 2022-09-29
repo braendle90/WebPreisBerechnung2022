@@ -1,0 +1,90 @@
+﻿@model WebPreisBerechnungAuB.Models.Logo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Logo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogoName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SurfaceWidht)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SurfaceWidht)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SurfaceHight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SurfaceHight)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoSurfaceSize)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogoSurfaceSize)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OfferId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OfferId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.isOld)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.isOld)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogoPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogoPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PricePerScreen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PricePerScreen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPriceScreenPrint)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalPriceScreenPrint)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPriceTransfer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalPriceTransfer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TransferLogoPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TransferLogoPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.isLogoStorage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.isLogoStorage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

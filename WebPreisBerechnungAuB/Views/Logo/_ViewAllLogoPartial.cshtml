@@ -1,0 +1,112 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.LogoVM
+
+@{
+    ViewData["Title"] = "Index";
+    var test = Model;
+}
+
+<div class="text-center mb-5">
+
+<h1>Logo</h1>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().LogoName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().Color.ColorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoList.FirstOrDefault().LogoSurfaceSize)
+            </th>
+            <th>
+                <a onclick="showInPopupLogo('@Url.Action("AddOrEdit","Logo",null,Context.Request.Scheme)','Logo hinzufügen', 0, '@Model.OfferId' )" data-dismiss="modal" class="btn btn-success text-white"><i></i> Logo Hinzufügen</a>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LogoList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogoName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color.ColorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LogoSurfaceSize)
+                </td>
+                <td>
+                    <a style="font-size: 2rem" onclick="showInPopupLogo('@Url.Action("AddOrEdit","Logo",Context.Request.Scheme)','Logo ändern','@item.Id','@Model.OfferId')" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
+                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.Id" onclick="return jQueryAjaxDelete(this)" class="float-right bi bi-trash iconsStyle">
+                        <input type="hidden" asp-for="@item.Id" />
+                    
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+<div>
+
+    <div class="float-left">
+                     <form method="get" asp-action="Index" asp-controller="OrderTextil" asp-route-id="@Model.OfferId">
+
+                <input type="submit" value="Zurück" class="btn btn-primary" />
+            </form>
+
+    </div>
+
+
+@{
+
+    if (Model.LogoList.Count() >= 1)
+    {
+        <div class="text-center">
+
+            <form method="get" asp-action="Index" asp-controller="Position" asp-route-id="@Model.OfferId">
+
+                <input type="submit" value="Weiter" class="btn btn-primary" />
+            </form>
+
+
+        </div>
+
+
+    }
+}
+
+</div>
+
+@*
+@{
+
+    if (Model.LogoList.Count() >= 1)
+    {
+        <div class="text-center">
+
+            <form method="get" asp-action="Index" asp-controller="Position" asp-route-id="@Model.OfferId">
+
+                <input type="submit" value="Weiter" class="btn btn-primary" />
+            </form>
+
+
+        </div>
+
+
+    }
+}
+*@

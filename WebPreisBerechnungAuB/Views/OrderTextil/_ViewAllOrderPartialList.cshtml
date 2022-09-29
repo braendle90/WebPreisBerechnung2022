@@ -1,0 +1,186 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.OrderVMList
+
+@{
+    var test = Model;
+    ViewData["Title"] = "Partial";
+    var offerId = "";
+
+    try
+    {
+        offerId = @Model.OfferId;
+    }
+    catch (NullReferenceException e)
+    {
+        offerId = "0";
+    }
+
+}
+
+
+
+<div class="row mt-5">
+    <div id="orderName" class="col">
+
+        @if (@Model.Offer.OfferName != null){
+
+                <h2>Angebot @Model.Offer.OfferName</h2>
+        }
+      
+    </div>
+
+    <div class="col">
+        <h1>Textilien</h1>
+
+    </div>
+
+
+
+
+@*
+    <div class="col ">
+
+        @if (@Model.Offer.OfferName == null)
+        {
+            <form onsubmit="return jQueryAjaxChangeName(this)">
+
+
+            <div class="input-group">
+
+
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@Html.DisplayNameFor(model => model.Offer.OfferName)</span>
+                </div>
+                <input type="text" asp-for="Offer.OfferName" name="OfferName" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                <input name="OfferId" hidden asp-for="Offer.OfferId" />
+
+                <div class="input-group-append">
+                    <input type="submit" class="btn btn-primary" />
+                </div>
+
+            </div>
+
+
+
+        </form>
+
+        }
+
+    </div>
+
+*@
+    
+
+
+
+    <div class="col ">
+
+ 
+
+
+            <div class="input-group">
+
+
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@Html.DisplayNameFor(model => model.Offer.OfferName)</span>
+                </div>
+                <input type="text" asp-for="Offer.OfferName" name="OfferName" oninput="jQueryAjaxChangeName(this)" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                <input name="OfferId" hidden asp-for="Offer.OfferId" />
+
+
+
+            </div>
+
+
+
+
+
+     
+
+    </div>
+
+
+
+
+</div>
+
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+@*            <th>
+                @Html.DisplayNameFor(model => model.OfferId)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfPieces)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TextilColorName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TextilName)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",null,Context.Request.Scheme)','Texil hinzufügen', 0, '@offerId' )" data-dismiss="modal" class="btn btn-success text-white"><i></i> Textil Hinzufügen</a>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderPositionLogos)
+        {
+            <tr>
+@*                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OfferId)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.NumberOfPieces)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.TextilColor.TextilColorName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Textil.TextilName)
+                </td>
+                <td>
+
+
+
+
+
+
+                    <a style="font-size: 2rem" onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",Context.Request.Scheme)','Texil ändern','@item.Id','@Model.OfferId')" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
+                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.Id" onclick="return jQueryAjaxDelete(this)" class="float-right bi bi-trash iconsStyle">
+                        <input type="hidden" asp-for="@item.Id" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@{
+
+    if (Model.OrderPositionLogos.Count() >= 1)
+    {
+        <div class="text-center">
+
+            <form method="get" asp-action="Index" asp-controller="Logo" asp-route-id="@Model.OfferId">
+
+                <input type="submit" value="Weiter" class="btn btn-primary" />
+            </form>
+
+
+        </div>
+
+
+    }
+}

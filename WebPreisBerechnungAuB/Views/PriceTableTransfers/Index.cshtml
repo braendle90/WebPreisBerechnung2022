@@ -1,0 +1,49 @@
+﻿@using System.Globalization
+@model IEnumerable<WebPreisBerechnungAuB.Models.ViewModel.PriceTableTransferVM>
+
+@{
+    ViewData["Title"] = "Index";
+    var model = Model;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Texil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RangeLogo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) €
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texil.TextilName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RangeLogo.SurfaceSizeFrom) bis @Html.DisplayFor(modelItem => item.RangeLogo.SurfaceSizeTo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PriceTableTransfer.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PriceTableTransfer.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,66 @@
+﻿@model WebPreisBerechnungAuB.Models.Logo
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+}
+
+<h1>AddOrEdit</h1>
+
+<h4>Logo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="LogoName" class="control-label"></label>
+                <input asp-for="LogoName" class="form-control" />
+                <span asp-validation-for="LogoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurfaceWidht" class="control-label"></label>
+                <input asp-for="SurfaceWidht" class="form-control" />
+                <span asp-validation-for="SurfaceWidht" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurfaceHight" class="control-label"></label>
+                <input asp-for="SurfaceHight" class="form-control" />
+                <span asp-validation-for="SurfaceHight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoSurfaceSize" class="control-label"></label>
+                <input asp-for="LogoSurfaceSize" class="form-control" />
+                <span asp-validation-for="LogoSurfaceSize" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isOld" /> @Html.DisplayNameFor(model => model.isOld)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoPrice" class="control-label"></label>
+                <input asp-for="LogoPrice" class="form-control" />
+                <span asp-validation-for="LogoPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransferLogoPrice" class="control-label"></label>
+                <input asp-for="TransferLogoPrice" class="form-control" />
+                <span asp-validation-for="TransferLogoPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isLogoStorage" /> @Html.DisplayNameFor(model => model.isLogoStorage)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,51 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.PriceTableVM
+
+@{
+    ViewData["Title"] = "Create";
+    var model = Model;
+}
+
+<h1>Create</h1>
+
+<h4>PriceTable</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PriceTable.Price" class="control-label"></label>
+                <input name="Price" asp-for="PriceTable.Price" class="form-control" />
+                <span asp-validation-for="PriceTable.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-group-text">@Html.DisplayNameFor(m => m.NumberColorList.FirstOrDefault().ColorName)</label>
+                <select name="NumberColorsId" id="NumberColorsId" class="custom-select" asp-items="@(new SelectList(Model.NumberColorList,"Id","ColorName",Model.NumberColorList.Select(x => x.Id == 2)))"></select>
+                <span asp-validation-for="@Model.NumberColorList.FirstOrDefault().ColorName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-group-text">@Html.DisplayNameFor(m => m.TexilList.FirstOrDefault().TextilName)</label>
+                <select name="TexilId" id="TexilId" class="custom-select" asp-items="@(new SelectList(Model.TexilList,"Id","TextilName",Model.TexilList.Select(x => x.Id == 2)))"></select>
+                <span asp-validation-for="@Model.TexilList.FirstOrDefault().TextilName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-group-text">@Html.DisplayNameFor(m => m.RangeTableList.FirstOrDefault().RangeName)</label>
+                <select name="RangeId" id="RangeId" class="custom-select" asp-items="@(new SelectList(Model.RangeTableList,"Id","RangeName",Model.RangeTableList.Select(x => x.Id == 2)))"></select>
+                <span asp-validation-for="@Model.RangeTableList.FirstOrDefault().RangeName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

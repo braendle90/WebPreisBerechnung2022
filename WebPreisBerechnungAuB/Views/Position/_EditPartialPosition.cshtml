@@ -1,0 +1,57 @@
+﻿@model WebPreisBerechnungAuB.Models.ViewModel.PositionVM
+
+@{
+    ViewData["Title"] = "AddOrEdit";
+    Layout = null;
+    var test = Model;
+}
+
+
+
+
+<form method="post" asp-action="AddOrEdit" asp-route-id="@Model.Id" onsubmit="return jQueryAjaxPost(this);">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="OrderPositionId" />
+    <input type="hidden" asp-for="OfferId" />
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="form-group">
+                    <label class="form-group-text">@Html.DisplayNameFor(m => m.PositionList.FirstOrDefault().PositionName)</label>
+                    <select name="PositionId" id="PositionId" class="custom-select" asp-items="@(new SelectList(Model.PositionList,"Id","PositionName"))"></select>
+                    <span asp-validation-for="PositionList.FirstOrDefault().PositionName" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="form-group">
+                    <label class="form-group-text">@Html.DisplayNameFor(m => m.LogoList.FirstOrDefault().LogoName)</label>
+                    <select name="LogoId" id="LogoId" class="custom-select" asp-items="@(new SelectList(Model.LogoList,"Id","LogoName"))"></select>
+                    <span asp-validation-for="LogoList.FirstOrDefault().LogoName" class="text-danger"></span>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="mx-auto">
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
