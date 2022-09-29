@@ -27,7 +27,6 @@ namespace WebPreisBerechnungAuB.Controllers
         }
         public IActionResult Index()
         {
-
             var logo = _context.PositionLogos.FirstOrDefault();
 
             var read = _context.ExtraChargeList
@@ -68,7 +67,6 @@ namespace WebPreisBerechnungAuB.Controllers
             list.Add(extraChargeList2);
 
             logo.ExtraChargeLists = list;
-
 
             _context.ExtraChargeList.AddRange(list);
             _context.PositionLogos.Update(logo);
