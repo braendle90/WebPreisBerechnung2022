@@ -1,18 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Services;
+using WebPreisBerechnungAuB.Services.Interface;
 
 namespace WebPreisBerechnungAuB
 {
@@ -37,13 +32,15 @@ namespace WebPreisBerechnungAuB
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
+            RegisterServices(services);
+
             //Authorization
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
 
             //});
-            
+
             }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +79,10 @@ namespace WebPreisBerechnungAuB
                     pattern: "{controller=OrderTextil}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
