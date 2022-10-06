@@ -47,7 +47,7 @@
                             <a asp-action="Index" asp-controller="Logo"  asp-route-id="@OfferId.OfferId">
                                 <i class="bi bi-plus-circle iconsStyle"></i>
                             </a>
-                            <a asp-action="Index" asp-controller="Calculation" asp-route-id="@OfferId.OfferId">
+                            <a asp-action="SendOfferMail" asp-controller="SendEmail" asp-route-body="@OfferId.OfferId">
                                 <i class="bi bi-envelope iconsStyle"></i>
                             </a>
                         </div>
