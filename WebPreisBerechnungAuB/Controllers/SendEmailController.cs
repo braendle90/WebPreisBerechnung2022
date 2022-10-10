@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Crypto.Tls;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
@@ -24,29 +27,26 @@ namespace WebPreisBerechnungAuB.Controllers
         private readonly IEmailSender _emailSender;
 
 
-
-        public SendEmailController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IWebHostEnvironment webHostEnvironment)
+        public SendEmailController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender, IWebHostEnvironment webHostEnvironment)
         {
             this._context = context;
             this._userManager = userManager;
             this._webHostEnvironment = webHostEnvironment;
             this._getFromDB = new GetFromDB(_context, userManager);
             this._helper = new helper(_context, userManager);
-            
+            _emailSender = emailSender;
+
         }
         public async Task<IActionResult> SendOfferMail(string body)
         {
-            var user = await _userManager.GetUserAsync(User);
 
-            var mail = new EMail();
-            mail.emailAdressTo = user.Email;
-            mail.htmlMessage = body;   
-            mail.subject = body;
+            var message = new Message(new string[] { "angebot@aub.at" }, "Test mail with Attachments", "This is the content from our mail with attachments.", null);
+
+            await _emailSender.SendEmailAsync(message);
 
 
-
-            var sender = new EmailSender();
-            sender.SendEmailAsync(mail);        
+            //var message = new Message(new string[] { "angebot@aub.at" }, "Test email async", "This is the content from our async email.");
+            //await _emailSender.SendEmailAsync(message);
 
 
             return View();
