@@ -13,7 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
+using WebPreisBerechnungAuB.Helpers;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Services;
 
 namespace WebPreisBerechnungAuB
 {
@@ -51,7 +53,9 @@ namespace WebPreisBerechnungAuB
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-
+            services.AddScoped<IUserService,UserService>(); 
+            services.AddScoped<ICalculationService, CalculationService>();
+            services.AddScoped<ITemplateReader, TemplateReader>();
             //Authorization
             //services.AddAuthorization(options =>
             //{

@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using MimeKit.Text;
+﻿using Microsoft.AspNetCore.Mvc.Routing;
 using MimeKit;
-using System.Threading.Tasks;
-using MailKit.Net.Smtp;
-using WebPreisBerechnungAuB.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using WebPreisBerechnungAuB.Models.ViewModel;
 
 namespace WebPreisBerechnungAuB
 {
@@ -22,18 +21,18 @@ namespace WebPreisBerechnungAuB
 
         public void SendEmail(Message message)
         {
-            var emailMessage = CreateEmailMessage(message);
+            var emailMessage = CreateEmailMessage(message).Result;
 
             Send(emailMessage);
         }
 
         public async Task SendEmailAsync(Message message)
         {
-            var mailMessage = CreateEmailMessage(message);
-            await SendAsync(mailMessage);
+            var mailMessage = await CreateEmailMessage(message);
+           await SendAsync(mailMessage);
         }
 
-        private MimeMessage CreateEmailMessage(Message message)
+        private async Task<MimeMessage> CreateEmailMessage(Message message)
         {
 
 
@@ -42,7 +41,7 @@ namespace WebPreisBerechnungAuB
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
-            var bodyBuilder = new BodyBuilder { HtmlBody = string.Format("<h2 style='color:red;'>{0}</h2>", message.Content) };
+            var bodyBuilder = new BodyBuilder { HtmlBody = (message.Content) };
 
             if (message.Attachments != null && message.Attachments.Any())
             {
@@ -58,12 +57,14 @@ namespace WebPreisBerechnungAuB
                 }
             }
             emailMessage.Body = bodyBuilder.ToMessageBody();
-            return emailMessage;
+
+          
+           return emailMessage;
         }
 
         private void Send(MimeMessage mailMessage)
         {
-            using (var client = new SmtpClient())
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
                 try
                 {
@@ -85,10 +86,23 @@ namespace WebPreisBerechnungAuB
                 }
             }
         }
+        public async Task SendMailViewModel(SendOfferViewModel model)
+        {
+            var empfängermail = model.CalculationVMList[0].OrderPositionLogo.User.Email;
+            var empfängerName = $"{model.CalculationVMList[0].OrderPositionLogo.User.FirstName} {model.CalculationVMList[0].OrderPositionLogo.User.LastName}";
+
+
+            var message = new Message(new string[] { "d.braendle@aub.at" }, "Angebot Vorlage", model.MailContent.Content);
+
+            var mailMessage = await CreateEmailMessage(message);
+            await SendAsync(mailMessage);
+
+        }
+
 
         private async Task SendAsync(MimeMessage mailMessage)
         {
-            using (var client = new SmtpClient())
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
                 try
                 {
