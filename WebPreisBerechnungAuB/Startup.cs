@@ -1,10 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebPreisBerechnungAuB.Data;
+using WebPreisBerechnungAuB.Helpers;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Services;
 using WebPreisBerechnungAuB.Services.Interface;
@@ -28,19 +33,35 @@ namespace WebPreisBerechnungAuB
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+
+            services.AddControllers();
+
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
+            services.AddScoped<IUserService,UserService>(); 
+            services.AddScoped<ICalculationService, CalculationService>();
+            services.AddScoped<ITemplateReader, TemplateReader>();
             RegisterServices(services);
-
+            
             //Authorization
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
 
             //});
-
             }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

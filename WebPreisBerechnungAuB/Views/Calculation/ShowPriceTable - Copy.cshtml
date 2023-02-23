@@ -265,6 +265,14 @@
 
             </div>
 
+            <div class="float-right">
+                <form method="get" asp-action="SendEmail" asp-controller="SendEmail" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+
+                    <input type="submit" value="E-Mail Senden" class="btn btn-primary" />
+                </form>
+
+            </div>
+
 
         }
     }

@@ -17,10 +17,9 @@ namespace WebPreisBerechnungAuB.Repo
         private readonly UserManager<ApplicationUser> _userManager;
         private ICalculationPiecesLogoandPosition _calcRepo;
 
-        public helper(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public helper(ApplicationDbContext context, UserManager<ApplicationUser> userManager = null)
         {
             this._context = context;
-            this._userManager = userManager;
             this._calcRepo = new CalculationPiecesLogoandPosition(_context);
         }
 

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <center><h2>@Model.UserCompany</h2></center>
+    <br />
+    <center><h2>Ihre Kundennummer: @Model.ClientPrefix@Model.ClientId</h2></center>
+    <br />
+    <p>
+        @Model.Greeting
+        <br />
+        <br />
+        Ihr aktuelles Guthaben beträgt: <b>@Model.CreditAfterUse</b>
+        <br />
+        <br />
+        @Model.isDeposit
+    </p>
+    <center>
+        <h1>@Model.CreditTitle</h1>
+        <br />
+        <h1>
+            Betragshöhe<br />
+            @Model.CreditUsed
+        </h1>
+    </center>
+    <p>
+        <span>TransaktionsID: @Model.TransactionsId</span><br />
+        <span>Zeitstempel: @Model.Time</span>
+    </p>
+    <footer>
+        <div>
+            <address>
+                @Model.Company<br />
+                @Model.UserName<br />
+                @Model.UserTelefon<br />
+                @Model.UserEmail<br />
+            </address>
+        </div>
+    </footer>
+</body>
+</html>
