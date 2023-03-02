@@ -51,7 +51,7 @@ namespace WebPreisBerechnungAuB
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            services.AddScoped<IUserService,UserService>(); 
+            services.AddScoped<Services.IUserService, UserService>(); 
             services.AddScoped<ICalculationService, CalculationService>();
             services.AddScoped<ITemplateReader, TemplateReader>();
             RegisterServices(services);
@@ -103,7 +103,7 @@ namespace WebPreisBerechnungAuB
         }
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<Services.IUserService, UserService>();
         }
     }
 }
