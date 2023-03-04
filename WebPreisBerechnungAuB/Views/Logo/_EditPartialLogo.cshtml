@@ -53,17 +53,17 @@
 
 
     @*   <div class="row">
-        <div class="mx-auto">
+    <div class="mx-auto">
 
-        @Html.LabelFor(model => model.ExtraChargeId, "Extra Charge")
-        <br />
-        @Html.ListBoxFor(m => m.ExtraChargeId, Model.ExtraChargeList)
-        <br />
-        <br />
+    @Html.LabelFor(model => model.ExtraChargeId, "Extra Charge")
+    <br />
+    @Html.ListBoxFor(m => m.ExtraChargeId, Model.ExtraChargeList)
+    <br />
+    <br />
 
-        </div>
+    </div>
 
-        </div>*@
+    </div>*@
 
     <div class="row">
 
@@ -87,14 +87,14 @@
                 </div>
 
                 @*                <div class="custom-file">
-                    <input type="file" onchange="fileToImage(event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                    <input type="hidden" name="Image" id="Image" />
-                    </div>*@
+                <input type="file" onchange="fileToImage(event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                <input type="hidden" name="Image" id="Image" />
+                </div>*@
             </div>
 
 
-@*
+            @*
             C:\Users\domin\Desktop\WebPreisBerechnungAuB-master\WebPreisBerechnungAuB\wwwroot\src\bg_repeat.png*@
 
             <div id="croppDiv" class='container'>
@@ -113,41 +113,41 @@
 
                 </div>
 
-                <div class="rowPreisberechnung d-flex justify-content-between">
+                <div class="rowPreisberechnung d-flex justify-content-center mt-3">
 
-                    <a onclick="CropImage(event)" class="btn btn-primary ">Zuschneiden</a>
+                    <a onclick="CropImage(event)" id="cropBtn" class="btn btn-primary ">Zuschneiden</a>
                     <br />
-                    <a onclick="Save(event)" class="btn btn-primary ">Speichern</a>
+                    <a onclick="Save(event)" hidden id="saveBtn" class="btn btn-primary ">Speichern</a>
                     <br />
-@*
-                    //ICONS To Test 
+                    @*
+                    //ICONS To Test
                     <a onclick="Save(event)" type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
-                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.rotate(-45)">
-                            <span class="fa fa-undo-alt"></span>
-                        </span>
+                    <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="cropper.rotate(-45)">
+                    <span class="fa fa-undo-alt"></span>
+                    </span>
                     </a>*@
                 </div>
 
             </div>
             @*            <div style="height:350px; margin:10px;">
-                <img id="rsDiagram" src="" class="partDiagram">
-                </div>*@
+            <img id="rsDiagram" src="" class="partDiagram">
+            </div>*@
 
             @*                    <img id="imgShow" src="~/img/bildTest.png" />
-                <a onclick="CropImage(event)" class="btn btn-primary">Zuschneiden</a>
-                <br />
-                <a onclick="Save(event)" class="btn btn-primary">Speichern</a>
-                <br />*@
+            <a onclick="CropImage(event)" class="btn btn-primary">Zuschneiden</a>
+            <br />
+            <a onclick="Save(event)" class="btn btn-primary">Speichern</a>
+            <br />*@
 
 
             <br />
 
             @*
-                <div class="form-group">
-                <label asp-for="Logo.File.FileData" class="control-label"></label>
-                <input type="file" asp-for="Logo.File.FileData" class="form-control" />
-                <span asp-validation-for="Logo.File.FileData" class="text-danger"></span>
-                </div>*@
+            <div class="form-group">
+            <label asp-for="Logo.File.FileData" class="control-label"></label>
+            <input type="file" asp-for="Logo.File.FileData" class="form-control" />
+            <span asp-validation-for="Logo.File.FileData" class="text-danger"></span>
+            </div>*@
         </div>
 
     </div>
@@ -193,11 +193,11 @@
 
 @section scripts {
 
-<script>
+    <script>
 
 
 
 
-</script>
+    </script>
 
 }
