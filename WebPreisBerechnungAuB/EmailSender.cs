@@ -37,7 +37,7 @@ namespace WebPreisBerechnungAuB
 
 
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("email", _emailConfig.From));
+            emailMessage.From.Add(new MailboxAddress("Angebot A&B Textildruck", _emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
@@ -92,7 +92,7 @@ namespace WebPreisBerechnungAuB
             var empfängerName = $"{model.CalculationVMList[0].OrderPositionLogo.User.FirstName} {model.CalculationVMList[0].OrderPositionLogo.User.LastName}";
 
 
-            var message = new Message(new string[] { "d.braendle@aub.at" }, "Angebot Vorlage", model.MailContent.Content);
+            var message = new Message(new string[] { empfängermail }, "Angebot Vorlage", model.MailContent.Content);
 
             var mailMessage = await CreateEmailMessage(message);
             await SendAsync(mailMessage);
@@ -106,8 +106,9 @@ namespace WebPreisBerechnungAuB
             {
                 try
                 {
-                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
-                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    client.CheckCertificateRevocation = false;
+                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                   // client.AuthenticationMechanisms.Remove("XOAUTH2");
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
 
                     await client.SendAsync(mailMessage);
