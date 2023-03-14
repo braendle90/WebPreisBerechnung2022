@@ -36,6 +36,9 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Firma")]
+            public string Company { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -47,7 +50,8 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Company = user.Company
             };
         }
 
@@ -66,6 +70,8 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -76,6 +82,10 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
+
+            user.Company = Input.Company;
+
+            await _userManager.UpdateAsync(user);   
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)

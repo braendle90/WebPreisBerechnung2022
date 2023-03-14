@@ -1,44 +1,172 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>Appointment Confirmed</title>
+
+
+
+    <style>
+        /*-- fonts --*/
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+        div, p, h1, h2, h3, h4, ol, li, ul {
+            font-family: 'Roboto', 'sans-serif';
+        }
+        /*-- fonts --*/
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, * {
+            font-family: 'Roboto', 'sans-serif';
+            box-sizing: border-box;
+        }
+
+
+
+
+        .bitmap {
+            width: 236px;
+            height: 56px;
+        }
+
+        .body {
+            width: 600px;
+            height: 734px;
+            background-color: #F4F5F5;
+            text-align: center;
+            margin: 0 auto;
+            padding: 50px 0 0;
+        }
+
+        .rectangle {
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 2px 4px 0 rgba(52, 61, 86, 0.04), 0 16px 32px 0 rgba(52, 61, 86, 0.2);
+            width: 504px;
+            /*height: 446px;*/
+            height: auto;
+            text-align: center;
+            margin: 48px auto 32px;
+            padding: 40px;
+        }
+
+        .hi-nikita {
+            color: #343D56;
+            font-size: 12px;
+            /*font-weight: 900;*/
+            line-height: 14px;
+            font-family: 'Roboto';
+            font-weight: bold;
+        }
+
+        .thanks-for-your-paym {
+            color: #031926;
+            font-size: 20px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            letter-spacing: -0.25px;
+            line-height: 24px;
+            font-family: 'Roboto';
+            margin: 10px 0 40px;
+        }
+
+        .amount-paid {
+            color: #343D56;
+            font-size: 12px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 14px;
+            font-family: 'Roboto';
+        }
+
+        .ammount {
+            color: #031926;
+            font-size: 15px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 38px;
+            font-family: 'Roboto';
+            margin: 10px 0 35px;
+        }
+
+        .confirmation-number {
+            color: #343D56;
+            font-size: 12px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 14px;
+            font-family: 'Roboto';
+        }
+
+        .confnumber {
+            color: #031926;
+            font-size: 20px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 24px;
+            font-family: 'Roboto';
+            margin: 10px 0 35px;
+        }
+
+        .date {
+            color: #343D56;
+            font-size: 12px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 14px;
+            font-family: 'Roboto';
+        }
+
+        .may-20th-2020 {
+            color: #031926;
+            font-size: 20px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 24px;
+            font-family: 'Roboto';
+            margin-top: 8px;
+        }
+
+        .you-have-received-th {
+            color: #343D56;
+            font-size: 11px;
+            /*font-weight: 400;*/
+            font-weight: bold;
+            line-height: 15px;
+            width: 452px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+            .you-have-received-th a {
+                color: #343D56;
+                font-family: 'Roboto';
+            }
+    </style>
 </head>
 <body>
-    <center><h2>@Model.UserCompany</h2></center>
-    <br />
-    <center><h2>Ihre Kundennummer: @Model.ClientPrefix@Model.ClientId</h2></center>
-    <br />
-    <p>
-        @Model.Greeting
-        <br />
-        <br />
-        Ihr aktuelles Guthaben beträgt: <b>@Model.CreditAfterUse</b>
-        <br />
-        <br />
-        @Model.isDeposit
-    </p>
-    <center>
-        <h1>@Model.CreditTitle</h1>
-        <br />
-        <h1>
-            Betragshöhe<br />
-            @Model.CreditUsed
-        </h1>
-    </center>
-    <p>
-        <span>TransaktionsID: @Model.TransactionsId</span><br />
-        <span>Zeitstempel: @Model.Time</span>
-    </p>
-    <footer>
-        <div>
-            <address>
-                @Model.Company<br />
-                @Model.UserName<br />
-                @Model.UserTelefon<br />
-                @Model.UserEmail<br />
-            </address>
+    <div class="body" ">
+        <img src="https://aub.at/wp-content/uploads/2016/07/logo-2-Kopie.png" alt="Logo" class="bitmap" />
+
+
+        <div class="rectangle">
+            <div class="hi-nikita">Hi, @Model.UserEmail!</div>
+            <div class="thanks-for-your-paym">Wilkommen auf A&B Textildruck GmbH!</div>
+            <div class="amount-paid">Your Account Email Id</div>
+            <div class="ammount">{EmailAmount}</div>
+            <div class="confirmation-number">Your Account Password</div>
+            <div class="confnumber">{EmailPaymentTransactionId}</div>
+            <div class="date">Date</div>
+            <div class="may-20th-2020">{EmailCreatedOn}</div>
+            <a style="color: #22BCE5" href="https://www.aub.at"></a><br />
         </div>
-    </footer>
+        <div class="you-have-received-th">
+            Du erhälst die E-Mail weil du dich auf A&B Tetildruck Gmbh angemeldet hast.
+        </div>
+    </div>
 </body>
+
+
 </html>
