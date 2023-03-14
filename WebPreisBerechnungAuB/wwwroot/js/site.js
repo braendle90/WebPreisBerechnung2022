@@ -57,7 +57,7 @@ CalculateImageSizeInMilimeterWidth = data => {
 
     var sumWidth = parseInt(height * aspectRatio);
 
-/*    heightElement.value = sumHeight;*/
+    /*    heightElement.value = sumHeight;*/
 
 
     //if (sumHeight < 1) {
@@ -87,11 +87,11 @@ CalculateImageSizeInMilimeterWidth = data => {
     }
 
 
-    localStorage.getItem("width");
-    localStorage.getItem("ratiowidth");
+    //localStorage.getItem("width");
+    //localStorage.getItem("ratiowidth");
 
-    localStorage.getItem("height");
-    localStorage.getItem("ratioheight");
+    //localStorage.getItem("height");
+    //localStorage.getItem("ratioheight");
 
 }
 
@@ -107,7 +107,14 @@ jQueryAjaxSendImage = form => {
     var fileInput = $('#inputGroupFile01')[0];
     var file = fileInput.files[0];
 
-    fdata.append("File", file);
+
+    if (fdata != null) {
+
+        fdata.append("File", file);
+    }
+
+
+    //formData.set('File', file);
 
     var inputSave = $('#Image')[0];
 
@@ -126,7 +133,7 @@ jQueryAjaxSendImage = form => {
                     localstorageSaveWidthAndHeight(res.jsonString);
                     $("#imgShow").attr('src', 'data:image/png;base64,' + res.fileToSend);
                     document.getElementById("imgShow").hidden = false;
-                    inputSave.value = ('data:image/png;base64,' + res.fileToSend) ;
+                    inputSave.value = ('data:image/png;base64,' + res.fileToSend);
 
                     //$('#view-all').html(res.html)
                     //$('#form-modal .modal-body').html('');
@@ -191,8 +198,7 @@ fileToImage = (evt) => {
 
 CropImage = (evt) => {
 
-
-
+    document.getElementById("saveBtn").hidden = false;
 
     // get the <img> Element what is to cropp
     var uploadedImage = document.getElementById("imgShow");
@@ -200,11 +206,20 @@ CropImage = (evt) => {
 
     // init cropper
     cropper = new Cropper(uploadedImage);
+
+
+
+    evt.srcElement.hidden = true;
+
+
 }
 
 Save = (evt) => {
 
- 
+
+    //get the element id to change the button state
+    evt.srcElement.hidden = true;
+    document.getElementById("cropBtn").hidden = false;
 
 
     // get the cropped Image with a widh of 300 
@@ -215,7 +230,7 @@ Save = (evt) => {
 
 
     //get the Canvas Data from the cropped Image
-   /* var canvasData = cropper.canvasData;*/
+    /* var canvasData = cropper.canvasData;*/
 
     let canvasData = JSON.stringify(cropper.cropBoxData);
 
@@ -233,6 +248,19 @@ Save = (evt) => {
 
 
     cropper.destroy();
+
+
+
+
+    var valueTest = 123;
+
+
+
+
+    const changeWidth = document.getElementById('width');
+    ;
+    changeWidth.dispatchEvent(new Event('input', { bubbles: true }));
+
 
 
 }
@@ -288,7 +316,7 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
         type: 'GET',
         url: "/Logo/AddOrEdit/",
 
-        data: { id: Id, offerId: offerId,showUserLogos: showUserLogos },
+        data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
         success: function (res) {
             $('#form-modal .modal-body').html(res);
             $('#form-modal .modal-title').html(title);
@@ -303,7 +331,7 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
 
 
 
-showInPopupPosition = (url, title, Id,orderPositionId, offerId) => {
+showInPopupPosition = (url, title, Id, orderPositionId, offerId) => {
     $.ajax({
         type: 'GET',
         url: "/Position/AddOrEdit/",
@@ -384,7 +412,7 @@ jQueryAjaxDelete = form => {
 
 
 //jQueryAjaxChangeName = form => {
-   
+
 //        try {
 //            $.ajax({
 //                type: 'POST',
@@ -403,7 +431,7 @@ jQueryAjaxDelete = form => {
 //        } catch (ex) {
 //            console.log(ex)
 //        }
-    
+
 
 //    //prevent default form submit event
 //    return false;
@@ -421,25 +449,25 @@ jQueryAjaxChangeName = form => {
 
     var offerId = document.getElementById("Offer_OfferId").value;
 
-        try {
-            $.ajax({
-                url: "/OrderTextil/AddOrderName/",
-                type: 'POST',
-                dataType: 'JSON',
-                data: { offerId: offerId, offerName: form.value },
-                success: function (res) {
+    try {
+        $.ajax({
+            url: "/OrderTextil/AddOrderName/",
+            type: 'POST',
+            dataType: 'JSON',
+            data: { offerId: offerId, offerName: form.value },
+            success: function (res) {
 
-                   
-                    $('#view-all').html(res.html);
-                    $('#orderName').html("<h2>Angebot " + res.orderName + "</h2>");
-                },
-                error: function (err) {
-                    console.log(err)
-                }
-            })
-        } catch (ex) {
-            console.log(ex)
-        }
+
+                $('#view-all').html(res.html);
+                $('#orderName').html("<h2>Angebot " + res.orderName + "</h2>");
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    } catch (ex) {
+        console.log(ex)
+    }
 
 
     //prevent default form submit event
