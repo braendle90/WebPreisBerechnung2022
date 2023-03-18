@@ -68,7 +68,12 @@ namespace WebPreisBerechnungAuB.Repo
                     ExtraCharge = _context.ExtraCharge.Find(item.ExtraCharge.Id),
                     IsSelected = item.IsSelected,
                     Logo = logovm.Logo,
-                };
+                    ChargePieces = logovm.Logo.Color.NumberOfColors,
+                    };
+
+
+
+
 
                 newExtraChargeList.Add(newExtraCharge);
 
@@ -93,6 +98,13 @@ namespace WebPreisBerechnungAuB.Repo
                     .FirstOrDefaultAsync();
 
                 extraChargeListLoading.IsSelected = item.IsSelected;
+                extraChargeListLoading.ChargePieces = logovm.Logo.Color.NumberOfColors;
+
+                if (extraChargeListLoading.ExtraCharge.Id == 1 || extraChargeListLoading.ExtraCharge.Id == 2)
+                {
+                    extraChargeListLoading.ChargePriceTotal = (logovm.Logo.Color.NumberOfColors * extraChargeListLoading.ExtraCharge.ChargePrice);
+
+                }
                 updateExtraChargeList.Add(extraChargeListLoading);
             }
 
@@ -170,7 +182,7 @@ namespace WebPreisBerechnungAuB.Repo
 
 
 
-            var priceExtraLogo = extraChargeListsLogo.Sum(x => x.ExtraCharge.ChargePrice);
+            var priceExtraLogo = extraChargeListsLogo.Sum(x => x.ChargePriceTotal);
             var applicationPrice = (decimal)_calcRepo.ApplicationTransferPrice(data, data.Logo.LogoSurfaceSize, fillModel.Pieces);
             var applicationPricePieces = (applicationPrice * data.OrderPositionLogo.Order.NumberOfPieces);
 

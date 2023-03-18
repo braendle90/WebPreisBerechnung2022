@@ -139,8 +139,18 @@ namespace WebPreisBerechnungAuB.Controllers
 
             }
 
+            //demo if the view change the selected 1 farbig to 2 or 3 farbig
+            vmModel.ColorId = getOfferid.Color.Id;
+            vmModel.SelectColorList = new List<SelectListItem>();
 
-          
+            foreach (var color in vmModel.ColorList) 
+            {
+                vmModel.SelectColorList.Add(new SelectListItem { Text = color.ColorName, Value = color.Id.ToString() });
+
+            }    
+            
+                
+
 
             return View("_EditPartialLogo", vmModel);
         }

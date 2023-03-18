@@ -18,6 +18,8 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
 
         public int ColorId { get; set; }
         public List<Color> ColorList { get; set; }
+
+        public List<SelectListItem> SelectColorList { get; set; }
         public bool IsCalculated { get; set; }
 
         public List<PositionLogo> PositionLogo { get; set; }

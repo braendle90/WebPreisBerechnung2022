@@ -7,6 +7,10 @@
 
         public ExtraCharge ExtraCharge{ get; set; }
 
+        public int ChargePieces { get; set; }
+
+        public decimal ChargePriceTotal { get; set; }
+
         public bool IsSelected { get; set; }
 
         public string GroupName { get; set; }

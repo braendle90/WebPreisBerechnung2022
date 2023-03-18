@@ -163,7 +163,7 @@
 
                             @if (extraCharge.ExtraCharge.ChargeTyp == "Logo")
                             {
-                                <td scope="col" id="client_@count">  @extraCharge.ExtraCharge.ChargePrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                                <td scope="col" id="client_@count">  @(extraCharge.ChargePriceTotal.ToString("C", CultureInfo.CurrentCulture))</td>
                             }
                             else
                             {
