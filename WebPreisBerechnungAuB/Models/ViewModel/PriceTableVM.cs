@@ -11,11 +11,12 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
         public int Id { get; set; }
 
         public PriceTable PriceTable{ get; set; }
+        public List<PriceTable> PriceTableList { get; set; }
 
         public int TexilId { get; set; }
         public List<Textil> TexilList { get; set; }
 
-
+        public decimal PriceUpdatePercent { get; set; }
         public int NumberColorsId { get; set; }
 
         public List<Color> NumberColorList { get; set; }

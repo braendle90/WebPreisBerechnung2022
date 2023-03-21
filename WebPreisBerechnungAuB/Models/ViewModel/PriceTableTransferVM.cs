@@ -10,6 +10,9 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
         [DisplayName("Textil")]
 
         public PriceTableTransfer PriceTableTransfer { get; set; }
+        public List<PriceTableTransfer> PriceTableTransferList { get; set; }
+
+        public double PriceUpdatePercent { get; set; }
         public List<Textil> TexilList { get; set; }
         public Textil Texil { get; set; }
         public int TexilId { get; set; }

@@ -31,29 +31,11 @@ namespace WebPreisBerechnungAuB.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var modelVMList = new List<PriceTableTransferVM>();
+            var modelVMList = new PriceTableTransferVM();
 
             var allPriceTableTransfer = await _getFromDB.GetAllPriceTableTransfer();
 
-
-            foreach (var item in allPriceTableTransfer)
-            {
-
-
-                var modelVM = new PriceTableTransferVM
-                {
-
-                    Price = (decimal)item.Price,
-                    Texil = await _getFromDB.loadTextilById(item.Texil.Id),
-                    RangeLogo = await _getFromDB.getRangeSurfaceSizeByID(item.RangeLogo.Id),
-                    PriceTableTransfer = item,
-
-                };
-
-                modelVMList.Add(modelVM);
-
-            };
-
+            modelVMList.PriceTableTransferList = allPriceTableTransfer;
 
             return View(modelVMList);
 
@@ -214,5 +196,27 @@ namespace WebPreisBerechnungAuB.Controllers
         {
             return _context.PriceTableTransfer.Any(e => e.Id == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePrice(PriceTableVM model)
+
+        {
+
+            var priceTable = await _getFromDB.GetAllPriceTableTransfer();
+
+            foreach (var priceTransfer in priceTable)
+            {
+
+                priceTransfer.Price = (priceTransfer.Price / 100) * (100 + (double)model.PriceUpdatePercent);
+
+                _context.Update(priceTransfer);
+                await _context.SaveChangesAsync();
+            }
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

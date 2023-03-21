@@ -14,5 +14,6 @@ namespace WebPreisBerechnungAuB.Models
         [DisplayName("Preis")]
 
         public decimal Price { get; set; }
+        public decimal PriceUpdatePercent { get; set; }
     }
 }

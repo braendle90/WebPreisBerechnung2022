@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-@model IEnumerable<WebPreisBerechnungAuB.Models.ViewModel.PriceTableTransferVM>
+@model WebPreisBerechnungAuB.Models.ViewModel.PriceTableTransferVM
 
 @{
     ViewData["Title"] = "Index";
@@ -11,6 +11,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="UpdatePrice" method="POST">
+    <label for="percent">Prozente</label>
+    <input type="text" asp-for="PriceUpdatePercent" placeholder="10" />
+    <input type="submit" />
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -27,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.PriceTableTransferList)
         {
             <tr>
                 <td>
@@ -40,8 +46,8 @@
                     @Html.DisplayFor(modelItem => item.RangeLogo.SurfaceSizeFrom) bis @Html.DisplayFor(modelItem => item.RangeLogo.SurfaceSizeTo)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.PriceTableTransfer.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PriceTableTransfer.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

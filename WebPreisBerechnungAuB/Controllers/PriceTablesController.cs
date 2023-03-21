@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using ImageMagick;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -35,10 +37,13 @@ namespace WebPreisBerechnungAuB.Controllers
             //public Color NumberColors { get; set; }
             //public RangeTable Range { get; set; }
 
+            var PriceTableViewModel = new PriceTableVM();
+
             var model = await _getFromDB.loadAllScreenprintPrice();
 
+            PriceTableViewModel.PriceTableList = model;
 
-            return View(model);
+            return View(PriceTableViewModel);
         }
 
         // GET: PriceTables/Details/5
@@ -248,6 +253,27 @@ namespace WebPreisBerechnungAuB.Controllers
         private bool PriceTableExists(int id)
         {
             return _context.PriceTable.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePrice(PriceTableVM model)
+
+        {
+
+
+            var priceTable = await _getFromDB.loadAllScreenprintPrice();
+
+            foreach (var price in priceTable)
+            {
+
+                price.Price = (price.Price / 100) * (100 + model.PriceUpdatePercent);
+
+                _context.Update(price);
+                await _context.SaveChangesAsync();
+            }
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
