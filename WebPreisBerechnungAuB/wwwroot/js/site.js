@@ -28,6 +28,12 @@ localstorageSaveWidthAndHeight = data => {
 CalculateImageSizeInMilimeterWidth = data => {
 
 
+    var imageSrc = document.getElementById("imgShow").src;
+
+    if (imageSrc != "") {
+
+
+
 
     var LogoSizeRatio = JSON.parse(localStorage.getItem("LogoSizeRatioModel"));
 
@@ -92,6 +98,8 @@ CalculateImageSizeInMilimeterWidth = data => {
 
     //localStorage.getItem("height");
     //localStorage.getItem("ratioheight");
+
+    }
 
 }
 
