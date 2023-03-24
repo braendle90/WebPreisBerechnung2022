@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Org.BouncyCastle.Crypto.Tls;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,6 +52,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             var message = new Message(new string[] { "d.braendle@aub.at" },"Test mail with Attachments", "This is the content from our mail with attachments.");
 
+            
 
             await _emailSender.SendEmailAsync(message);
             //"Test mail with Attachments"
@@ -73,10 +76,16 @@ namespace WebPreisBerechnungAuB.Controllers
             };
             model = template.ReadSendContingenteEmailFile(model);
 
+            var renderedView = Helper.RenderRazorViewToString(this, "sendEmailTemplate",model.CalculationVMList);
+            model.MailContent.Content = renderedView;
+            
             await _emailSender.SendMailViewModel(model);
             return RedirectToAction("Index", "Home");
 
-
         }
+
+
+
+
     }
 }
