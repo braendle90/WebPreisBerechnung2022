@@ -38,12 +38,16 @@
 
 
 
+
 @foreach (var item in Model)
 {
 
-    <table class="table  table-striped ">
 
-        <thead>
+
+    <table class="table table-responsive table-striped ">
+
+          <thead class="table">
+
             <tr>
 
 
@@ -52,8 +56,7 @@
                 <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.NumberOfPieces)</th>
                 <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceTransfer)</th>
                 <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceScreenPrint)</th>
-                <th scope="col">Ändern</th>
-                <th scope="col">Löschen</th>
+        
 
 
             </tr>
@@ -67,19 +70,6 @@
                 <td scope="col">@item.OrderPositionLogo.Order.NumberOfPieces</td>
                 <td scope="col">@item.OrderPositionLogo.Order.PriceTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
                 <td scope="col">@item.OrderPositionLogo.Order.PriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</td>
-                <td scope="col">
-
-                    <a style="font-size: 2rem" onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",Context.Request.Scheme)','Texil ändern','@item.OrderPositionLogo.Id','@item.OrderPositionLogo.Order.OfferId')" data-dismiss="modal" class="bi bi-pencil-square iconsStyle"></a>
-
-                </td>
-
-                <td scope="col">
-
-                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.OrderPositionLogo.Id" onclick="return jQueryAjaxDelete(this)" class=" bi bi-trash iconsStyle">
-                        <input type="hidden" asp-for="@item.OrderPositionLogo.Id" />
-                    </form>
-                </td>
-
             </tr>
         </tbody>
     </table>

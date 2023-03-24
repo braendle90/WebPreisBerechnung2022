@@ -105,6 +105,10 @@ namespace WebPreisBerechnungAuB.Repo
                     extraChargeListLoading.ChargePriceTotal = (logovm.Logo.Color.NumberOfColors * extraChargeListLoading.ExtraCharge.ChargePrice);
 
                 }
+                else
+                {
+                    extraChargeListLoading.ChargePriceTotal = extraChargeListLoading.ExtraCharge.ChargePrice;
+                }
                 updateExtraChargeList.Add(extraChargeListLoading);
             }
 
