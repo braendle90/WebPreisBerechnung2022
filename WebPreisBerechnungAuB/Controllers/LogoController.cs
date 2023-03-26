@@ -121,7 +121,14 @@ namespace WebPreisBerechnungAuB.Controllers
                 {
                     Color = colorModelNew,
                 };
+                vmModel.ColorId = 0;
+                vmModel.SelectColorList = new List<SelectListItem>();
 
+                foreach (var color in vmModel.ColorList)
+                {
+                    vmModel.SelectColorList.Add(new SelectListItem { Text = color.ColorName, Value = color.Id.ToString() });
+
+                }
                 vmModel.Logo = logoModelNew;
                 vmModel.ExtraChargeListCheckbox = checkboxChargeList;
                 vmModel.ExtraChargeListsModel = listExtraChargeLoad;
