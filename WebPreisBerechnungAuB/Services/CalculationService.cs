@@ -111,7 +111,9 @@ namespace WebPreisBerechnungAuB.Services
 
                 ShowPriceCalculation showPriceCalculation = new ShowPriceCalculation();
 
-                showPriceCalculation = await _helper.calculatExtraChargeListScreenprintAndTransfer(data, fillModel);
+                showPriceCalculation = await _helper.calculatExtraChargeListScreenprintAndTransfer(data, fillModel, positonLogoList);
+                
+                data.ExtraChargeLists = showPriceCalculation.ExtraChargeList;
 
                 var anbringung = await _helper.priceofTransferApplication(data, fillModel);
 

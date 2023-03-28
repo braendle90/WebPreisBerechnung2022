@@ -8,7 +8,7 @@ namespace WebPreisBerechnungAuB.Repo
 {
     public interface Ihelper
     {
-        Task<ShowPriceCalculation> calculatExtraChargeListScreenprintAndTransfer(PositionLogo data, OneLogoAndPosition fillModel);
+        Task<ShowPriceCalculation> calculatExtraChargeListScreenprintAndTransfer(PositionLogo data, OneLogoAndPosition fillModel, List<PositionLogo> positionLogo);
         Task<List<ExtraChargeList>> CreateExtraChargeList(LogoVM logovm);
         Task<List<SelectListItem>> findSelectedExtraChargeList(List<int> extraChargeList);
         Task<List<ExtraChargeList>> loadExtraChargeListFromLogo(Models.Logo logo);

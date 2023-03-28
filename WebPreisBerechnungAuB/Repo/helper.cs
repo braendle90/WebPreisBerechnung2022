@@ -69,7 +69,7 @@ namespace WebPreisBerechnungAuB.Repo
                     IsSelected = item.IsSelected,
                     Logo = logovm.Logo,
                     ChargePieces = logovm.Logo.Color.NumberOfColors,
-                    };
+                };
 
 
 
@@ -173,20 +173,58 @@ namespace WebPreisBerechnungAuB.Repo
             return applicationPricePieces;
         }
 
-        public async Task<ShowPriceCalculation> calculatExtraChargeListScreenprintAndTransfer(PositionLogo data, OneLogoAndPosition fillModel)
+        public async Task<ShowPriceCalculation> calculatExtraChargeListScreenprintAndTransfer(PositionLogo data, OneLogoAndPosition fillModel, List<PositionLogo> positionLogos)
         {
             List<ExtraChargeList> extraChargeLists = new List<ExtraChargeList>();
 
 
             var extraChargeListsLogo = await loadExtraChargeListFromLogo(data.Logo);
+            var extraChargeListsLogoToRemove = await loadExtraChargeListFromLogo(data.Logo); ;
 
             //  ExtraChargeList extraChargeListsTransfer = new ExtraChargeList();
 
             // extraChargeListsTransfer = await loadExtraChargeListFromTransfer(data.Logo, data, fillModel);
 
+            foreach (var positionLogo in positionLogos)
+            {
+
+                if (positionLogo.ExtraChargeLists != null)
+                {
+
+                    foreach (var extraCharge in positionLogo.ExtraChargeLists)
+                    {
 
 
-            var priceExtraLogo = extraChargeListsLogo.Sum(x => x.ChargePriceTotal);
+                        if (extraChargeListsLogo != null)
+                        {
+
+                            foreach (var item in extraChargeListsLogo)
+                            {
+                        
+
+                                if (item == extraCharge)
+                                {
+
+                                    var test = "alsdfj";
+
+
+                                    extraChargeListsLogoToRemove.Remove(item);
+                                }
+
+                            }
+
+
+                        }
+
+
+                    }
+                }
+
+
+            }
+
+
+            var priceExtraLogo = extraChargeListsLogoToRemove.Sum(x => x.ChargePriceTotal);
             var applicationPrice = (decimal)_calcRepo.ApplicationTransferPrice(data, data.Logo.LogoSurfaceSize, fillModel.Pieces);
             var applicationPricePieces = (applicationPrice * data.OrderPositionLogo.Order.NumberOfPieces);
 
