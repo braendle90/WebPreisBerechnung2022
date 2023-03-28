@@ -223,8 +223,14 @@ namespace WebPreisBerechnungAuB.Repo
 
             }
 
-
             var priceExtraLogo = extraChargeListsLogoToRemove.Sum(x => x.ChargePriceTotal);
+
+
+            if (positionLogos[positionLogos.Count() - 1] == data)
+            {
+                priceExtraLogo = extraChargeListsLogo.Sum(x => x.ChargePriceTotal);
+            }
+                
             var applicationPrice = (decimal)_calcRepo.ApplicationTransferPrice(data, data.Logo.LogoSurfaceSize, fillModel.Pieces);
             var applicationPricePieces = (applicationPrice * data.OrderPositionLogo.Order.NumberOfPieces);
 
