@@ -339,6 +339,26 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
 
 
 
+showInPopupDesigner = (url, title, Id, offerId, showUserLogos) => {
+    $.ajax({
+        type: 'GET',
+        url: url,
+
+        data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
+        success: function (res) {
+            $('#form-modal .modal-body').html(res);
+            $('#form-modal .modal-title').html(title);
+            $('#form-modal').modal('show');
+            // to make popup draggable
+            $('.modal-dialog').draggable({
+                handle: ".modal-header"
+            });
+        }
+    })
+}
+
+
+
 showInPopupPosition = (url, title, Id, orderPositionId, offerId) => {
     $.ajax({
         type: 'GET',

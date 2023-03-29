@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>A&B Textildruck Shirt Designer</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Include DomToImage in the page -->
+    <script src="/js/dom-to-image.js"></script>
+
+</head>
+<body>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" onclick="showInPopupDesigner('@Url.Action("LoadImage","Designer",Context.Request.Scheme)','Design ändern','abcd','123456')" data-toggle="modal" data-target="#form-modal">
+        Launch demo modal
+    </button>
+
+
+    <h3>Save File</h3>
+    <button id="download" onclick="saveToFile()">Download</button>
+    <br />
+    <br>
+    <label for="tshirt-custompicture">Upload your own design:</label>
+    <input type="file" id="tshirt-custompicture" />
+    <br>
+
+    <h3>Farbe ändern:</h3>
+    <br>
+
+    <input type="color"
+           id="html5colorpicker"
+           onchange="clickColor()"
+           value="#ff0000" />
+
+    <!-- Create the container of the tool -->
+    <div id="tshirt-div">
+        <!--
+                  Initially, the image will have the background tshirt that has transparency
+                  So we can simply update the color with CSS or JavaScript dinamically
+              -->
+
+        <div id="drawingArea" class="drawing-area">
+            <div class="canvas-container">
+                <canvas id="canvas" width="1024" height="768"></canvas>
+                <canvas id="tshirt-canvas" width="1024" height="768"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <canvas hidden width="1024" height="768" id="saveCanvas"></canvas>
+
+    @section Scripts{
+
+
+
+
+        <!-- Include Fabric.js in the page -->
+        <script src="/js/f"></script>
+
+        <script>
+            let canvas = new fabric.Canvas("tshirt-canvas");
+
+            // When the user clicks on upload a custom picture
+            document.getElementById("tshirt-custompicture").addEventListener(
+                "change",
+                function (e) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+                        var imgObj = new Image();
+                        imgObj.src = event.target.result;
+
+                        // When the picture loads, create the image in Fabric.js
+                        imgObj.onload = function () {
+                            var img = new fabric.Image(imgObj);
+                            img.scaleToWidth(100);
+                            canvas.centerObject(img);
+                            canvas.add(img);
+                            canvas.renderAll();
+                        };
+                    };
+
+                    // If the user selected a picture, load it
+                    if (e.target.files[0]) {
+                        reader.readAsDataURL(e.target.files[0]);
+                    }
+                },
+                false
+            );
+
+            function uncheckObject(params) {
+                canvas.discardActiveObject();
+                canvas.requestRenderAll();
+            }
+
+            function saveToFile() {
+                uncheckObject();
+
+                let element = document.getElementById("tshirt-div");
+                let scale = 2;
+
+                domtoimage.toPng(element, {
+                    width: element.clientWidth * scale,
+                    height: element.clientHeight * scale,
+                    style: { transform: 'scale(' + scale + ')', transformOrigin: 'top left' }
+                })
+                    .then(function (dataUrl) {
+
+
+                        var link = document.createElement("a");
+                        link.download = "AuB_Vorlage.png";
+                        link.href = dataUrl;
+                        link.click();
+
+                    })
+
+
+                    .catch(function (error) { console.error('oops, something went wrong!', error); });
+            }
+
+            // When the user selects a picture that has been added and press the DEL key
+            // The object will be removed !
+            document.addEventListener(
+                "keydown",
+                function (e) {
+                    var keyCode = e.keyCode;
+
+                    if (keyCode == 46) {
+                        console.log(
+                            "Removing selected element on Fabric.js on DELETE key !"
+                        );
+                        canvas.remove(canvas.getActiveObject());
+                    }
+                },
+                false
+            );
+        </script>
+        <script src="/js/script.js"></script>
+
+    }
+
+
+
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
