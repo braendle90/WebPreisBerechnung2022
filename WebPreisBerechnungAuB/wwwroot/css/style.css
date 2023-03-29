@@ -1,0 +1,37 @@
+
+.canvas-container{
+    width: 1024px; 
+    height: 768px; 
+    position: relative; 
+    user-select: none;
+}
+
+#tshirt-div {
+    width: 1024px;
+    height: 768px;
+    position: relative;
+    background-color: #fff;
+}
+
+#canvas {
+    position: absolute;
+    width: 1024px;
+    height: 768px;
+    left: 0px;
+    top: 0px;
+    user-select: none;
+    cursor: default;
+}
+
+
+.upper-canvas {
+    position: absolute;
+    width: 1024px;
+    height: 768px;
+    left: 0px;
+    top: 0px;
+    user-select: none;
+    cursor: default;
+}
+
+upper-canvas 
