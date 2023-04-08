@@ -19,6 +19,38 @@
     }
 </style>
 
+<div class="row mr-4">
+
+
+    <div class="col">
+
+        <div class="col">Angebots Name</div>
+    </div>
+
+
+    <div class="col">
+
+        <div class="col">Textil</div>
+    </div>
+
+
+    <div class="col">
+
+        <div class="col">Logo</div>
+    </div>
+
+
+    <div class="col">
+
+        <div class="col">E-Mail Senden</div>
+    </div>
+
+
+</div>
+
+
+
+
 <table class="table table-hover table-head-fixed text-nowrap" style="border-collapse:collapse;">
 
     @foreach (var OfferId in Model)
@@ -43,10 +75,16 @@
                             <a asp-action="Index" asp-controller="OrderTextil" asp-route-Id="@OfferId.OfferId">
                                 <i class="bi bi-pencil-square iconsStyle"></i>
                             </a>
-                           
-                            <a asp-action="Index" asp-controller="Logo"  asp-route-id="@OfferId.OfferId">
+
+                        </div>
+                        <div class="col">
+
+                            <a asp-action="Index" asp-controller="Logo" asp-route-id="@OfferId.OfferId">
                                 <i class="bi bi-plus-circle iconsStyle"></i>
                             </a>
+
+                        </div>
+                        <div class="col">
                             <a asp-action="SendOfferMail" asp-controller="SendEmail" asp-route-body="@OfferId.OfferId">
                                 <i class="bi bi-envelope iconsStyle"></i>
                             </a>
