@@ -486,8 +486,5 @@ namespace WebPreisBerechnungAuB.Controllers
             return _context.Logos.Any(e => e.Id == id);
         }
 
-
-
-
     }
 }
