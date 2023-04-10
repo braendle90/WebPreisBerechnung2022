@@ -219,21 +219,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             string fileToSend = Convert.ToBase64String(System.IO.File.ReadAllBytes(pathtoFileToSend));
 
-            //return Json(fileToSend);
-
-            //if (widthImage > heightImage)
-            //{
-            //    ratiowidth = widthImage / heightImage;
-            //}
-            //else
-            //{
-            //    ratioheight = heightImage / widthImage;
-
-            //}
-
-
-            //logoSizeRatio.CalcRatio()
-
+     
             string jsonString = JsonSerializer.Serialize(logoSizeRatio);
 
 

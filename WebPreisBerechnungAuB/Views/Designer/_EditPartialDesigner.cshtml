@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-    <h1>Upload File</h1>
+
 
 
     <div class="input-group mb-3">
@@ -18,13 +18,24 @@
 
 
         <div class="custom-file">
-            <input type="file" accept='image/jpeg,image/gif,image/ai,image/eps,application/postscript  ai,application/postscript  eps,image/png,application/pdf,image/x-eps' onchange="return jQueryAjaxSendImage(this);" class="custom-file-input" id="inputGroupFile01" name="file" aria-describedby="inputGroupFileAddon01">
+            <input type="file" onchange="return jQueryAjaxSendImage(this);" class="custom-file-input" id="inputGroupFile01" name="file" aria-describedby="inputGroupFileAddon01">
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
             <input type="hidden" name="Image" id="Image" />
         </div>
+        
 
 
 
     </div>
 
-    <img width="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow"/>
+ 
+    <button onclick="uploadToTextil()" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Place on Textil</button>
+    
+    
+    <button onclick="removeWhiteBackground()" id="removeBg" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Remove White Background</button>
+
+
+
+    <br />
+
+    <img style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow"/>

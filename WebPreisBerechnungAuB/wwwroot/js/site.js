@@ -104,6 +104,81 @@ CalculateImageSizeInMilimeterWidth = data => {
 }
 
 
+function removeWhiteBackground() {
+
+    var file = document.getElementById("imgShow").src;
+
+        $.ajax({
+            type: "POST",
+            url: "/Designer/SaveImage/",
+            data: {
+                data: file
+            },
+            dataType: 'json',
+            success: function (response) {
+                // use console.log for debugging, and access the property of the deserialised object
+                //console.log(response.isValid);
+                console.log(response.imgBase64);
+            },
+        });
+   
+
+
+    //var fdata = new FormData();
+
+    //var fileInput = $('#inputGroupFile01')[0];
+
+
+    //if (fdata != null) {
+
+    //    fdata.append("File", file);
+    //}
+
+
+    ////formData.set('File', file);
+
+    //var inputSave = $('#Image')[0];
+
+
+
+
+
+    //try {
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: "/Designer/SaveImage/",
+    //        data: fdata,
+
+    //        contentType: false,
+    //        processData: false,
+    //        success: function (res) {
+    //            if (res.isValid) {
+    //                localstorageSaveWidthAndHeight(res.jsonString);
+    //                $("#imgShow").attr('src', 'data:image/png;base64,' + res.fileToSend);
+    //                document.getElementById("imgShow").hidden = false;
+    //                inputSave.value = ('data:image/png;base64,' + res.fileToSend);
+
+    //                //$('#view-all').html(res.html)
+    //                //$('#form-modal .modal-body').html('');
+    //                //$('#form-modal .modal-title').html('');
+    //                //$('#form-modal').modal('hide');
+    //                $('#form-modal').modal('show');
+    //            }
+    //            else
+    //                $('#form-modal .modal-body').html(res.html);
+    //        },
+    //        error: function (err) {
+    //            console.log(err)
+    //        }
+    //    })
+    //    //to prevent default form submit event
+    //    return false;
+    //} catch (ex) {
+    //    console.log(ex)
+    //}
+
+
+}
 
 
 
