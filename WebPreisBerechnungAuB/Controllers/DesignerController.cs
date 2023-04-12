@@ -12,6 +12,8 @@ using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Collections.Generic;
+using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -43,32 +45,51 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
         }
-
         [HttpPost]
-        public async Task<IActionResult> SaveImage(string data)
+        public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
+
+            var _image = MagickImage.FromBase64(SubstringBase64Image(imageBackground.ImageBase64));
+
+            _image.ColorFuzz = new Percentage(44);
+            MagickColor RemoveColor = MagickColor.FromRgb((byte)0, (byte)255, (byte)0);
+            _image.Opaque(RemoveColor, MagickColors.None);
+
+
+
 
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
             // string uploads = Path.Combine(uploadsFolder, file.FileName);
             var separator = Path.DirectorySeparatorChar.ToString();
-
-            string strStart = ",";
-            string strEnd = "\"";
+            _image.Write(uploadsFolder + separator + "BgRemoved" + ".png");
 
 
-            int Start, End;
+            return Json(new { isValid = true, imgBase64 = _image.ToBase64() });
 
-            Start = data.IndexOf(strStart, 20) + strStart.Length;
-            End = data.IndexOf(strEnd, Start);
-            End = data.Length;   
-         
+        }
 
-            var Base64String = data.Substring(Start, End - Start);
+        [HttpPost]
 
-            if (data.Length > 0)
+        public async Task<IActionResult> SaveImage(ImageBackground imageBackground)
+        {
+
+            var logoSizeRatio = new LogoSizeAndAspectRatio();
+
+            //string uploadsFolder = "C:\\Users\\domin\\OneDrive\\Desktop\\Images_Asp\\";
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+            string uploads = Path.Combine(uploadsFolder, imageBackground.FileData.FileName);
+            var separator = Path.DirectorySeparatorChar.ToString();
+
+
+
+
+            if (imageBackground.FileData.Length > 0)
             {
 
-       
+                using (Stream fileStream = new FileStream(uploads, FileMode.Create))
+                {
+                    await imageBackground.FileData.CopyToAsync(fileStream);
+                }
 
                 string ghostScriptPath = Path.Combine(_webHostEnvironment.ContentRootPath, "Ghostscript");
 
@@ -79,33 +100,59 @@ namespace WebPreisBerechnungAuB.Controllers
                 //MagickNET.SetGhostscriptDirectory(@"C:\MyProgram\Ghostscript");
                 MagickNET.SetGhostscriptDirectory(ghostScriptPath);
 
-                var _image = MagickImage.FromBase64(Base64String);
-               
+                MagickImage _image = new MagickImage();
+                _image.Read(uploads, settings);
                 _image.Resize(400, 0);
 
-                _image.Write(uploadsFolder + separator + "BgRemoved" + ".png");
+                _image.Write(uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
 
 
-                //remove the file that is uploaded so that only the png file is available
-                //DeleteFileFromFolder(filePath);
+   
 
                 _image.Dispose();
 
             }
 
-            //var logoSizeRatio = new LogoSizeAndAspectRatio();
+            var pathtoFileToSend = (uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
 
-            ////string uploadsFolder = "C:\\Users\\domin\\OneDrive\\Desktop\\Images_Asp\\";
-            //string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-            //string uploads = Path.Combine(uploadsFolder, "testName.png");
-            //var separator = Path.DirectorySeparatorChar.ToString();
+            string fileToSend = Convert.ToBase64String(System.IO.File.ReadAllBytes(pathtoFileToSend));
 
 
-            byte[] imageArray = System.IO.File.ReadAllBytes(uploadsFolder + separator + "BgRemoved" + ".png");
+
+            byte[] imageArray = System.IO.File.ReadAllBytes(uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
             string base64ImageRepresentation = Convert.ToBase64String(imageArray);
 
 
             return Json(new { isValid = true, imgBase64 = base64ImageRepresentation });
         }
+
+
+        //private static MagickImage ChangeWhiteColor(MagickImage Image, int fuzz)
+        //{
+        //    Image.ColorFuzz = new Percentage(fuzz);
+        //    Image.Transparent();
+        //    Image.Opaque(MagickColor.FromRgb((byte)255, (byte)255, (byte)255), MagickColors.None);
+        //    return Image;
+        //}
+
+
+        private static string SubstringBase64Image(string data)
+        {
+            string strStart = ",";
+            string strEnd = "\"";
+            int Start, End;
+
+            Start = data.IndexOf(strStart, 20) + strStart.Length;
+            End = data.IndexOf(strEnd, Start);
+            End = data.Length;
+
+
+            var Base64String = data.Substring(Start, End - Start);
+
+            return Base64String;
+        }
+
+
+
     }
 }

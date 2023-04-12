@@ -35,149 +35,192 @@ CalculateImageSizeInMilimeterWidth = data => {
 
 
 
-    var LogoSizeRatio = JSON.parse(localStorage.getItem("LogoSizeRatioModel"));
+        var LogoSizeRatio = JSON.parse(localStorage.getItem("LogoSizeRatioModel"));
 
 
 
-    var localWidth = parseFloat(localStorage.getItem("width"));
-    //var localRatioWidth = parseFloat(localStorage.getItem("ratiowidth"));
+        var localWidth = parseFloat(localStorage.getItem("width"));
+        //var localRatioWidth = parseFloat(localStorage.getItem("ratiowidth"));
 
-    var localHeight = parseFloat(localStorage.getItem("height"));
+        var localHeight = parseFloat(localStorage.getItem("height"));
 
-    var aspectRatio = parseFloat(localStorage.getItem("aspectRatio"));
-    //var localRatioheight = parseFloat(localStorage.getItem("ratioheight"));
+        var aspectRatio = parseFloat(localStorage.getItem("aspectRatio"));
+        //var localRatioheight = parseFloat(localStorage.getItem("ratioheight"));
 
-    //var aspectRatio = parseFloat(LogoSizeRatio.aspectRatio);
+        //var aspectRatio = parseFloat(LogoSizeRatio.aspectRatio);
 
-    var widthElement = document.getElementById("width");
+        var widthElement = document.getElementById("width");
 
-    var width = widthElement.value;
-
-
-    var heightElement = document.getElementById("hight");
-    var height = heightElement.value;
+        var width = widthElement.value;
 
 
-
-    var sumHeight = parseInt(width / aspectRatio);
-
-    var sumWidth = parseInt(height * aspectRatio);
-
-    /*    heightElement.value = sumHeight;*/
+        var heightElement = document.getElementById("hight");
+        var height = heightElement.value;
 
 
-    //if (sumHeight < 1) {
 
-    //    heightElement.value = height;
-    //}
+        var sumHeight = parseInt(width / aspectRatio);
 
+        var sumWidth = parseInt(height * aspectRatio);
 
-    //widthElement.value = sumWidth;
-    //if (sumWidth < 1) {
-
-    //    widthElement.value = width;
-    //}
-
-    if (data.id == "width") {
-
-        heightElement.value = sumHeight;
-
-        widthElement.value = width;
-    }
-
-    if (data.id == "hight") {
-
-        widthElement.value = sumWidth;
-
-        heightElement.value = height;
-    }
+        /*    heightElement.value = sumHeight;*/
 
 
-    //localStorage.getItem("width");
-    //localStorage.getItem("ratiowidth");
+        //if (sumHeight < 1) {
 
-    //localStorage.getItem("height");
-    //localStorage.getItem("ratioheight");
+        //    heightElement.value = height;
+        //}
+
+
+        //widthElement.value = sumWidth;
+        //if (sumWidth < 1) {
+
+        //    widthElement.value = width;
+        //}
+
+        if (data.id == "width") {
+
+            heightElement.value = sumHeight;
+
+            widthElement.value = width;
+        }
+
+        if (data.id == "hight") {
+
+            widthElement.value = sumWidth;
+
+            heightElement.value = height;
+        }
+
+
+        //localStorage.getItem("width");
+        //localStorage.getItem("ratiowidth");
+
+        //localStorage.getItem("height");
+        //localStorage.getItem("ratioheight");
 
     }
 
 }
+
+function testFunction() {
+    var c = document.getElementById("imgShow");
+    var ctx = c.getContext("2d");
+
+
+    var img = new Image();
+    img.onload = function () {
+        ctx.globalCompositeOperation = "screen"; // negative multiplizieren
+        ctx.drawImage(img, 0, 0, w, h);
+
+   
+    };
+    img.src =
+        "data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==";
+}
+
+
 
 
 function removeWhiteBackground() {
 
     var file = document.getElementById("imgShow").src;
 
-        $.ajax({
-            type: "POST",
-            url: "/Designer/SaveImage/",
-            data: {
-                data: file
-            },
-            dataType: 'json',
-            success: function (response) {
-                // use console.log for debugging, and access the property of the deserialised object
-                //console.log(response.isValid);
-                console.log(response.imgBase64);
-            },
-        });
-   
+
+    $.ajax({
+        type: "POST",
+        url: "/Designer/RemoveBackground/",
+        data: {
+            data: file,
+
+        },
+        dataType: 'json',
+        success: function (response) {
+            // use console.log for debugging, and access the property of the deserialised object
+            //console.log(response.isValid);
+            console.log(response.imgBase64);
+        },
+    });
+
+}
+
+function drawImageScaled(img, ctx) {
+    var canvas = ctx.canvas;
+    var hRatio = canvas.width / img.width;
+    var vRatio = canvas.height / img.height;
+    var ratio = Math.min(hRatio, vRatio);
+    var centerShift_x = (canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, img.width, img.height,
+        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+}
 
 
-    //var fdata = new FormData();
+function SendJsonData(url) {
 
-    //var fileInput = $('#inputGroupFile01')[0];
+    var file = document.getElementById("imgShow");
+    var valueRgb = 123;
 
+    var c = document.getElementById("imgShow");
+    var ctx = c.getContext("2d");
 
-    //if (fdata != null) {
+    file = ctx.canvas.toDataURL();
 
-    //    fdata.append("File", file);
-    //}
+    var postData = { "ValueRGB": valueRgb, "data": file };
 
-
-    ////formData.set('File', file);
-
-    //var inputSave = $('#Image')[0];
-
+    //JSON.stringify({ "Name": $('#name').val(), "Father": $('#father').val(), "Mother": $('#mother').val(), "Age": $('#age').val(), "Email": $('#email').val(), "Phone": $('#phone').val(), "Standard": $('#standard').val(), "Section": $('#section').val() }),
 
 
+    var fdata = new FormData();
+    var filesInput = document.getElementById("inputGroupFile01");
+    filesInput = filesInput.files[0];
+
+    if (fdata != null) {
+
+        fdata.append("FileData", filesInput);
+        fdata.append("Id", valueRgb);
+        fdata.append("ImageBase64", file);
+        fdata.append("RemoveColorRGB", valueRgb);
+        fdata.append("Name", "NameFórmdata");
+        fdata.append("FilePath", "FilePath");
+    }
 
 
-    //try {
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: "/Designer/SaveImage/",
-    //        data: fdata,
-
-    //        contentType: false,
-    //        processData: false,
-    //        success: function (res) {
-    //            if (res.isValid) {
-    //                localstorageSaveWidthAndHeight(res.jsonString);
-    //                $("#imgShow").attr('src', 'data:image/png;base64,' + res.fileToSend);
-    //                document.getElementById("imgShow").hidden = false;
-    //                inputSave.value = ('data:image/png;base64,' + res.fileToSend);
-
-    //                //$('#view-all').html(res.html)
-    //                //$('#form-modal .modal-body').html('');
-    //                //$('#form-modal .modal-title').html('');
-    //                //$('#form-modal').modal('hide');
-    //                $('#form-modal').modal('show');
-    //            }
-    //            else
-    //                $('#form-modal .modal-body').html(res.html);
-    //        },
-    //        error: function (err) {
-    //            console.log(err)
-    //        }
-    //    })
-    //    //to prevent default form submit event
-    //    return false;
-    //} catch (ex) {
-    //    console.log(ex)
-    //}
 
 
+
+
+    $.ajax({
+        url: "/Designer/" + url,
+        type: "POST",
+        data: fdata,
+        processData: false,
+        contentType: false,
+        //data: JSON.stringify({ "Id": 123, "Name": "123", "ImageBase64": file, "FileData": fdata, "RemoveColorRGB": "1234567" }),
+        //contentType: "application/json;charset=utf-8",
+        success: function (res) {
+            if (res.isValid) {
+
+
+
+
+                var img = new Image();
+                img.onload = function () {
+                    ctx.canvas.height = img.height;
+                    ctx.globalCompositeOperation = "screen"; // negative multiplizieren
+                    ctx.drawImage(img, 0, 0);
+
+                };
+                img.src = 'data:image/png;base64,' + res.imgBase64;
+
+               
+            }
+        },
+        error: function () {
+            console.log("error updating status.");
+        }
+    });
 }
 
 
