@@ -54,6 +54,7 @@ namespace WebPreisBerechnungAuB
             services.AddScoped<Services.IUserService, UserService>(); 
             services.AddScoped<ICalculationService, CalculationService>();
             services.AddScoped<ITemplateReader, TemplateReader>();
+            services.AddScoped<ILoadAndModifyImage, LoadAndModifyImage>();
             RegisterServices(services);
             
             //Authorization

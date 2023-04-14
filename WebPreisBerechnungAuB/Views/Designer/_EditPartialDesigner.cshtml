@@ -27,16 +27,17 @@
 
 
     </div>
+   
 
-
+    @*<button onclick="ColorPicker()" class="btn btn-danger">Remove Background</button>*@
  
     <button onclick="uploadToTextil()" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Place on Textil</button>
     
     
-    <button onclick="SendJsonData('RemoveBackground')" id="removeBg" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Remove White Background</button>
+    <button onclick="SendJsonData('RemoveBackground')" id="removeBg" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Remove Color</button>
 
 
 
     <br />
 
-    <canvas width="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow"  />
+    <canvas onclick="colorPicker(event)" width="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow"  />

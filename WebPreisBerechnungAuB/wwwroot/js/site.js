@@ -5,6 +5,46 @@
 //Logo_SurfaceWidht
 
 
+function colorPicker() {
+
+    var colorBlock = document.getElementById('imgShow');
+    var ctx1 = colorBlock.getContext('2d');
+    var width1 = colorBlock.width;
+    var height1 = colorBlock.height;
+    colorBlock.clientHeight = height1;
+    colorBlock.clientWidth = width1;
+
+
+    var x = 0;
+    var y = 0;
+    var drag = false;
+    var rgbaColor = 'rgba(255,0,0,1)';
+
+    colorBlock.addEventListener("mousedown", mousedown, false);
+
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+            y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+        };
+    }
+
+
+    function mousedown(e) {
+
+        var xy = getMousePos(colorBlock,e);
+
+
+        var imageData = ctx1.getImageData(xy.x, xy.y, 1, 1).data;
+        rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
+       // alert("x: " + xy.x + "y: " + xy.y);
+        //alert(rgbaColor);
+        console.log(localStorage.getItem("rgbaColor", imageData))
+        localStorage.setItem("rgbaColor", imageData);
+    }
+}
+
 
 
 localstorageSaveWidthAndHeight = data => {
@@ -113,7 +153,7 @@ function testFunction() {
         ctx.globalCompositeOperation = "screen"; // negative multiplizieren
         ctx.drawImage(img, 0, 0, w, h);
 
-   
+
     };
     img.src =
         "data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==";
@@ -157,17 +197,21 @@ function drawImageScaled(img, ctx) {
 }
 
 
+
+
+
 function SendJsonData(url) {
 
     var file = document.getElementById("imgShow");
-    var valueRgb = 123;
+    console.log(localStorage.getItem("rgbaColor"))
 
-    var c = document.getElementById("imgShow");
-    var ctx = c.getContext("2d");
+    var ctx = file.getContext("2d");
+
+    //var LogoSizeRatio = JSON.parse(localStorage.getItem("rgbaColor"));
 
     file = ctx.canvas.toDataURL();
 
-    var postData = { "ValueRGB": valueRgb, "data": file };
+    var postData = { "ValueRGB": 123, "data": file };
 
     //JSON.stringify({ "Name": $('#name').val(), "Father": $('#father').val(), "Mother": $('#mother').val(), "Age": $('#age').val(), "Email": $('#email').val(), "Phone": $('#phone').val(), "Standard": $('#standard').val(), "Section": $('#section').val() }),
 
@@ -179,9 +223,9 @@ function SendJsonData(url) {
     if (fdata != null) {
 
         fdata.append("FileData", filesInput);
-        fdata.append("Id", valueRgb);
+        fdata.append("Id", 123);
         fdata.append("ImageBase64", file);
-        fdata.append("RemoveColorRGB", valueRgb);
+        fdata.append("RemoveColorRGB", JSON.stringify(localStorage.getItem("rgbaColor")));
         fdata.append("Name", "NameFórmdata");
         fdata.append("FilePath", "FilePath");
     }
@@ -214,7 +258,7 @@ function SendJsonData(url) {
                 };
                 img.src = 'data:image/png;base64,' + res.imgBase64;
 
-               
+
             }
         },
         error: function () {
