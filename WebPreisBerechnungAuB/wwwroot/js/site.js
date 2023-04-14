@@ -162,8 +162,8 @@ function SendJsonData(url) {
     var file = document.getElementById("imgShow");
     var valueRgb = 123;
 
-    var c = document.getElementById("imgShow");
-    var ctx = c.getContext("2d");
+    var ctx = file.getContext("2d");
+
 
     file = ctx.canvas.toDataURL();
 

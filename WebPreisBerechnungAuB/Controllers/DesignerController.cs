@@ -14,6 +14,7 @@ using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Collections.Generic;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Services;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -22,9 +23,12 @@ namespace WebPreisBerechnungAuB.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DesignerController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ILoadAndModifyImage _LoadAndModifyImage { get; }
+
+        public DesignerController(ApplicationDbContext context, ILoadAndModifyImage LoadAndModifyImage, IWebHostEnvironment webHostEnvironment)
         {
             this._context = context;
+            this._LoadAndModifyImage = LoadAndModifyImage;
             this._webHostEnvironment = webHostEnvironment;
         }
 
@@ -49,22 +53,26 @@ namespace WebPreisBerechnungAuB.Controllers
         public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
 
-            var _image = MagickImage.FromBase64(SubstringBase64Image(imageBackground.ImageBase64));
-
-            _image.ColorFuzz = new Percentage(44);
-            MagickColor RemoveColor = MagickColor.FromRgb((byte)0, (byte)255, (byte)0);
-            _image.Opaque(RemoveColor, MagickColors.None);
+            var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground.ImageBase64);
 
 
 
+            //var _image = MagickImage.FromBase64(SubstringBase64Image(imageBackground.ImageBase64));
 
-            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-            // string uploads = Path.Combine(uploadsFolder, file.FileName);
-            var separator = Path.DirectorySeparatorChar.ToString();
-            _image.Write(uploadsFolder + separator + "BgRemoved" + ".png");
+            //_image.ColorFuzz = new Percentage(44);
+            //MagickColor RemoveColor = MagickColor.FromRgb((byte)0, (byte)255, (byte)0);
+            //_image.Opaque(RemoveColor, MagickColors.None);
 
 
-            return Json(new { isValid = true, imgBase64 = _image.ToBase64() });
+
+
+            //string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+            //string uploads = Path.Combine(uploadsFolder, file.FileName);
+            //var separator = Path.DirectorySeparatorChar.ToString();
+            //_image.Write(uploadsFolder + separator + "BgRemoved" + ".png");
+
+
+            return Json(new { isValid = true, imgBase64 = ImageBasej64 });
 
         }
 
@@ -107,7 +115,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 _image.Write(uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
 
 
-   
+
 
                 _image.Dispose();
 
