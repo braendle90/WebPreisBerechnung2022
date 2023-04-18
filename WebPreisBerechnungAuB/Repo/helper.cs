@@ -68,8 +68,12 @@ namespace WebPreisBerechnungAuB.Repo
                     ExtraCharge = _context.ExtraCharge.Find(item.ExtraCharge.Id),
                     IsSelected = item.IsSelected,
                     Logo = logovm.Logo,
-                    ChargePieces = logovm.Logo.Color.NumberOfColors,
+                    ChargePieces = logovm.Logo.Color.NumberOfColors
                 };
+
+                newExtraCharge.ChargePriceTotal = CalculateScreenPricePerColors(newExtraCharge, logovm.Logo.Color.NumberOfColors);
+
+
 
 
 
@@ -100,15 +104,18 @@ namespace WebPreisBerechnungAuB.Repo
                 extraChargeListLoading.IsSelected = item.IsSelected;
                 extraChargeListLoading.ChargePieces = logovm.Logo.Color.NumberOfColors;
 
-                if (extraChargeListLoading.ExtraCharge.Id == 1 || extraChargeListLoading.ExtraCharge.Id == 2)
-                {
-                    extraChargeListLoading.ChargePriceTotal = (logovm.Logo.Color.NumberOfColors * extraChargeListLoading.ExtraCharge.ChargePrice);
 
-                }
-                else
-                {
-                    extraChargeListLoading.ChargePriceTotal = extraChargeListLoading.ExtraCharge.ChargePrice;
-                }
+                extraChargeListLoading.ChargePriceTotal = CalculateScreenPricePerColors(extraChargeListLoading, logovm.Logo.Color.NumberOfColors);
+
+                //if (extraChargeListLoading.ExtraCharge.Id == 1 || extraChargeListLoading.ExtraCharge.Id == 2)
+                //{
+                //    extraChargeListLoading.ChargePriceTotal = (logovm.Logo.Color.NumberOfColors * extraChargeListLoading.ExtraCharge.ChargePrice);
+
+                //}
+                //else
+                //{
+                //    extraChargeListLoading.ChargePriceTotal = extraChargeListLoading.ExtraCharge.ChargePrice;
+                //}
                 updateExtraChargeList.Add(extraChargeListLoading);
             }
 
@@ -205,7 +212,7 @@ namespace WebPreisBerechnungAuB.Repo
                                 if (item == extraCharge)
                                 {
 
-                                    var test = "alsdfj";
+                                   
 
 
                                     extraChargeListsLogoToRemove.Remove(item);
@@ -254,6 +261,24 @@ namespace WebPreisBerechnungAuB.Repo
 
 
             return showPriceCalculation;
+        }
+
+
+        public decimal CalculateScreenPricePerColors(ExtraChargeList extraChargeListLoading,int NumberOFColors)
+        {
+            decimal chargePriceToal;
+
+            if (extraChargeListLoading.ExtraCharge.Id == 1 || extraChargeListLoading.ExtraCharge.Id == 2)
+            {
+                chargePriceToal  = (NumberOFColors * extraChargeListLoading.ExtraCharge.ChargePrice);
+
+            }
+            else
+            {
+                chargePriceToal = extraChargeListLoading.ExtraCharge.ChargePrice;
+            }
+
+            return chargePriceToal;
         }
 
     }

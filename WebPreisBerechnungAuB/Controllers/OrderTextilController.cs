@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,6 +13,7 @@ using WebPreisBerechnungAuB.Repo;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
+    [Authorize]
     public class OrderTextilController : Controller
     {
 

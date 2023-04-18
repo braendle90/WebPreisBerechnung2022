@@ -7,20 +7,20 @@
     int count = 0;
 }
 
-<style>
+@*<style>
     .hiddenRow {
-        padding: 0 !important;
+    padding: 0 !important;
     }
 
     thead tr {
-        border-bottom: 10px solid white;
+    border-bottom: 10px solid white;
     }
 
     .iconsStyle {
-        font-size: 1.5rem;
-        color: black;
+    font-size: 1.5rem;
+    color: black;
     }
-</style>
+    </style>*@
 
 <div class="text-center mb-5">
 
@@ -31,117 +31,150 @@
 
 
 
-<table class="table table-hover  text-nowrap" style="border-collapse:collapse;">
-
-    <thead >
-        <tr class="accordion-toggle">
 
 
-            <th class="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.Textil.TextilName)</th>
-            <th class="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.TextilColor.TextilColorName)</th>
-            <th class="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.NumberOfPieces)</th>
-            <th class="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceScreenPrint)</th>
-            @*             <th class="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.OfferId)</th>*@
-            <th class="col">Edit</th>
 
+@foreach (var item in Model)
+{
+    <br />
 
-        </tr>
-    </thead>
+    <table class="table  table-striped ">
 
-
-    @foreach (var item in Model)
-    {
-        <tbody class=" mb-4">
-
+        <thead>
             <tr>
-                <td>    </td>
+
+
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.Textil.TextilName)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.TextilColor.TextilColorName)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.NumberOfPieces)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceTransfer)</th>
+                <th scope="col">@Html.DisplayNameFor(m => m.FirstOrDefault().OrderPositionLogo.Order.PriceScreenPrint)</th>
+                <th scope="col">Ändern</th>
+                <th scope="col">Löschen</th>
+
+
             </tr>
-
-            <tr data-toggle="collapse" data-target="#client_@count" class=" pb-5 pt-5   bg-primary text-white accordion-toggle">
-
-                <td class="col .bg-success">@item.OrderPositionLogo.Order.Textil.TextilName</td>
-                <td class="col">@item.OrderPositionLogo.Order.TextilColor.TextilColorName</td>
-                <td class="col">@item.OrderPositionLogo.Order.NumberOfPieces</td>
-                <td class="col">@item.OrderPositionLogo.Order.PriceScreenPrint</td>
-                @*           <td class="col">@item.OrderPositionLogo.Order.OfferId</td>*@
-
-                <td class="col">
-
-                    <a style="font-size: 2rem" onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",Context.Request.Scheme)','Texil ändern','@item.OrderPositionLogo.Id','@item.OrderPositionLogo.Order.OfferId')" data-dismiss="modal" class="float-right   bi bi-pencil-square iconsStyle"></a>
+        </thead>
 
 
-                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.OrderPositionLogo.Id" onclick="return jQueryAjaxDelete(this)" class="float-right text-white bi bi-trash iconsStyle">
+        <tbody class="">
+            <tr class="table-light">
+
+                <td scope="col">@item.OrderPositionLogo.Order.Textil.TextilName</td>
+                <td scope="col">@item.OrderPositionLogo.Order.TextilColor.TextilColorName</td>
+                <td scope="col">@item.OrderPositionLogo.Order.NumberOfPieces</td>
+                <td scope="col">@item.OrderPositionLogo.Order.PriceTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td scope="col">@item.OrderPositionLogo.Order.PriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</td>
+                <td scope="col">
+
+                    <a style="font-size: 2rem" onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",Context.Request.Scheme)','Texil ändern','@item.OrderPositionLogo.Id','@item.OrderPositionLogo.Order.OfferId')" data-dismiss="modal" class="bi bi-pencil-square iconsStyle"></a>
+
+                </td>
+
+                <td scope="col">
+
+                    <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.OrderPositionLogo.Id" onclick="return jQueryAjaxDelete(this)" class=" bi bi-trash iconsStyle">
                         <input type="hidden" asp-for="@item.OrderPositionLogo.Id" />
                     </form>
                 </td>
 
             </tr>
+        </tbody>
+    </table>
 
 
 
-            <tr class="pb-5 pb-5 hiddenRow">
 
-                <th class="accordian-body collapse show col" id="client_@count">LogoName</th>
+    <table class="table table-dark table-striped ">
 
-                <th class="accordian-body collapse show col" id="client_@count">Quadratzentimeter </th>
+        <thead class="table-dark">
 
-                <th class="accordian-body collapse show col" id="client_@count">Position Name</th>
+            <tr class="pb-5 text-primary pb-5 border-bottom border-top">
 
-                <th class="accordian-body collapse show col" id="client_@count">Farbanzahl</th>
-                <th class="accordian-body collapse show col" id="client_@count">Stückzahl </th>
+                <th scope="col" id="client_@count">Logo Name</th>
 
-                <th class="accordian-body collapse show col" id="client_@count">Stückzahl Total</th>
+                <th scope="col" id="client_@count">Größe Logo </th>
 
-                <th class="accordian-body collapse show col" id="client_@count">Transferpreis</th>
+                <th scope="col" id="client_@count">Position</th>
+                <th scope="col" id="client_@count">Farbanzahl </th>
+                <th scope="col" id="client_@count">Stückzahl </th>
 
-                <th class="accordian-body collapse show col" id="client_@count">Siebdruckpreis</th>
+                <th scope="col" id="client_@count">Transferpreis</th>
 
-
-
+                <th scope="col" id="client_@count">Siebdruckpreis</th>
             </tr>
+        </thead>
 
+        <tbody>
 
             @foreach (var data in item.ShowPriceModel)
             {
-                <tr class="bg-success hiddenRow mr-5 pt5">
+                <tr class="border-bottom">
 
 
-                    <td class="accordian-body collapse show col" id="client_@count"> @data.Logo.LogoName</td>
+                    <td scope="col" id="client_@count"> @data.Logo.LogoName</td>
 
-                    <td class="accordian-body collapse show col" id="client_@count"> @data.Logo.LogoSurfaceSize cm²</td>
+                    <td scope="col" id="client_@count"> @data.Logo.SurfaceHight x @data.Logo.SurfaceWidht mm </td>
 
-                    <td class="accordian-body collapse show col" id="client_@count">@data.Position.PositionName</td>
+                    <td scope="col" id="client_@count">@data.Position.PositionName</td>
+                    <td scope="col" id="client_@count">@data.Logo.Color.NumberOfColors</td>
+                    <td scope="col" id="client_@count">@data.OrderPositionLogo.Order.NumberOfPieces Stk.</td>
 
-                    <td class="accordian-body collapse show col" id="client_@count">@data.Logo.Color.NumberOfColors Farbig</td>
-                    <td class="accordian-body collapse show col" id="client_@count">@data.OrderPositionLogo.Order.NumberOfPieces Stk.</td>
 
-                    <td class="accordian-body collapse show col" id="client_@count">@data.PiecesofTextilWithThisLogo Total Stk.</td>
+                    <td scope="col" id="client_@count"> @data.PricePerPicesTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
 
-                    <td class="accordian-body collapse show col" id="client_@count"> á @data.PricePerPicesTransfer.ToString("C", CultureInfo.CurrentCulture)</td>
-
-                    <td class="accordian-body collapse show col" id="client_@count"> á @data.PricePerPices.ToString("C", CultureInfo.CurrentCulture)</td>
+                    <td scope="col" id="client_@count">  @data.PricePerPices.ToString("C", CultureInfo.CurrentCulture)</td>
 
 
                 </tr>
 
 
 
+                <tr>
+
+                    <td scope="col" id="client_@count">@Html.DisplayNameFor(model => model.FirstOrDefault().ShowPriceModel.FirstOrDefault().Anbringung)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    @if (data.Anbringung > 1)
+                    {
+                        <td scope="col" id="client_@count">  @data.Anbringung.ToString("C", CultureInfo.CurrentCulture)</td>
+                    }
+
+
+
+                    <td></td>
+
+
+                </tr>
+
 
 
                 @foreach (var extraCharge in data.extraChargeLists)
                 {
-                    <tr>
+                    @if (extraCharge.ExtraCharge.ChargeTyp == "Logo")
+                    {
+                        <tr>
 
-                        <td class="accordian-body collapse show col" id="client_@count">@extraCharge.ExtraCharge.ChargeName</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="accordian-body collapse show col" id="client_@count"> á @extraCharge.ExtraCharge.ChargePrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                            <td scope="col" id="client_@count">@extraCharge.ExtraCharge.ChargeName</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
 
-                    </tr>
+                            @if (extraCharge.ExtraCharge.ChargeTyp == "Logo")
+                            {
+                                <td scope="col" id="client_@count">  @(extraCharge.ChargePriceTotal.ToString("C", CultureInfo.CurrentCulture))</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+
+                        </tr>
+                    }
 
                 }
 
@@ -149,23 +182,37 @@
                 // total price
                 <tr>
 
-                    <th class="accordian-body collapse show col" id="client_@count">Gesamt Preis</th>
+                    <th scope="col" id="client_@count">Preis Logo</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th scope="col" id="client_@count">  @data.TotalPriceTransfer.ToString("C", CultureInfo.CurrentCulture)</th>
+                    <th scope="col" id="client_@count">  @data.TotalPriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</th>
+
+                </tr>
+
+                <tr class="table-light">
+
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <th class="accordian-body collapse show col" id="client_@count"> á @data.TotalPriceTransfer.ToString("C", CultureInfo.CurrentCulture)</th>
-                    <th class="accordian-body collapse show col" id="client_@count"> á @data.TotalPriceScreenPrint.ToString("C", CultureInfo.CurrentCulture)</th>
+                    <td></td>
+                    <td></td>
 
                 </tr>
 
             }
 
+
         </tbody>
-        count++;
-    }
-</table>
+    </table>
+    count++;
+
+}
+
 
 
 
@@ -202,13 +249,30 @@
 
         if (Model.FirstOrDefault().ShowPriceModel.Count() >= 1)
         {
+            //<div class="text-center">
+
+            //    <form method="get" asp-action="Index" asp-controller="Calculation" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+
+            //        <input type="submit" value="Drucken" class="btn btn-primary" />
+            //    </form>
+
+
+            //</div>
+
+
             <div class="text-center">
 
-                <form method="get" asp-action="Index" asp-controller="Calculation" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+                <input type="button" onclick="display()" value="Drucken" class="btn btn-primary" />
 
-                    <input type="submit" value="Speichern" class="btn btn-primary" />
+
+
+            </div>
+
+            <div class="float-right">
+                <form method="get" asp-action="SendEmail" asp-controller="SendEmail" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
+
+                    <input type="submit" value="E-Mail Senden" class="btn btn-primary" />
                 </form>
-
 
             </div>
 

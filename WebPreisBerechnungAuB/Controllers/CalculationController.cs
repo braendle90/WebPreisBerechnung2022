@@ -29,7 +29,7 @@ namespace WebPreisBerechnungAuB.Controllers
         {
             var list = await _service.GetCalculationVMs(id);
 
-            return View("ShowPriceTable - Copy", list);
+            return View("ShowPriceTable", list);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using ImageMagick;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ using WebPreisBerechnungAuB.Repo.Logo;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
+    [Authorize]
     public class LogoController : Controller
     {
 

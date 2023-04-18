@@ -28,6 +28,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                              @if (SignInManager.IsSignedIn(User))
+                        {
                       <li class="nav-item dropdown text-dark">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Change Database
@@ -46,6 +48,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Offer" asp-action="Index">Angebote</a>
                         </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Designer" asp-action="Index">Designer </a>
 
