@@ -85,7 +85,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
                 MagickReadSettings settings = new MagickReadSettings();
                 settings.ColorSpace = ColorSpace.sRGB;
-                settings.Density = new Density(72);
+                settings.Density = new Density(96);
 
                 //MagickNET.SetGhostscriptDirectory(@"C:\MyProgram\Ghostscript");
                 MagickNET.SetGhostscriptDirectory(ghostScriptPath);

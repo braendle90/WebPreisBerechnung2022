@@ -599,43 +599,7 @@ jQueryAjaxDelete = form => {
 }
 
 
-
-
-//jQueryAjaxChangeName = form => {
-
-//        try {
-//            $.ajax({
-//                type: 'POST',
-//                url: "/OrderTextil/AddOrderName/",
-//                data: new FormData(form),
-//                contentType: false,
-//                processData: false,
-//                success: function (res) {
-//                    $('#view-all').html(res.html);
-//                    $('#orderName').html("<h2>Angebot " + res.orderName + "</h2>");
-//                },
-//                error: function (err) {
-//                    console.log(err)
-//                }
-//            })
-//        } catch (ex) {
-//            console.log(ex)
-//        }
-
-
-//    //prevent default form submit event
-//    return false;
-//}
-
-
-
-
-
-
 jQueryAjaxChangeName = form => {
-
-
-
 
     var offerId = document.getElementById("Offer_OfferId").value;
 
