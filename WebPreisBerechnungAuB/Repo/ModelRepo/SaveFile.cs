@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Models.ViewModel;
 
@@ -11,8 +10,8 @@ namespace WebPreisBerechnungAuB.Repo.Logo
 
         public SaveFile()
         {
-   
-          
+
+
         }
 
         public async Task SaveFileToDB(LogoVM logo)
@@ -23,7 +22,7 @@ namespace WebPreisBerechnungAuB.Repo.Logo
             file = logo.Logo.File;
             file.Name = logo.Logo.LogoName;
 
-           
+
 
         }
     }

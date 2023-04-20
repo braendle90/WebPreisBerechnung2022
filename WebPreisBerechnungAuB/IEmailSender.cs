@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Mail;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models.ViewModel;
 
 namespace WebPreisBerechnungAuB

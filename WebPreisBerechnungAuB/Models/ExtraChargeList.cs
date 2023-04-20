@@ -5,7 +5,7 @@
 
         public int Id { get; set; }
 
-        public ExtraCharge ExtraCharge{ get; set; }
+        public ExtraCharge ExtraCharge { get; set; }
 
         public int ChargePieces { get; set; }
 

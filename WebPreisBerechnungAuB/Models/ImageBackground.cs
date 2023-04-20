@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebPreisBerechnungAuB.Models
 {
@@ -22,6 +22,6 @@ namespace WebPreisBerechnungAuB.Models
 
         [NotMapped]
         [DisplayName("Datei hochladen")]
-        public IFormFile FileData { get; set; } 
+        public IFormFile FileData { get; set; }
     }
 }

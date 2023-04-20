@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MimeKit.Text;
 using MimeKit;
+using MimeKit.Text;
 using System.Diagnostics;
 using WebPreisBerechnungAuB.Models;
-using MailKit.Net.Smtp;
 
 namespace WebPreisBerechnungAuB.Controllers
 {

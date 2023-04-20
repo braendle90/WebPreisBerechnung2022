@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -112,7 +111,7 @@ namespace WebPreisBerechnungAuB.Services
                 ShowPriceCalculation showPriceCalculation = new ShowPriceCalculation();
 
                 showPriceCalculation = await _helper.calculatExtraChargeListScreenprintAndTransfer(data, fillModel, positonLogoList);
-                
+
                 data.ExtraChargeLists = showPriceCalculation.ExtraChargeList;
 
                 var anbringung = await _helper.priceofTransferApplication(data, fillModel);

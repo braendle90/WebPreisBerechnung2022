@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Routing;
-using MimeKit;
-using System.Collections.Generic;
+﻿using MimeKit;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models.ViewModel;
 
@@ -29,7 +25,7 @@ namespace WebPreisBerechnungAuB
         public async Task SendEmailAsync(Message message)
         {
             var mailMessage = await CreateEmailMessage(message);
-           await SendAsync(mailMessage);
+            await SendAsync(mailMessage);
         }
 
         private async Task<MimeMessage> CreateEmailMessage(Message message)
@@ -58,8 +54,8 @@ namespace WebPreisBerechnungAuB
             }
             emailMessage.Body = bodyBuilder.ToMessageBody();
 
-          
-           return emailMessage;
+
+            return emailMessage;
         }
 
         private void Send(MimeMessage mailMessage)
@@ -108,7 +104,7 @@ namespace WebPreisBerechnungAuB
                 {
                     client.CheckCertificateRevocation = false;
                     await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, MailKit.Security.SecureSocketOptions.StartTls);
-                   // client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    // client.AuthenticationMechanisms.Remove("XOAUTH2");
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
 
                     await client.SendAsync(mailMessage);

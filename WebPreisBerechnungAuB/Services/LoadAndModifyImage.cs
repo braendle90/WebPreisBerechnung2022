@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Services
 {
@@ -17,10 +15,10 @@ namespace WebPreisBerechnungAuB.Services
             this._webHostEnvironment = webHostEnvironment;
         }
 
-        public string RemoveBackground(string Image,string removeArray)
+        public string RemoveBackground(string Image, string removeArray)
         {
 
-           
+
 
             var ImageWithoutAnnotation = SubstringBase64Image(Image);
             string[] modifedArray = removeArray.Split(',').Select(str => str.Trim()).ToArray();
@@ -29,8 +27,8 @@ namespace WebPreisBerechnungAuB.Services
             byte[] removeArraySplited = new byte[modifedArray.Length];
 
             //removeArraySplited[i] = modifedArray[i].Select(s => Convert.ToByte(s)).ToArray();
-             byte[] _Byte = modifedArray.Select(s => Byte.Parse(s)).ToArray();
-            
+            byte[] _Byte = modifedArray.Select(s => Byte.Parse(s)).ToArray();
+
 
 
             var _image = MagickImage.FromBase64(ImageWithoutAnnotation);

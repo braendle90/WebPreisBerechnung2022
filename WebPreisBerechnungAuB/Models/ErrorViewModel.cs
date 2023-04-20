@@ -1,5 +1,3 @@
-using System;
-
 namespace WebPreisBerechnungAuB.Models
 {
     public class ErrorViewModel

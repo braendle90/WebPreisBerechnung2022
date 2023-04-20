@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
@@ -101,9 +97,9 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
 
-                var message = new Message(new string[] { 
-                    Input.NewEmail }, 
-                    "Confirm your email", 
+                var message = new Message(new string[] {
+                    Input.NewEmail },
+                    "Confirm your email",
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.", null);
 
                 await _emailSender.SendEmailAsync(message);

@@ -13,7 +13,7 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
         [DisplayName("Textil Farbe")]
         public int TextilColorId { get; set; }
         [DisplayName("Textilfarbe")]
-        public string TextilColorName { get; set;}
+        public string TextilColorName { get; set; }
 
         public List<TextilColor> TextilColorList { get; set; }
         [DisplayName("Textil Art")]

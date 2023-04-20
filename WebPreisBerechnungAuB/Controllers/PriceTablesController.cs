@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using ImageMagick;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Models.ViewModel;
@@ -125,8 +120,8 @@ namespace WebPreisBerechnungAuB.Controllers
             var range = await _context.RangeTable.ToListAsync();
 
 
-            
-            
+
+
 
             if (id == null)
             {
@@ -144,7 +139,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             //textilSorted.AddRange(textil);
 
-            
+
 
 
             if (priceTable == null)
@@ -154,7 +149,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             PriceTableVM priceTableVm = new PriceTableVM
             {
-               
+
                 PriceTable = priceTable,
                 NumberColorList = color,
                 TexilList = textil,
@@ -178,7 +173,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
-            Textil textil = await _getFromDB.loadTextilById(model.TexilId);    
+            Textil textil = await _getFromDB.loadTextilById(model.TexilId);
             Color color = await _getFromDB.loadAllColorById(model.NumberColorsId);
             var range = await _context.RangeTable.Where(x => x.Id == model.RangeId).FirstOrDefaultAsync();
 
@@ -188,7 +183,7 @@ namespace WebPreisBerechnungAuB.Controllers
             priceTable.Texil = textil;
 
 
-            
+
 
 
 

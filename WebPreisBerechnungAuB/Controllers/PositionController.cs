@@ -32,7 +32,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             var user = await _userManager.GetUserAsync(User);
 
-            var PositionVMList = await _getFromDB.loadPositionLogoAndCreateVM(id,user);
+            var PositionVMList = await _getFromDB.loadPositionLogoAndCreateVM(id, user);
 
 
 
@@ -48,7 +48,7 @@ namespace WebPreisBerechnungAuB.Controllers
             PositionVM positionVM;
 
             var positionList = await _context.Positions.ToListAsync();
-            var logoList = await _getFromDB.loadAllLogoslByOfferIdAndUser(offerId,user);
+            var logoList = await _getFromDB.loadAllLogoslByOfferIdAndUser(offerId, user);
 
             var oplById = await _getFromDB.findOplById(id);
 
@@ -86,7 +86,7 @@ namespace WebPreisBerechnungAuB.Controllers
                     TextilName = positionLogo.OrderPositionLogo.Order.Textil.TextilName,
                     OfferId = offerId,
                     PositionLogoId = positionLogo.Id,
-                    
+
                 };
 
             }
@@ -103,7 +103,7 @@ namespace WebPreisBerechnungAuB.Controllers
             var position = await _getFromDB.loadPositionById(model.PositionId);
             var logo = await _getFromDB.loadLogoById(model.LogoId);
             var orderPositionLogo = await _getFromDB.loadOrderPositionLogoById(model.OrderPositionId);
-            var offerId = model.OfferId; 
+            var offerId = model.OfferId;
             PositionVM positionVM;
             List<PositionVM> modelVm;
 
@@ -153,7 +153,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
                 }
 
-                modelVm = await _getFromDB.loadPositionLogoAndCreateVM(offerId,user);
+                modelVm = await _getFromDB.loadPositionLogoAndCreateVM(offerId, user);
 
 
 
@@ -204,7 +204,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-            var modelVm = await _getFromDB.loadPositionLogoAndCreateVM(offerId,user);
+            var modelVm = await _getFromDB.loadPositionLogoAndCreateVM(offerId, user);
 
 
 

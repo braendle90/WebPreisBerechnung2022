@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +18,7 @@ namespace WebPreisBerechnungAuB.Controllers
         private readonly IGetFromDB _getFromDB;
 
         public OrderController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
-            {
+        {
             this._context = context;
             this._userManager = userManager;
             this._getFromDB = new GetFromDB(_context, userManager);
@@ -38,24 +37,24 @@ namespace WebPreisBerechnungAuB.Controllers
 
             var allOpl = await _getFromDB.loadAllOrderPositionLogoByUser(user);
 
-    
 
 
-                foreach (var opl in allOpl)
+
+            foreach (var opl in allOpl)
+            {
+                var orderVm = new OrderVM
                 {
-                    var orderVm = new OrderVM
-                    {
-                        NumberOfPieces = opl.Order.NumberOfPieces,
-                        TextilColorName = opl.Order.TextilColor.TextilColorName,
-                        TextilName = opl.Order.Textil.TextilName,
-                        OfferId = opl.Order.OfferId,
-                        Id = opl.Id
-                    };
+                    NumberOfPieces = opl.Order.NumberOfPieces,
+                    TextilColorName = opl.Order.TextilColor.TextilColorName,
+                    TextilName = opl.Order.Textil.TextilName,
+                    OfferId = opl.Order.OfferId,
+                    Id = opl.Id
+                };
 
-                    orderVmList.Add(orderVm);
-                }
+                orderVmList.Add(orderVm);
+            }
 
-            
+
 
 
             return View(orderVmList);

@@ -16,7 +16,6 @@ using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Models.ViewModel;
 using WebPreisBerechnungAuB.Repo;
-using WebPreisBerechnungAuB.Repo.Logo;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -152,13 +151,13 @@ namespace WebPreisBerechnungAuB.Controllers
             vmModel.ColorId = getOfferid.Color.Id;
             vmModel.SelectColorList = new List<SelectListItem>();
 
-            foreach (var color in vmModel.ColorList) 
+            foreach (var color in vmModel.ColorList)
             {
                 vmModel.SelectColorList.Add(new SelectListItem { Text = color.ColorName, Value = color.Id.ToString() });
 
-            }    
-            
-                
+            }
+
+
 
 
             return View("_EditPartialLogo", vmModel);
@@ -176,7 +175,7 @@ namespace WebPreisBerechnungAuB.Controllers
             string uploads = Path.Combine(uploadsFolder, file.FileName);
             var separator = Path.DirectorySeparatorChar.ToString();
 
-          
+
 
 
             if (file.Length > 0)
@@ -221,7 +220,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             string fileToSend = Convert.ToBase64String(System.IO.File.ReadAllBytes(pathtoFileToSend));
 
-     
+
             string jsonString = JsonSerializer.Serialize(logoSizeRatio);
 
 

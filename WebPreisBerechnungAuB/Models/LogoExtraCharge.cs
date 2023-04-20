@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace WebPreisBerechnungAuB.Models
+﻿namespace WebPreisBerechnungAuB.Models
 {
     public class LogoExtraCharge
     {

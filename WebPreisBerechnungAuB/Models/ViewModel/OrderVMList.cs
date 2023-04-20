@@ -8,7 +8,7 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
     {
 
         public int Id { get; set; }
- 
+
         [Required]
         [DisplayName("Stückzahl")]
         [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
@@ -16,7 +16,7 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
 
         [DisplayName("Angebots Nummer")]
         public string OfferId { get; set; }
-        
+
         public int TextilColorId { get; set; }
 
         [DisplayName("Textilfarbe")]

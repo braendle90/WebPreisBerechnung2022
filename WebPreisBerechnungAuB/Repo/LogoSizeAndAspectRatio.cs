@@ -5,9 +5,9 @@
 
         public int Id { get; set; }
         public decimal width { get; set; }
-       public decimal height { get; set; }
-       public decimal ratiowidth { get; set; }
-       public decimal ratioheight { get; set; }
+        public decimal height { get; set; }
+        public decimal ratiowidth { get; set; }
+        public decimal ratioheight { get; set; }
 
         public decimal aspectRatio { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace WebPreisBerechnungAuB.Models
 {
@@ -8,7 +7,7 @@ namespace WebPreisBerechnungAuB.Models
         public int Id { get; set; }
 
 
-        [DisplayName("Logo Name")] 
+        [DisplayName("Logo Name")]
         public string LogoName { get; set; }
         [DisplayName("Breite in mm")]
         public double SurfaceWidht { get; set; }

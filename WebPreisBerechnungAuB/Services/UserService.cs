@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
-using WebPreisBerechnungAuB.Services.Interface;
 
 namespace WebPreisBerechnungAuB.Services
 {

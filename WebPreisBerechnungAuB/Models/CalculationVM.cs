@@ -6,7 +6,7 @@ namespace WebPreisBerechnungAuB.Models
     {
         public int Id { get; set; }
 
-        public OrderPositionLogo OrderPositionLogo { get; set; } 
+        public OrderPositionLogo OrderPositionLogo { get; set; }
         public List<ShowPriceModel> ShowPriceModel { get; set; } = new List<ShowPriceModel>();
     }
 }

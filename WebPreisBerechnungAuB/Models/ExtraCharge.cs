@@ -7,7 +7,7 @@
         public string ChargeName { get; set; }
 
         public decimal ChargePrice { get; set; }
- 
+
 
         public string ChargeTyp { get; set; }
 

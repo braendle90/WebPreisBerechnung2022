@@ -207,12 +207,12 @@ namespace WebPreisBerechnungAuB.Repo
 
                             foreach (var item in extraChargeListsLogo)
                             {
-                        
+
 
                                 if (item == extraCharge)
                                 {
 
-                                   
+
 
 
                                     extraChargeListsLogoToRemove.Remove(item);
@@ -237,7 +237,7 @@ namespace WebPreisBerechnungAuB.Repo
             {
                 priceExtraLogo = extraChargeListsLogo.Sum(x => x.ChargePriceTotal);
             }
-                
+
             var applicationPrice = (decimal)_calcRepo.ApplicationTransferPrice(data, data.Logo.LogoSurfaceSize, fillModel.Pieces);
             var applicationPricePieces = (applicationPrice * data.OrderPositionLogo.Order.NumberOfPieces);
 
@@ -264,13 +264,13 @@ namespace WebPreisBerechnungAuB.Repo
         }
 
 
-        public decimal CalculateScreenPricePerColors(ExtraChargeList extraChargeListLoading,int NumberOFColors)
+        public decimal CalculateScreenPricePerColors(ExtraChargeList extraChargeListLoading, int NumberOFColors)
         {
             decimal chargePriceToal;
 
             if (extraChargeListLoading.ExtraCharge.Id == 1 || extraChargeListLoading.ExtraCharge.Id == 2)
             {
-                chargePriceToal  = (NumberOFColors * extraChargeListLoading.ExtraCharge.ChargePrice);
+                chargePriceToal = (NumberOFColors * extraChargeListLoading.ExtraCharge.ChargePrice);
 
             }
             else

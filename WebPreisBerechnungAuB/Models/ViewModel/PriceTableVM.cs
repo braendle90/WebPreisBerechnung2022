@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace WebPreisBerechnungAuB.Models.ViewModel
 {
@@ -10,7 +9,7 @@ namespace WebPreisBerechnungAuB.Models.ViewModel
 
         public int Id { get; set; }
 
-        public PriceTable PriceTable{ get; set; }
+        public PriceTable PriceTable { get; set; }
         public List<PriceTable> PriceTableList { get; set; }
 
         public int TexilId { get; set; }

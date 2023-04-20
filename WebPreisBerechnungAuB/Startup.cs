@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +9,6 @@ using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Helpers;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Services;
-using WebPreisBerechnungAuB.Services.Interface;
 
 namespace WebPreisBerechnungAuB
 {
@@ -39,7 +35,8 @@ namespace WebPreisBerechnungAuB
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
 
-            services.Configure<FormOptions>(o => {
+            services.Configure<FormOptions>(o =>
+            {
                 o.ValueLengthLimit = int.MaxValue;
                 o.MultipartBodyLengthLimit = int.MaxValue;
                 o.MemoryBufferThreshold = int.MaxValue;
@@ -51,24 +48,24 @@ namespace WebPreisBerechnungAuB
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            services.AddScoped<Services.IUserService, UserService>(); 
+            services.AddScoped<Services.IUserService, UserService>();
             services.AddScoped<ICalculationService, CalculationService>();
             services.AddScoped<ITemplateReader, TemplateReader>();
             services.AddScoped<ILoadAndModifyImage, LoadAndModifyImage>();
             RegisterServices(services);
-            
+
             //Authorization
             //services.AddAuthorization(options =>
             //{
             //    options.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
 
             //});
-            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
-           
+
             context.Database.Migrate();
 
             if (env.IsDevelopment())

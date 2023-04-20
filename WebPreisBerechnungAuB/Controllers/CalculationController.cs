@@ -1,14 +1,5 @@
-﻿using System.Collections.Generic;
-using WebPreisBerechnungAuB.Models;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using WebPreisBerechnungAuB.Data;
-using WebPreisBerechnungAuB.Models.ViewModel;
-using WebPreisBerechnungAuB.Repo;
 using WebPreisBerechnungAuB.Services;
 
 namespace WebPreisBerechnungAuB.Controllers

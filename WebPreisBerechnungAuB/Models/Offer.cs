@@ -13,7 +13,7 @@ namespace WebPreisBerechnungAuB.Models
         [DisplayName("Angebot bestellt")]
         public bool IsOrdered { get; set; }
 
-       
+
 
     }
 }

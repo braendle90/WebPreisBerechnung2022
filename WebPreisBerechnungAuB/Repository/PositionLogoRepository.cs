@@ -35,8 +35,8 @@ namespace WebPreisBerechnungAuB.Repository
             var user = await _userService.CurrentUser();
             return await _context.PositionLogos
                 .Include(x => x.Logo)
-                .Include(x=>x.Position)
-                .Include(x=>x.OrderPositionLogo)
+                .Include(x => x.Position)
+                .Include(x => x.OrderPositionLogo)
                 .ToListAsync();
         }
 

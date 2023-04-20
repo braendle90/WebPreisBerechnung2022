@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
@@ -85,7 +82,7 @@ namespace WebPreisBerechnungAuB.Areas.Identity.Pages.Account.Manage
 
             user.Company = Input.Company;
 
-            await _userManager.UpdateAsync(user);   
+            await _userManager.UpdateAsync(user);
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)

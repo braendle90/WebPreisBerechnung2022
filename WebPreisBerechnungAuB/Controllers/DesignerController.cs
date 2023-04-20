@@ -1,19 +1,12 @@
 ﻿using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Threading.Tasks;
-using System;
 using WebPreisBerechnungAuB.Data;
-using WebPreisBerechnungAuB.Repo;
-using System.Text.Json;
-using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
-using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Collections.Generic;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Repo;
 using WebPreisBerechnungAuB.Services;
 
 namespace WebPreisBerechnungAuB.Controllers
@@ -51,14 +44,14 @@ namespace WebPreisBerechnungAuB.Controllers
         }
         [HttpPost]
         public IActionResult RemoveBackground(ImageBackground imageBackground)
-            {
+        {
 
             var BackgroundRemoveArray = imageBackground.RemoveColorRGB;
             var lengthString = BackgroundRemoveArray.Length;
-            var arraySubString = BackgroundRemoveArray.Substring(1, lengthString-2);
+            var arraySubString = BackgroundRemoveArray.Substring(1, lengthString - 2);
             imageBackground.RemoveColorRGB = arraySubString;
 
-            var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground.ImageBase64,arraySubString);
+            var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground.ImageBase64, arraySubString);
 
 
             return Json(new { isValid = true, imgBase64 = ImageBasej64 });

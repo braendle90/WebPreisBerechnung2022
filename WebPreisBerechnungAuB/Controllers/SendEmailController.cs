@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Org.BouncyCastle.Crypto.Tls;
-using System;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Helpers;
@@ -34,7 +27,7 @@ namespace WebPreisBerechnungAuB.Controllers
         private readonly IEmailSender _emailSender;
 
 
-        public SendEmailController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender, 
+        public SendEmailController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender,
             IWebHostEnvironment webHostEnvironment, ICalculationService service, ITemplateReader template)
         {
             this._context = context;
@@ -50,9 +43,9 @@ namespace WebPreisBerechnungAuB.Controllers
         public async Task<IActionResult> SendOfferMail()
         {
 
-            var message = new Message(new string[] { "d.braendle@aub.at" },"Test mail with Attachments", "This is the content from our mail with attachments.");
+            var message = new Message(new string[] { "d.braendle@aub.at" }, "Test mail with Attachments", "This is the content from our mail with attachments.");
 
-            
+
 
             await _emailSender.SendEmailAsync(message);
             //"Test mail with Attachments"
@@ -76,9 +69,9 @@ namespace WebPreisBerechnungAuB.Controllers
             };
             model = template.ReadSendContingenteEmailFile(model);
 
-            var renderedView = Helper.RenderRazorViewToString(this, "sendEmailTemplate",model.CalculationVMList);
+            var renderedView = Helper.RenderRazorViewToString(this, "sendEmailTemplate", model.CalculationVMList);
             model.MailContent.Content = renderedView;
-            
+
             await _emailSender.SendMailViewModel(model);
             return RedirectToAction("Index", "Home");
 
