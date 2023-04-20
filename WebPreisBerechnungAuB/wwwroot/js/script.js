@@ -30,9 +30,6 @@ function draw1() {
   img.onload = function () {
     ctx.drawImage(img, 0, 0, w, h);
     ctx.globalCompositeOperation = "source-in";
-    // set composite mode
-
-    // draw color
     ctx.fillStyle = hexCodeHtml;
     ctx.fillRect(0, 0, c.width, c.height);
   };
