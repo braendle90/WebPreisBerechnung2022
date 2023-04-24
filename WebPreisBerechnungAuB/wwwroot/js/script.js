@@ -1,7 +1,7 @@
 var c;
 var ctx;
-var w = 1024;
-var h = 768;
+var w = 1080;
+var h = 661;
 var hexCodeHtml = "#131698";
 let restore_array = [];
 let index = -1;
@@ -22,26 +22,32 @@ function CanvasData() {
   c.width = w;
   c.height = h;
 }
+//draw1();
 
-draw1();
+
 
 function draw1() {
   var img = new Image();
   img.onload = function () {
-    ctx.drawImage(img, 0, 0, w, h);
+    ctx.drawImage(img, 0, 0,w,h);
     ctx.globalCompositeOperation = "source-in";
     ctx.fillStyle = hexCodeHtml;
     ctx.fillRect(0, 0, c.width, c.height);
   };
-  img.src = "/img/shirt/Base_Vorlage.svg";
+    img.src = "/img/shirt/Base_Vorlage.svg";    
   draw2();
 }
+
+// Listen for `DOMContentLoaded` event
+document.addEventListener('DOMContentLoaded', e => {
+    draw1();
+})
 
 function draw2() {
   var img = new Image();
   img.onload = function () {
     ctx.globalCompositeOperation = "multiply";
-    ctx.drawImage(img, 0, 0, w, h);
+    ctx.drawImage(img, 0, 0,w,h);
   };
   img.src = "/img/shirt/shadows_multiplizieren.png";
   draw3();
@@ -51,7 +57,7 @@ function draw3() {
   var img = new Image();
   img.onload = function () {
     ctx.globalCompositeOperation = "screen"; // negative multiplizieren
-    ctx.drawImage(img, 0, 0, w, h);
+    ctx.drawImage(img, 0, 0,w,h);
 
     restore_array.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
     index += 1;
@@ -59,7 +65,7 @@ function draw3() {
   img.src = "/img/shirt/highlights_negative_muliplizieren.png";
 }
 
-setDPI(300);
+//setDPI(300);
 
 function setDPI(dpi) {
 
