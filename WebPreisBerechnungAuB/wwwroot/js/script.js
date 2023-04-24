@@ -65,7 +65,8 @@ function draw3() {
   img.src = "/img/shirt/highlights_negative_muliplizieren.png";
 }
 
-//setDPI(300);
+
+setDPI(200);
 
 function setDPI(dpi) {
 
