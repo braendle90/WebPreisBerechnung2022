@@ -21,7 +21,7 @@
 
 <div class="text-center mb-5">
 
-    <h1>Position Logo</h1>
+    <h1>Position/Logo auf Textil</h1>
 
 </div>
 
@@ -31,14 +31,14 @@
     @foreach (var textil in Model)
     {
         <tbody>
-            <tr data-toggle="collapse" data-target="#client_@count" class="accordion-toggle">
+            <tr >
                 <th>
-                    <div class="row">
+                    <div class="row" onclick="showInPopupPosition('@Url.Action("AddOrEdit","Position",null,Context.Request.Scheme)','Position hinzufügen', 0,@textil.OrderPositionId, '@Model.FirstOrDefault().OfferId' )">
                         <div class="col">@textil.TextilName</div>
 
                         <div class="col">
 
-                            <a onclick="showInPopupPosition('@Url.Action("AddOrEdit","Position",null,Context.Request.Scheme)','Position hinzufügen', 0,@textil.OrderPositionId, '@Model.FirstOrDefault().OfferId' )" data-dismiss="modal"><i class="float-right bi bi-plus-circle iconsStyle"></i> </a>
+                            <a class="float-right btn btn-success text-white"  data-dismiss="modal">Hinzufügen</a>
 
                             @*
                                 <a asp-action="EditClient" asp-controller="Client" asp-route-Id="@textil.OfferId">

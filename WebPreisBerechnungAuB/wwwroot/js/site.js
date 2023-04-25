@@ -5,7 +5,7 @@
 //Logo_SurfaceWidht
 
 
-function colorPicker() {
+function colorPicker(event) {
 
     var colorBlock = document.getElementById('imgShow');
     var ctx1 = colorBlock.getContext('2d');
@@ -20,7 +20,9 @@ function colorPicker() {
     var drag = false;
     var rgbaColor = 'rgba(255,0,0,1)';
 
-    colorBlock.addEventListener("mousedown", mousedown, false);
+    //colorBlock.addEventListener("mousedown", mousedown, false);
+
+    mousedown(event);
 
     function getMousePos(canvas, evt) {
         var rect = canvas.getBoundingClientRect();
@@ -142,24 +144,6 @@ CalculateImageSizeInMilimeterWidth = data => {
     }
 
 }
-
-function testFunction() {
-    var c = document.getElementById("imgShow");
-    var ctx = c.getContext("2d");
-
-
-    var img = new Image();
-    img.onload = function () {
-        ctx.globalCompositeOperation = "screen"; // negative multiplizieren
-        ctx.drawImage(img, 0, 0, w, h);
-
-
-    };
-    img.src =
-        "data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==";
-}
-
-
 
 
 function removeWhiteBackground() {

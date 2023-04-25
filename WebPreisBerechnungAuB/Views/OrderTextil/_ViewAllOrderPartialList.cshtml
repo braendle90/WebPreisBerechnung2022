@@ -37,36 +37,7 @@
 
 
 @*
-    <div class="col ">
-
-        @if (@Model.Offer.OfferName == null)
-        {
-            <form onsubmit="return jQueryAjaxChangeName(this)">
-
-
-            <div class="input-group">
-
-
-
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@Html.DisplayNameFor(model => model.Offer.OfferName)</span>
-                </div>
-                <input type="text" asp-for="Offer.OfferName" name="OfferName" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
-                <input name="OfferId" hidden asp-for="Offer.OfferId" />
-
-                <div class="input-group-append">
-                    <input type="submit" class="btn btn-primary" />
-                </div>
-
-            </div>
-
-
-
-        </form>
-
-        }
-
-    </div>
+  
 
 *@
     
@@ -123,8 +94,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.TextilName)
             </th>
+           
             <th>
+                <div class="float-right">
+
                 <a onclick="showInPopup('@Url.Action("AddOrEdit","OrderTextil",null,Context.Request.Scheme)','Texil hinzufügen', 0, '@offerId' )" data-dismiss="modal" class="btn btn-success text-white"><i></i> Textil Hinzufügen</a>
+                </div>
             </th>
 
         </tr>

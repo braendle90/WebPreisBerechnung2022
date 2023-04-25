@@ -6,7 +6,7 @@ namespace WebPreisBerechnungAuB.Models
     {
 
         public int Id { get; set; }
-        [DisplayName("Textil Farbe")]
+        [DisplayName("Textil Farbe:")]
         public string TextilColorName { get; set; }
 
         public bool IsPriceHigher { get; set; }

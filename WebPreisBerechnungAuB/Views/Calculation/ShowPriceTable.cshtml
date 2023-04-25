@@ -234,9 +234,9 @@
 
 
 
-<div>
+<div class="row">
 
-    <div class="float-left">
+    <div class="float-start">
         <form method="get" asp-action="Index" asp-controller="Position" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
 
             <input type="submit" value="Zurück" class="btn btn-primary" />
@@ -260,7 +260,7 @@
             //</div>
 
 
-            <div class="text-center">
+            <div class="float-none mx-auto">
 
                 <input type="button" onclick="display()" value="Drucken" class="btn btn-primary" />
 
@@ -268,7 +268,7 @@
 
             </div>
 
-            <div class="float-right">
+            <div class="float-end">
                 <form method="get" asp-action="SendEmail" asp-controller="SendEmail" asp-route-id="@Model.FirstOrDefault().OrderPositionLogo.Order.OfferId">
 
                     <input type="submit" value="E-Mail Senden" class="btn btn-primary" />

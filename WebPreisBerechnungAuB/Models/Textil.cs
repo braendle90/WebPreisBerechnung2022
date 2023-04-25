@@ -5,7 +5,7 @@ namespace WebPreisBerechnungAuB.Models
     public class Textil
     {
         public int Id { get; set; }
-        [DisplayName("Textil Name")]
+        [DisplayName("Textil:")]
         public string TextilName { get; set; }
     }
 }
