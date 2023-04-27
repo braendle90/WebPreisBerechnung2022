@@ -4,6 +4,16 @@
 
 //Logo_SurfaceWidht
 
+var rgbaColor = 'rgba(255,0,0,1)';
+
+
+function changeColorField() {
+
+    var colorField = document.getElementById("colorField");
+
+    colorField.style.backgroundColor = rgbaColor;
+
+}
 
 function colorPicker(event) {
 
@@ -18,7 +28,7 @@ function colorPicker(event) {
     var x = 0;
     var y = 0;
     var drag = false;
-    var rgbaColor = 'rgba(255,0,0,1)';
+
 
     //colorBlock.addEventListener("mousedown", mousedown, false);
 
@@ -35,16 +45,18 @@ function colorPicker(event) {
 
     function mousedown(e) {
 
-        var xy = getMousePos(colorBlock,e);
+        var xy = getMousePos(colorBlock, e);
 
 
         var imageData = ctx1.getImageData(xy.x, xy.y, 1, 1).data;
         rgbaColor = 'rgba(' + imageData[0] + ',' + imageData[1] + ',' + imageData[2] + ',1)';
-       // alert("x: " + xy.x + "y: " + xy.y);
+        // alert("x: " + xy.x + "y: " + xy.y);
         //alert(rgbaColor);
         console.log(localStorage.getItem("rgbaColor", imageData))
         localStorage.setItem("rgbaColor", imageData);
     }
+
+    changeColorField();
 }
 
 
