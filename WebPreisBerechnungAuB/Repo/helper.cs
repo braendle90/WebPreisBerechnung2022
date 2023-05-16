@@ -83,7 +83,8 @@ namespace WebPreisBerechnungAuB.Repo
 
             }
 
-            _context.AddRange(newExtraChargeList);
+            _context
+                .AddRange(newExtraChargeList);
             _context.SaveChanges();
 
             return newExtraChargeList;

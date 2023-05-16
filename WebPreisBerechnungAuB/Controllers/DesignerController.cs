@@ -43,6 +43,22 @@ namespace WebPreisBerechnungAuB.Controllers
 
         }
         [HttpPost]
+        public IActionResult InvertColor(ImageBackground imageBackground)
+        {
+
+            var BackgroundRemoveArray = imageBackground.RemoveColorRGB;
+            var lengthString = BackgroundRemoveArray.Length;
+            var arraySubString = BackgroundRemoveArray.Substring(1, lengthString - 2);
+            imageBackground.RemoveColorRGB = arraySubString;
+
+            var ImageBasej64 = _LoadAndModifyImage.InvertColor(imageBackground.ImageBase64, arraySubString);
+
+
+            return Json(new { isValid = true, imgBase64 = ImageBasej64 });
+        }
+
+
+        [HttpPost]
         public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
 

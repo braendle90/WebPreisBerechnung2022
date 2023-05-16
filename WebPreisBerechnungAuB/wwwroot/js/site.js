@@ -216,12 +216,18 @@ function SendJsonData(url) {
     var filesInput = document.getElementById("inputGroupFile01");
     filesInput = filesInput.files[0];
 
+    var removeColorRGB = JSON.stringify(localStorage.getItem("rgbaColor"));
+
+    if (!removeColorRGB) {
+        removeColorRGB = "Leer";
+    }
+
     if (fdata != null) {
 
         fdata.append("FileData", filesInput);
         fdata.append("Id", 123);
         fdata.append("ImageBase64", file);
-        fdata.append("RemoveColorRGB", JSON.stringify(localStorage.getItem("rgbaColor")));
+        fdata.append("RemoveColorRGB", removeColorRGB);
         fdata.append("Name", "NameFórmdata");
         fdata.append("FilePath", "FilePath");
     }
@@ -254,7 +260,7 @@ function SendJsonData(url) {
                 };
                 img.src = 'data:image/png;base64,' + res.imgBase64;
 
-
+                localStorage.removeItem("rgbaColor");
             }
         },
         error: function () {

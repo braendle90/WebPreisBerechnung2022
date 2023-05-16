@@ -261,6 +261,41 @@ namespace WebPreisBerechnungAuB.Repo
 
 
         }
+        //copy of the function 
+        public decimal calcTransferPriceOLD(PositionLogo order, int piecesOfTextilPositions)
+        {
+
+
+
+
+            var hight = order.Logo.SurfaceHight / 10;
+            var width = order.Logo.SurfaceWidht / 10;
+
+            var surfaceSize = hight * width;
+
+            var PiecesOfLogoOnSamePositionSize = surfaceSize * piecesOfTextilPositions;
+
+            var logoSurfaceSizeWithPieces = (order.OrderPositionLogo.Order.NumberOfPieces * surfaceSize);
+
+            var multiply = _context.PriceTableTransfer
+                .Include(x => x.RangeLogo)
+                .Where(x => x.RangeLogo.SurfaceSizeFrom <= PiecesOfLogoOnSamePositionSize)
+                .Where(x => x.RangeLogo.SurfaceSizeTo >= PiecesOfLogoOnSamePositionSize)
+                .FirstOrDefault();
+
+
+            decimal priceTansfer = ((decimal)logoSurfaceSizeWithPieces / 10) * (decimal)multiply.Price;
+
+            if (multiply.Price >= 0.19)
+            {
+                priceTansfer += 25;
+            }
+
+            return priceTansfer;
+
+
+
+        }
 
         public void deleteOrderPositionLogos(int orderpositionId)
         {
