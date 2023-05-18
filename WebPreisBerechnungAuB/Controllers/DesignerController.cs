@@ -60,7 +60,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
         [HttpPost]
 
-       
+
         public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
 
@@ -69,7 +69,7 @@ namespace WebPreisBerechnungAuB.Controllers
             var arraySubString = BackgroundRemoveArray.Substring(1, lengthString - 2);
             imageBackground.RemoveColorRGB = arraySubString;
 
-            var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground.ImageBase64, arraySubString);
+            var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground, arraySubString);
 
 
             return Json(new { isValid = true, imgBase64 = ImageBasej64 });
@@ -87,8 +87,6 @@ namespace WebPreisBerechnungAuB.Controllers
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
             string uploads = Path.Combine(uploadsFolder, imageBackground.FileData.FileName);
             var separator = Path.DirectorySeparatorChar.ToString();
-
-
 
 
             if (imageBackground.FileData.Length > 0)

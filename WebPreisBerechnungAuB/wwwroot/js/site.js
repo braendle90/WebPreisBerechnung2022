@@ -193,7 +193,12 @@ function drawImageScaled(img, ctx) {
 }
 
 
+function changeValuefromTolerance() {
 
+    v = $('#toleranceRange').val();
+    console.log(v);
+    $('div.toleranceRangeValue').text(v);
+}
 
 
 function SendJsonData(url) {
@@ -202,6 +207,7 @@ function SendJsonData(url) {
     console.log(localStorage.getItem("rgbaColor"))
 
     var ctx = file.getContext("2d");
+
 
     //var LogoSizeRatio = JSON.parse(localStorage.getItem("rgbaColor"));
 
@@ -218,6 +224,8 @@ function SendJsonData(url) {
 
     var removeColorRGB = JSON.stringify(localStorage.getItem("rgbaColor"));
 
+    var tolerance = document.getElementById("toleranceRange").value;
+
     if (!removeColorRGB) {
         removeColorRGB = "Leer";
     }
@@ -230,6 +238,7 @@ function SendJsonData(url) {
         fdata.append("RemoveColorRGB", removeColorRGB);
         fdata.append("Name", "NameFórmdata");
         fdata.append("FilePath", "FilePath");
+        fdata.append("tolerance", tolerance);
     }
 
 

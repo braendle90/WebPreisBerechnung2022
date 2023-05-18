@@ -12,6 +12,8 @@ namespace WebPreisBerechnungAuB.Models
 
         public string RemoveColorRGB { get; set; }
 
+        public int tolerance { get; set; }
+
         [DisplayName("Datei Name")]
         public string Name { get; set; }
         public string FilePath { get; set; }

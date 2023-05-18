@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web.Helpers;
+using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Services
 {
@@ -32,8 +33,8 @@ namespace WebPreisBerechnungAuB.Services
             {
                 for (int x = 0; (x <= (pic.Width - 1)); x++)
                 {
-                    Color inv = pic.GetPixel(x, y);
-                    inv = Color.FromArgb(inv.A, (255 - inv.R), (255 - inv.G), (255 - inv.B));
+                    System.Drawing.Color inv = pic.GetPixel(x, y);
+                    inv = System.Drawing.Color.FromArgb(inv.A, (255 - inv.R), (255 - inv.G), (255 - inv.B));
                     pic.SetPixel(x, y, inv);
                 }
             }
@@ -54,19 +55,12 @@ namespace WebPreisBerechnungAuB.Services
             return SigBase64;
         }
 
-        /// <summary> 
-        /// Get the image and remove the Background 
-        /// finaly send it back via Json
-        /// </summary>
-        /// <param name="Image">The image.</param>
-        /// <param name="removeArray">the array with the rgb value to remove the color.</param>
-        /// <returns>Json value</returns>
-        public string RemoveBackground(string Image, string removeArray)
+        public string RemoveBackground(ImageBackground imageBackground, string removeArray)
         {
 
 
 
-            var ImageWithoutAnnotation = SubstringBase64Image(Image);
+            var ImageWithoutAnnotation = SubstringBase64Image(imageBackground.ImageBase64);
             string[] modifedArray = removeArray.Split(',').Select(str => str.Trim()).ToArray();
 
 
@@ -79,7 +73,7 @@ namespace WebPreisBerechnungAuB.Services
 
             var _image = MagickImage.FromBase64(ImageWithoutAnnotation);
 
-            _image.ColorFuzz = new Percentage(11);
+            _image.ColorFuzz = new Percentage(imageBackground.tolerance);
             MagickColor RemoveColor = MagickColor.FromRgba(_Byte[0], _Byte[1], _Byte[2], _Byte[3]);
             _image.Opaque(RemoveColor, MagickColors.None);
 
