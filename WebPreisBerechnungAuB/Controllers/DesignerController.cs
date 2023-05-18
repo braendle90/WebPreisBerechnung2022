@@ -59,6 +59,8 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
         [HttpPost]
+
+       
         public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
 
