@@ -208,6 +208,9 @@ function SendJsonData(url) {
 
     var ctx = file.getContext("2d");
 
+    var spinner = document.getElementById("spinner");
+    spinner.hidden = false;
+
 
     //var LogoSizeRatio = JSON.parse(localStorage.getItem("rgbaColor"));
 
@@ -262,6 +265,8 @@ function SendJsonData(url) {
 
                 var img = new Image();
                 img.onload = function () {
+                    spinner.hidden = true;
+
                     ctx.canvas.height = img.height;
                     ctx.globalCompositeOperation = "screen"; // negative multiplizieren
                     ctx.drawImage(img, 0, 0);
