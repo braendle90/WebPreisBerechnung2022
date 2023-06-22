@@ -19,7 +19,7 @@
 
         <div class="custom-file">
             <input type="file" onchange="return SendJsonData('SaveImage')" class="custom-file-input" id="inputGroupFile01" name="file" aria-describedby="inputGroupFileAddon01">
-            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            <label id="fileLabel" class="custom-file-label" for="inputGroupFile01">Choose file</label>
             <input type="hidden" name="Image" id="Image" />
         </div>
 
@@ -28,23 +28,28 @@
 
     </div>
 
+    <div class="row mx-auto">
 
 
-    <button onclick="uploadToTextil()" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Place on Textil</button>
+
+        <button onclick="uploadToTextil()" type="button" class="btn btn-primary  btn-sm mr-1 mb-5" data-bs-dismiss="modal">Auf Textil platzieren</button>
 
 
-    <button onclick="SendJsonData('RemoveBackground')" id="removeBg" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"> Remove Color</button>
+        <button onclick="SendJsonData('RemoveBackground')" id="removeBg" type="button" class="btn btn-primary  btn-sm mr-1 mb-5" data-bs-dismiss="modal"> Entferne Farbe</button>
 
-    <button onclick="SendJsonData('InvertColor')" id="invertColor" type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal">Bild invertieren</button>
+        <button onclick="SendJsonData('InvertColor')" id="invertColor" type="button" class="btn btn-primary  btn-sm mr-1 mb-5" data-bs-dismiss="modal">Bild invertieren</button>
 
+        <button onclick="SendJsonData('orginImage')" id="orginImage" type="button" class="btn btn-primary  btn-sm mb-5" data-bs-dismiss="modal">Original Bild</button>
+    </div>
+
+ 
     <div class="mx-auto" id="colorField"></div>
-
 
     <div class="form-group mt-4 text-center">
         <label for="toleranceRangeValue"><h4>Toleranz Farbe entfernen</h4></label>
 
         <div class="toleranceRangeValue">50</div>
-        <input type="range" onchange="changeValuefromTolerance()" class="custom-range" min="0" max="100" step="1" id="toleranceRange" value="50" style="width: 100%">
+        <input type="range" onchange="changeValuefromTolerance()" class="custom-range" min="0" max="100" step="1" id="toleranceRange" value="10" style="width: 100%">
 
     </div>
 
@@ -53,7 +58,7 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-   
+
     <br />
 
     <canvas onclick="colorPicker(event)" width="400" style='height: 100%; width: 100%; background-image: url("https://raw.githubusercontent.com/fengyuanchen/cropperjs/main/src/images/bg.png"); object-fit: contain' height="400" id="imgShow" />

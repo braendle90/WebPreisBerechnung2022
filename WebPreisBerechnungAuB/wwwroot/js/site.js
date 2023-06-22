@@ -5,6 +5,9 @@
 //Logo_SurfaceWidht
 
 var rgbaColor = 'rgba(255,0,0,1)';
+var colorField;
+
+localStorage.setItem("rgbaColor", [255, 255, 255, 255]);
 
 
 function changeColorField() {
@@ -223,6 +226,7 @@ function SendJsonData(url) {
 
     var fdata = new FormData();
     var filesInput = document.getElementById("inputGroupFile01");
+    var fileName = document.getElementById("fileLabel").innerHTML;
     filesInput = filesInput.files[0];
 
     var removeColorRGB = JSON.stringify(localStorage.getItem("rgbaColor"));
@@ -230,6 +234,7 @@ function SendJsonData(url) {
     var tolerance = document.getElementById("toleranceRange").value;
 
     if (!removeColorRGB) {
+
         removeColorRGB = "Leer";
     }
 
@@ -239,7 +244,7 @@ function SendJsonData(url) {
         fdata.append("Id", 123);
         fdata.append("ImageBase64", file);
         fdata.append("RemoveColorRGB", removeColorRGB);
-        fdata.append("Name", "NameFórmdata");
+        fdata.append("Name", fileName);
         fdata.append("FilePath", "FilePath");
         fdata.append("tolerance", tolerance);
     }
@@ -264,6 +269,10 @@ function SendJsonData(url) {
 
 
                 var img = new Image();
+                img.name = res.fileName;
+
+                document.getElementById("fileLabel").innerHTML = res.fileName;
+
                 img.onload = function () {
                     spinner.hidden = true;
 
@@ -274,7 +283,7 @@ function SendJsonData(url) {
                 };
                 img.src = 'data:image/png;base64,' + res.imgBase64;
 
-                localStorage.removeItem("rgbaColor");
+                //localStorage.removeItem("rgbaColor");
             }
         },
         error: function () {

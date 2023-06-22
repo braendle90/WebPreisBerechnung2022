@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Repo;
@@ -42,6 +43,22 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
         }
+
+        [HttpPost]
+
+        public IActionResult orginImage(ImageBackground imageBackground)
+        {
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+            string uploads = Path.Combine(uploadsFolder, imageBackground.FileData.FileName);
+            var separator = Path.DirectorySeparatorChar.ToString();
+            var pathtoFileToSend = (uploadsFolder + separator + imageBackground.Name);
+
+            byte[] imageArray = System.IO.File.ReadAllBytes(pathtoFileToSend);
+            string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+
+            return Json(new { isValid = true, fileName = imageBackground.Name, imgBase64 = base64ImageRepresentation }); ;
+        }
+
         [HttpPost]
         public IActionResult InvertColor(ImageBackground imageBackground)
         {
@@ -54,7 +71,7 @@ namespace WebPreisBerechnungAuB.Controllers
             var ImageBasej64 = _LoadAndModifyImage.InvertColor(imageBackground.ImageBase64, arraySubString);
 
 
-            return Json(new { isValid = true, imgBase64 = ImageBasej64 });
+            return Json(new { isValid = true,fileName = imageBackground.Name, imgBase64 = ImageBasej64 });
         }
 
 
@@ -72,7 +89,7 @@ namespace WebPreisBerechnungAuB.Controllers
             var ImageBasej64 = _LoadAndModifyImage.RemoveBackground(imageBackground, arraySubString);
 
 
-            return Json(new { isValid = true, imgBase64 = ImageBasej64 });
+            return Json(new { isValid = true, fileName = imageBackground.Name, imgBase64 = ImageBasej64 });
 
         }
 
@@ -88,6 +105,13 @@ namespace WebPreisBerechnungAuB.Controllers
             string uploads = Path.Combine(uploadsFolder, imageBackground.FileData.FileName);
             var separator = Path.DirectorySeparatorChar.ToString();
 
+
+            var fileName = imageBackground.FileData.FileName;
+            fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+            fileName = fileName + "_400px.png";
+
+
+            var pathtoFileToSend = (uploadsFolder + separator + fileName);
 
             if (imageBackground.FileData.Length > 0)
             {
@@ -110,26 +134,22 @@ namespace WebPreisBerechnungAuB.Controllers
                 _image.Read(uploads, settings);
                 _image.Resize(400, 0);
 
-                _image.Write(uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
-
-
-
+                _image.Write(pathtoFileToSend);
 
                 _image.Dispose();
 
             }
 
-            var pathtoFileToSend = (uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
 
             string fileToSend = Convert.ToBase64String(System.IO.File.ReadAllBytes(pathtoFileToSend));
 
 
 
-            byte[] imageArray = System.IO.File.ReadAllBytes(uploadsFolder + separator + imageBackground.FileData.FileName + ".png");
+            byte[] imageArray = System.IO.File.ReadAllBytes(pathtoFileToSend);
             string base64ImageRepresentation = Convert.ToBase64String(imageArray);
 
 
-            return Json(new { isValid = true, imgBase64 = base64ImageRepresentation });
+            return Json(new { isValid = true, fileName = fileName, imgBase64 = base64ImageRepresentation });
         }
 
 
