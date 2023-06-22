@@ -13,10 +13,9 @@
 <body>
 
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" onclick="showInPopupDesigner('@Url.Action("LoadImage","Designer",Context.Request.Scheme)','Design ändern','abcd','123456')" data-toggle="modal" data-target="#form-modal">
-        Image upload
-    </button>
+    <div class="text-center mx-auto">
+
+        <button type="button" class="btn btn-primary text-center" onclick="showInPopupDesigner('@Url.Action("LoadImage","Designer",Context.Request.Scheme)','Design ändern','abcd','123456')" data-toggle="modal" data-target="#form-modal">Bild einfügen</button>
 
 
     <h3>Save File</h3>
@@ -35,6 +34,7 @@
            onchange="clickColor()"
            value="#ff0000" />
 
+    </div>
     <!-- Create the container of the tool -->
     <div id="tshirt-div">
         <!--
