@@ -20,10 +20,10 @@
 
 
     <h3>Save File</h3>
-    <button id="download" onclick="saveToFile()">Download</button>
+    <button class="btn btn-primary" id="download" onclick="saveToFile()">Download</button>
     <br />
     <br>
-@*    <label for="tshirt-custompicture">Upload your own design:</label>
+    @*    <label for="tshirt-custompicture">Upload your own design:</label>
     <input type="file" id="tshirt-custompicture" />
     <br>*@
 
@@ -46,6 +46,8 @@
             <div class="canvas-container">
                 <canvas id="canvas" width="1080" height="661"></canvas>
                 <canvas id="tshirt-canvas" width="1080" height="661"></canvas>
+
+
             </div>
         </div>
     </div>
@@ -123,6 +125,45 @@
                 canvas.discardActiveObject();
                 canvas.requestRenderAll();
             }
+
+            //function saveCanvasFile() {
+
+            //    var can1 = document.getElementById('canvas');
+            //    var ctx1 = can1.getContext('2d');
+
+            //    var can2 = document.getElementById(canvas.getElement().id);
+            //    var ctx2 = can2.getContext('2d');
+
+            //    var can3 = document.getElementById('canvas3');
+            //    var ctx3 = can3.getContext('2d');
+
+            //    const cvs = document.getElementById("canvas3");
+            //    const ctx = cvs.getContext("2d");
+
+
+
+            //    const dpr = window.devicePixelRatio;
+
+            //    const dpi = 300;
+            //    let width = 11.69;
+            //    let height = 8.26;
+            //    cvs.width = width * dpi * dpr;
+            //    cvs.height = height * dpi * dpr;
+            //    ctx.scale(dpr, dpr);
+
+            //    ctx.drawImage(can1, 0, 0);
+            //    ctx.drawImage(can2, 0, 0);
+
+
+            //    const downloadUrl = cvs.toDataURL();
+            //    const a = document.createElement("a");
+            //    a.href = downloadUrl;
+            //    a.setAttribute("download", "SketchDownload");
+            //    a.click();
+
+
+
+            //}
 
             function saveToFile() {
                 uncheckObject();
