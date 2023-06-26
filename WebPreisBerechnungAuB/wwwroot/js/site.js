@@ -510,7 +510,7 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
     $.ajax({
         type: 'GET',
         url: "/Logo/AddOrEdit/",
-
+       
         data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
         success: function (res) {
             $('#form-modal .modal-body').html(res);
@@ -527,10 +527,12 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
 
 
 showInPopupDesigner = (url, title, Id, offerId, showUserLogos) => {
+    var number = Id;
     $.ajax({
         type: 'GET',
         url: url,
 
+        data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
         data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
         success: function (res) {
             $('#form-modal .modal-body').html(res);

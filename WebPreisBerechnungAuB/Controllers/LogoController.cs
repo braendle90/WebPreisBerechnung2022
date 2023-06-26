@@ -66,7 +66,6 @@ namespace WebPreisBerechnungAuB.Controllers
 
         [HttpGet]
         public async Task<IActionResult> AddOrEdit(int id, string offerId, bool showUserLogos)
-
         {
             var user = await _userManager.GetUserAsync(User);
             var colorList = await _getFromDB.loadAllColor();

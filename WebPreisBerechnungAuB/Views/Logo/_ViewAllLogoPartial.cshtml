@@ -44,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.LogoSurfaceSize)
                 </td>
                 <td>
-                    <a style="font-size: 2rem" onclick="showInPopupDesigner('@Url.Action("AddOrEdit","Logo",Context.Request.Scheme)','Logo ändern','@item.Id','@Model.OfferId')" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
+                    <a style="font-size: 2rem" onclick="showInPopupLogo('@Url.Action("AddOrEdit","Logo",Context.Request.Scheme)','Logo ändern','@item.Id','@Model.OfferId')" data-dismiss="modal" class="float-right  bi bi-pencil-square iconsStyle"></a>
                     <form style="font-size: 2rem" asp-action="Delete" asp-route-id="@item.Id" onclick="return jQueryAjaxDelete(this)" class="float-right bi bi-trash iconsStyle">
                         <input type="hidden" asp-for="@item.Id" />
                     
