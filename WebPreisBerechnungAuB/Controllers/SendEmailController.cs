@@ -56,7 +56,7 @@ namespace WebPreisBerechnungAuB.Controllers
             //await _emailSender.SendEmailAsync(message);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "OrderTextil");
         }
 
         public async Task<IActionResult> SendEmail(string id)
