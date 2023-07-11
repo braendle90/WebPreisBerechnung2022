@@ -1,6 +1,0 @@
-﻿namespace WebPreisBerechnungAuB
-{
-    public class Information
-    {
-    }
-}
