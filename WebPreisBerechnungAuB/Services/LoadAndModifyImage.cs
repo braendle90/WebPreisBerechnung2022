@@ -55,6 +55,51 @@ namespace WebPreisBerechnungAuB.Services
             return SigBase64;
         }
 
+        public string SubString(string text)
+        {
+            var lengthString = text.Length;
+            var arraySubString = text.Substring(1, lengthString - 2);
+
+            return arraySubString;
+        }
+
+        public string ChangeColor(ImageBackground imageBackground, string removeArray)
+        {
+
+
+
+            var ImageWithoutAnnotation = SubstringBase64Image(imageBackground.ImageBase64);
+            string[] modifedArray = removeArray.Split(',').Select(str => str.Trim()).ToArray();
+            string[] modifedArrayDesiredColor = imageBackground.ChangeColorRGB.Split(',').Select(str => str.Trim()).ToArray();
+
+
+            byte[] removeArraySplited = new byte[modifedArray.Length];
+
+            //removeArraySplited[i] = modifedArray[i].Select(s => Convert.ToByte(s)).ToArray();
+            byte[] _Byte = modifedArray.Select(s => Byte.Parse(s)).ToArray();
+            byte[] _ByteDesiredColor = modifedArrayDesiredColor.Select(s => Byte.Parse(s)).ToArray();
+
+
+
+            var _image = MagickImage.FromBase64(ImageWithoutAnnotation);
+
+            _image.ColorFuzz = new Percentage(imageBackground.tolerance);
+            MagickColor RemoveColor = MagickColor.FromRgba(_Byte[0], _Byte[1], _Byte[2], _Byte[3]);
+            MagickColor DesiredColor = MagickColor.FromRgb(_ByteDesiredColor[0], _ByteDesiredColor[1], _ByteDesiredColor[2]);
+            _image.Opaque(RemoveColor, DesiredColor);
+
+
+
+
+            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+            // string uploads = Path.Combine(uploadsFolder, file.FileName);
+            var separator = Path.DirectorySeparatorChar.ToString();
+            _image.Write(uploadsFolder + separator + "BgRemoved" + ".png");
+
+            return _image.ToBase64();
+
+        }
+
         public string RemoveBackground(ImageBackground imageBackground, string removeArray)
         {
 

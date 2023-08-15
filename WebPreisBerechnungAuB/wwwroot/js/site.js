@@ -204,6 +204,18 @@ function changeValuefromTolerance() {
 }
 
 
+function getRGBColor(hex) {
+    const color = hex.value
+    const r = parseInt(color.substr(1, 2), 16)
+    const g = parseInt(color.substr(3, 2), 16)
+    const b = parseInt(color.substr(5, 2), 16)
+    console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+    var rgbValue = "" + r + "," + g + "," + b;
+
+    return rgbValue;
+}
+
+
 function SendJsonData(url) {
 
     var file = document.getElementById("imgShow");
@@ -231,11 +243,22 @@ function SendJsonData(url) {
 
     var removeColorRGB = JSON.stringify(localStorage.getItem("rgbaColor"));
 
+    var changeColorRGBType = document.getElementById("desiredColor");
+
+
+
+    var changeColorRGB = JSON.stringify(getRGBColor(changeColorRGBType));
+
     var tolerance = document.getElementById("toleranceRange").value;
 
     if (!removeColorRGB) {
 
         removeColorRGB = "Leer";
+    }
+
+    if (!changeColorRGB) {
+
+        changeColorRGB = "Leer";
     }
 
     if (fdata != null) {
@@ -244,6 +267,7 @@ function SendJsonData(url) {
         fdata.append("Id", 123);
         fdata.append("ImageBase64", file);
         fdata.append("RemoveColorRGB", removeColorRGB);
+        fdata.append("ChangeColorRGB", changeColorRGB);
         fdata.append("Name", fileName);
         fdata.append("FilePath", "FilePath");
         fdata.append("tolerance", tolerance);
@@ -510,7 +534,7 @@ showInPopupLogo = (url, title, Id, offerId, showUserLogos) => {
     $.ajax({
         type: 'GET',
         url: "/Logo/AddOrEdit/",
-       
+
         data: { id: Id, offerId: offerId, showUserLogos: showUserLogos },
         success: function (res) {
             $('#form-modal .modal-body').html(res);

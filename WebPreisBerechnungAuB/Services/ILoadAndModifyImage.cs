@@ -12,6 +12,7 @@ namespace WebPreisBerechnungAuB.Services
         /// <param name="removeArray">the array with the rgb value to remove the color.</param>
         /// <returns>string ImageBase64</returns>
         public string RemoveBackground(ImageBackground imageBackground, string removeArray);
+        public string ChangeColor(ImageBackground imageBackground, string removeArray);
 
         /// <summary>
         /// Invert the given Image such as from black to White
@@ -28,5 +29,6 @@ namespace WebPreisBerechnungAuB.Services
         /// <param name="data"></param>
         /// <returns>Bitmap Base64Image</returns>
         public string SubstringBase64Image(string data);
+        public string SubString(string data);
     }
 }

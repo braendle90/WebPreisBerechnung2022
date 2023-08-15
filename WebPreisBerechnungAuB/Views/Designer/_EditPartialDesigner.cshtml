@@ -40,9 +40,19 @@
         <button onclick="SendJsonData('InvertColor')" id="invertColor" type="button" class="btn btn-primary  btn-sm mr-1 mb-5" data-bs-dismiss="modal">Bild invertieren</button>
 
         <button onclick="SendJsonData('orginImage')" id="orginImage" type="button" class="btn btn-primary  btn-sm mb-5" data-bs-dismiss="modal">Original Bild</button>
+
+        <div class="mx-auto text-center">
+
+            <input class="mx-auto" type="color" id="desiredColor" value="#ff0000">
+            <br />
+            <br />
+            <button onclick="SendJsonData('ChangePickedColor')" id="removeBg" type="button" class="btn btn-primary  btn-sm mr-1 mb-5" data-bs-dismiss="modal"> Ändere Farbe</button>
+            <br />
+        </div>
+
     </div>
 
- 
+
     <div class="mx-auto" id="colorField"></div>
 
     <div class="form-group mt-4 text-center">

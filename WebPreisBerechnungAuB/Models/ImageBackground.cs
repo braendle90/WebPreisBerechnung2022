@@ -11,6 +11,7 @@ namespace WebPreisBerechnungAuB.Models
         public int Id { get; set; }
 
         public string RemoveColorRGB { get; set; }
+        public string ChangeColorRGB { get; set; }
 
         public int tolerance { get; set; }
 

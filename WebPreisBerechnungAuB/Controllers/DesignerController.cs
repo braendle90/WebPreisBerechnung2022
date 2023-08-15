@@ -44,8 +44,27 @@ namespace WebPreisBerechnungAuB.Controllers
 
         }
 
-        [HttpPost]
 
+        [HttpPost]
+        public IActionResult ChangePickedColor(ImageBackground imageBackground)
+        {
+
+
+            var arraySubString = _LoadAndModifyImage.SubString(imageBackground.RemoveColorRGB);
+            var arraySubStringChangeColorRGB = _LoadAndModifyImage.SubString(imageBackground.ChangeColorRGB);
+
+
+            imageBackground.RemoveColorRGB = arraySubString;
+            imageBackground.ChangeColorRGB = arraySubStringChangeColorRGB;
+
+            var ImageBasej64 = _LoadAndModifyImage.ChangeColor(imageBackground, arraySubString);
+
+
+            return Json(new { isValid = true, fileName = imageBackground.Name, imgBase64 = ImageBasej64 });
+
+        }
+
+        [HttpPost]
         public IActionResult orginImage(ImageBackground imageBackground)
         {
             string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
@@ -71,13 +90,11 @@ namespace WebPreisBerechnungAuB.Controllers
             var ImageBasej64 = _LoadAndModifyImage.InvertColor(imageBackground.ImageBase64, arraySubString);
 
 
-            return Json(new { isValid = true,fileName = imageBackground.Name, imgBase64 = ImageBasej64 });
+            return Json(new { isValid = true, fileName = imageBackground.Name, imgBase64 = ImageBasej64 });
         }
 
 
         [HttpPost]
-
-
         public IActionResult RemoveBackground(ImageBackground imageBackground)
         {
 
