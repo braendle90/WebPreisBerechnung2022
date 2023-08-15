@@ -210,6 +210,7 @@ function getRGBColor(hex) {
     const g = parseInt(color.substr(3, 2), 16)
     const b = parseInt(color.substr(5, 2), 16)
     console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+
     var rgbValue = "" + r + "," + g + "," + b;
 
     return rgbValue;
