@@ -102,6 +102,9 @@ namespace WebPreisBerechnungAuB.Repo
                     .Where(x => x.Id == item.Id)
                     .FirstOrDefaultAsync();
 
+
+
+
                 extraChargeListLoading.IsSelected = item.IsSelected;
                 extraChargeListLoading.ChargePieces = logovm.Logo.Color.NumberOfColors;
 
@@ -120,6 +123,28 @@ namespace WebPreisBerechnungAuB.Repo
                 updateExtraChargeList.Add(extraChargeListLoading);
             }
 
+            var allSelectedExtraChargeList = updateExtraChargeList.FindAll(x => x.IsSelected == true);
+
+
+            // if a user not set any screen with or without storage.
+
+           List<ExtraCharge> extraChargeList = await loadExtraCharge();   
+
+            foreach (var item in allSelectedExtraChargeList)
+            {
+                // here is the quere 
+                foreach (var extracharge in extraChargeList)
+                {
+                    if (item.ExtraCharge.ChargeName == extracharge.ChargeName && item.IsSelected == true)
+                    {
+
+                    }
+
+                }
+
+            }
+
+
             //// add ExtraCharge for Transfer
             //var extraChargeTransfer = await _context.ExtraCharge.Where(x => x.ChargeTyp == "Transfer").FirstOrDefaultAsync();
             //var extraChargeListTransferAdd = new ExtraChargeList
@@ -136,6 +161,19 @@ namespace WebPreisBerechnungAuB.Repo
 
             return updateExtraChargeList;
 
+        }
+
+
+
+        public async Task<List<ExtraCharge>> loadExtraCharge()
+        {
+
+
+            List<ExtraCharge> loadExtraCharge = await _context.ExtraCharge.Where(x => x.ChargeTyp =="Logo").ToListAsync(); 
+
+
+
+            return loadExtraCharge;
         }
 
         public async Task<List<ExtraChargeList>> loadExtraChargeListFromLogo(WebPreisBerechnungAuB.Models.Logo logo)

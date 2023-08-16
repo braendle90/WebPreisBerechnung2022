@@ -86,6 +86,11 @@ namespace WebPreisBerechnungAuB.Controllers
                         IsSelected = false,
                     };
 
+                    if (item.IsSelected)
+                    {
+                        model.IsSelected = true;
+                    }
+
                     listExtraChargeLoad.Add(model);
 
                 }
@@ -279,46 +284,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
             }
 
-            //if (model.Image.Length > 0)
-            //{
-
-            //    string filePath = "C:\\Users\\domin\\source\\repos\\cropperjs\\cropperjs\\wwwroot\\Images\\221c4361-dd77-4fcb-9cd2-89fdc7a7e8a2NEW_Cropped.png";
-            //    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await model.Image.CopyToAsync(fileStream);
-            //    }
-            //}
-
-
-            //model.Logo.LogoExtraCharge.ExtraChargeList = new List<ExtraCharge>();
-            //model.ExtraChargeList = await _getFromDB.loadExtraCharges();
-
-            //var extraCharge = await _context.ExtraCharge.ToListAsync();
-
-            //foreach (var item in model.ExtraChargeListCheckbox)
-            //{
-            //    extraCharge.Find(x => x.Id == item.Id).IsSelected = item.IsSelected;
-            //}
-
-
-            // here it will be read the Extra Charge Name from submited int[] 
-            //List<SelectListItem> selectedItems = model.ExtraChargeList.Where(p => model.ExtraChargeId.Contains(int.Parse(p.Value))).ToList();
-
-            //var extraChargeListLoad = new List<ExtraCharge>();
-
-            //foreach (var item in model.ExtraChargeId)
-            //{
-            //    var extraFindListFound = await _context.ExtraCharge.Where(x => x.Id == item).FirstOrDefaultAsync();
-
-            //    if (extraFindListFound != null)
-            //    {
-            //        extraChargeListLoad.Add(extraFindListFound);
-            //    }
-
-            //}
-
-
-            model.Logo.LogoSurfaceSize = (model.Logo.SurfaceHight * model.Logo.SurfaceWidht);
+           model.Logo.LogoSurfaceSize = (model.Logo.SurfaceHight * model.Logo.SurfaceWidht);
 
             LogoVM modelVm;
 

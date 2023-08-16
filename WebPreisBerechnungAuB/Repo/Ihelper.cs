@@ -12,6 +12,7 @@ namespace WebPreisBerechnungAuB.Repo
         Task<List<ExtraChargeList>> CreateExtraChargeList(LogoVM logovm);
         Task<List<SelectListItem>> findSelectedExtraChargeList(List<int> extraChargeList);
         Task<List<ExtraChargeList>> loadExtraChargeListFromLogo(Models.Logo logo);
+        Task<List<ExtraCharge>> loadExtraCharge();
         Task<ExtraChargeList> loadExtraChargeListFromTransfer(Models.Logo logo, PositionLogo data, OneLogoAndPosition fillModel);
         Task<decimal> priceofTransferApplication(PositionLogo data, OneLogoAndPosition fillModel);
         Task<List<ExtraChargeList>> updateExtraChargeList(LogoVM logovm);
