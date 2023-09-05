@@ -1,0 +1,219 @@
+﻿@model WebPreisBerechnungAuB.Models.Article
+
+@{
+    ViewData["Title"] = "DetailSite";
+}
+
+
+
+<div>
+    <h4>Artikel</h4>
+    <br />
+
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+
+                    <img src="https://shop.l-shop-team.at/out/pictures/generated/product/1/665_665_75/225177.jpg" class="card-img-top" alt="...">
+
+                </div>
+                <div class="col-sm-8">
+
+                    <h2 style="display: inline-block;">@Model.Name</h2>
+                    <div id="detailsTabs" class="product-details-tablist-container">
+
+
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand" href="#">Beschreibung</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Description <span class="sr-only">(current)</span></a>
+                                        <ul>
+                                            <li>Halbgekämmte Ringspun-Baumwolle</li>
+                                            <li>Verstärkendes Nackenband</li>
+                                            <li>Kragenbündchen mit Elasthan</li>
+                                            <li>Schlauchware</li>
+                                            <li>Heavy-Jersey</li>
+                                        </ul>
+                                    </li>
+                                                                        <li class="nav-item">
+                                        <a class="nav-link" href="#">Features</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Pricing</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                            Dropdown link
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li><a href="#product-details-description" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> <span>Beschreibung</span></a></li>
+
+                            <li class="active"><a href="#product-details-information" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i> <span>Informationen</span></a></li>
+                            <li><a href="#product-details-manufacturer" role="tab" data-toggle="tab"><i class="fa fa-industry"></i> <span>Hersteller</span></a></li>
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane" id="product-details-description">
+                                <div class="description">
+                                    <ul>
+                                        <li>Halbgekämmte Ringspun-Baumwolle</li>
+                                        <li>Verstärkendes Nackenband</li>
+                                        <li>Kragenbündchen mit Elasthan</li>
+                                        <li>Schlauchware</li>
+                                        <li>Heavy-Jersey</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane active" id="product-details-information">
+                                <table class="attributes table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Katalogseite TexStyles</th>
+                                            <td>
+                                                65
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Material</th>
+                                            <td>
+                                                Jersey
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Zertifizierung</th>
+                                            <td>
+                                                Vegan<br>Faire Arbeitsbedingungen<br>Oeko-Tex 100<br>REACH
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Grammatur in g/m²</th>
+                                            <td>
+                                                190 g/m²
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Materialzusammensetzung</th>
+                                            <td>
+                                                100% Baumwolle (Grey Melange: 85% Baumwolle / 15% Viskose), (Ash: 98% Baumwolle / 2% Viskose)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Polybeutel</th>
+                                            <td>
+                                                Nein
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>T-Shirts (Art)</th>
+                                            <td>
+                                                Rundhals
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Farbigkeit</th>
+                                            <td>
+                                                1-farbig<br>Meliert
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ausschnitt</th>
+                                            <td>
+                                                Rundhals<br>Nackenband
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Verarbeitung</th>
+                                            <td>
+                                                Schlauchware
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ärmel</th>
+                                            <td>
+                                                Kurzarm<br>Set-In
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Pflegehinweis</th>
+                                            <td>
+                                                40 °C waschbar<br>Bügeln erlaubt
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Passform</th>
+                                            <td>
+                                                Regular (normal geschnitten)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Größenlauf</th>
+                                            <td>
+                                                XS, S, M, L, XL, XXL, 3XL, 4XL, 5XL
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Oeko-Tex (Details)</th>
+                                            <td>
+                                                STANDARD 100 by OEKO-TEX®: CQ 1094/1 IFHT
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="product-details-manufacturer">
+                                <table class="attributes table table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th>Hersteller-Katalognummer</th>
+                                            <td>
+                                                11500
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ursprungsland Bezeichnung</th>
+                                            <td>
+                                                Bangladesch
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Warennummer</th>
+                                            <td>
+                                                61091000
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
