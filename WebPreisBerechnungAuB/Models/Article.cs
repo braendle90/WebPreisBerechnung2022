@@ -27,7 +27,7 @@ namespace WebPreisBerechnungAuB.Models
         public List<AttributeArticle> Attributes = new List<AttributeArticle>();
         public File File { get; set; }
 
-        public List<ArticleColor> ArticleColors { get; set; }
+        public List<ArticleColor> ArticleColors = new List<ArticleColor>();
 
 
 

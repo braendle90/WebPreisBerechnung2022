@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Repo;
@@ -49,6 +50,20 @@ namespace WebPreisBerechnungAuB.Controllers
             article.Descriptions.Add("Schlauchware");
             article.Descriptions.Add("Heavy-Jersey");
 
+
+
+
+
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070")); 
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
 
 
             var artribute = new AttributeArticle();

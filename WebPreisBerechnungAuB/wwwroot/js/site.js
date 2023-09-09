@@ -10,6 +10,13 @@ var colorField;
 localStorage.setItem("rgbaColor", [255, 255, 255, 255]);
 
 
+
+$('#bologna-list a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+})
+
+
 function changeColorField() {
 
     var colorField = document.getElementById("colorField");

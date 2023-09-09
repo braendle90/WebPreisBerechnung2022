@@ -7,6 +7,9 @@ let restore_array = [];
 let index = -1;
 var logo;
 
+
+
+
 function clickColor() {
   hexCodeHtml = document.getElementById("html5colorpicker").value;
 

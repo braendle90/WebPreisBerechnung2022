@@ -22,198 +22,113 @@
 
                     <h2 style="display: inline-block;">@Model.Name</h2>
                     <div id="detailsTabs" class="product-details-tablist-container">
+                    </div>
+
+                    <br />
 
 
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="navbar-brand" href="#">Beschreibung</a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="#">Description <span class="sr-only">(current)</span></a>
-                                        <ul>
-                                            <li>Halbgekämmte Ringspun-Baumwolle</li>
-                                            <li>Verstärkendes Nackenband</li>
-                                            <li>Kragenbündchen mit Elasthan</li>
-                                            <li>Schlauchware</li>
-                                            <li>Heavy-Jersey</li>
-                                        </ul>
-                                    </li>
-                                                                        <li class="nav-item">
-                                        <a class="nav-link" href="#">Features</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Pricing</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                            Dropdown link
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li><a href="#product-details-description" role="tab" data-toggle="tab"><i class="fa fa-file-text"></i> <span>Beschreibung</span></a></li>
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="bologna-list" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Beschreibung</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#history" role="tab" aria-controls="history" aria-selected="false">Informationen</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Hersteller</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
 
-                            <li class="active"><a href="#product-details-information" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i> <span>Informationen</span></a></li>
-                            <li><a href="#product-details-manufacturer" role="tab" data-toggle="tab"><i class="fa fa-industry"></i> <span>Hersteller</span></a></li>
+                            <div class="tab-content mt-3">
+                                <div class="tab-pane active" id="description" role="tabpanel">
 
-                        </ul>
+                                    <ul class="list-group list-group-flush">
 
-                        <div class="tab-content">
-                            <div class="tab-pane" id="product-details-description">
-                                <div class="description">
-                                    <ul>
-                                        <li>Halbgekämmte Ringspun-Baumwolle</li>
-                                        <li>Verstärkendes Nackenband</li>
-                                        <li>Kragenbündchen mit Elasthan</li>
-                                        <li>Schlauchware</li>
-                                        <li>Heavy-Jersey</li>
+
+
+                                        @{
+                                            foreach (var item in Model.Descriptions)
+                                            {
+                                                <li class="list-group-item">
+                                                    <h6>@item</h6>
+
+                                                </li>
+
+
+
+                                            }
+                                        }
+
                                     </ul>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane active" id="product-details-information">
-                                <table class="attributes table table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <th>Katalogseite TexStyles</th>
-                                            <td>
-                                                65
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Material</th>
-                                            <td>
-                                                Jersey
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Zertifizierung</th>
-                                            <td>
-                                                Vegan<br>Faire Arbeitsbedingungen<br>Oeko-Tex 100<br>REACH
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Grammatur in g/m²</th>
-                                            <td>
-                                                190 g/m²
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Materialzusammensetzung</th>
-                                            <td>
-                                                100% Baumwolle (Grey Melange: 85% Baumwolle / 15% Viskose), (Ash: 98% Baumwolle / 2% Viskose)
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Polybeutel</th>
-                                            <td>
-                                                Nein
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>T-Shirts (Art)</th>
-                                            <td>
-                                                Rundhals
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Farbigkeit</th>
-                                            <td>
-                                                1-farbig<br>Meliert
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ausschnitt</th>
-                                            <td>
-                                                Rundhals<br>Nackenband
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Verarbeitung</th>
-                                            <td>
-                                                Schlauchware
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ärmel</th>
-                                            <td>
-                                                Kurzarm<br>Set-In
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Pflegehinweis</th>
-                                            <td>
-                                                40 °C waschbar<br>Bügeln erlaubt
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Passform</th>
-                                            <td>
-                                                Regular (normal geschnitten)
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Größenlauf</th>
-                                            <td>
-                                                XS, S, M, L, XL, XXL, 3XL, 4XL, 5XL
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Oeko-Tex (Details)</th>
-                                            <td>
-                                                STANDARD 100 by OEKO-TEX®: CQ 1094/1 IFHT
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="product-details-manufacturer">
-                                <table class="attributes table table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <th>Hersteller-Katalognummer</th>
-                                            <td>
-                                                11500
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ursprungsland Bezeichnung</th>
-                                            <td>
-                                                Bangladesch
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Warennummer</th>
-                                            <td>
-                                                61091000
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+                                    <p class="card-text">First settled around 1000 BCE and then founded as the Etruscan Felsina about 500 BCE, it was occupied by the Boii in the 4th century BCE and became a Roman colony and municipium with the name of Bononia in 196 BCE. </p>
+                                    <a href="#" class="card-link text-danger">Read more</a>
+                                </div>
 
+                                <div class="tab-pane" id="deals" role="tabpanel" aria-labelledby="deals-tab">
+                                    <p class="card-text">Immerse yourself in the colours, aromas and traditions of Emilia-Romagna with a holiday in Bologna, and discover the city's rich artistic heritage.</p>
+                                    <a href="#" class="btn btn-danger btn-sm">Get Deals</a>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
+
+
+
+
+            </div>
+
+            <br />
+
+            <p align="center" class="variantstitle"><strong>Bitte wählen Sie eine Farbe aus.</strong></p>
+
+            <div class="row">
+
+                <div class="container">
+
+                    <ul style=" flex-wrap: wrap;" class="list-group list-group-horizontal">
+
+
+                        @foreach (var item in @Model.ArticleColors)
+                        {
+                            <li style="display: inline-block; vertical-align: top;width: 10%; margin-left: 2%;" class="list-item">
+                                <a href="#">
+                                    <div style="display: table; width: 100% ;background: @item.HexColor; height: 50px;" class="field">
+                                        <span style="background: #253E33;"></span>
+                                    </div>
+                                    <div style="white-space: normal;color: gray;text-align: left;padding-left: 0;line-height: 1.4em;display: inline-block;" class="label">
+                                        @item.Name
+                                    </div>
+                                </a>
+
+                                </li>
+
+                                }
+
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
             </div>
 
 
         </div>
 
+
     </div>
+
+
