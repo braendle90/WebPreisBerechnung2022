@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
@@ -43,7 +45,7 @@ namespace WebPreisBerechnungAuB.Controllers
             article.Name = "Imperial T-Shirt";
             article.Price = 2.3;
 
-            
+
 
             article.Descriptions.Add("Verstärkendes Nackenband");
             article.Descriptions.Add("Kragenbündchen mit Elasthan");
@@ -53,29 +55,31 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070")); 
             article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
             article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
             article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
             article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
             article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
             article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
+            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
+            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
 
 
-            var artribute = new AttributeArticle();
-            artribute.NameOfAttribute = "Grammatur in g/m²";
-            artribute.Text = "190 g/m²";
+            List<ArticleColor> articelList = new List<ArticleColor>();
 
-            artribute.NameOfAttribute = "Pflegehinweis";
-            artribute.Text = "40 °C waschbar\r\nBügeln erlaubt";
+
+            List<AttributeArticle> attributeList = new List<AttributeArticle>();
 
 
 
-            article.Attributes.Add(artribute);
+
+            attributeList.Add(new AttributeArticle("Grammatur in g/m²:", "190 g/m²"));
+            attributeList.Add(new AttributeArticle("Pflegehinweis:", "40 °C waschbar\r\nBügeln erlaubt"));
+
+
+            article.Attributes = attributeList;
 
 
 
@@ -100,16 +104,6 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-            var artribute = new AttributeArticle();
-            artribute.NameOfAttribute = "Grammatur in g/m²";
-            artribute.Text = "190 g/m²";
-
-            artribute.NameOfAttribute = "Pflegehinweis";
-            artribute.Text = "40 °C waschbar\r\nBügeln erlaubt";
-
-
-
-            article.Attributes.Add(artribute);
 
 
 

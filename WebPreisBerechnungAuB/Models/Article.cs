@@ -1,5 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.Mozilla;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace WebPreisBerechnungAuB.Models
@@ -28,6 +27,7 @@ namespace WebPreisBerechnungAuB.Models
         public File File { get; set; }
 
         public List<ArticleColor> ArticleColors = new List<ArticleColor>();
+        public List<ArticleSize> ArticleSizes = new List<ArticleSize>();
 
 
 

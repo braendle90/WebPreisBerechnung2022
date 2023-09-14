@@ -34,11 +34,9 @@
                                     <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Beschreibung</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#history" role="tab" aria-controls="history" aria-selected="false">Informationen</a>
+                                    <a class="nav-link" href="#information" role="tab" aria-controls="information" aria-selected="false">Informationen</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#deals" role="tab" aria-controls="deals" aria-selected="false">Hersteller</a>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="card-body">
@@ -66,15 +64,30 @@
                                     </ul>
                                 </div>
 
-                                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
-                                    <p class="card-text">First settled around 1000 BCE and then founded as the Etruscan Felsina about 500 BCE, it was occupied by the Boii in the 4th century BCE and became a Roman colony and municipium with the name of Bononia in 196 BCE. </p>
-                                    <a href="#" class="card-link text-danger">Read more</a>
+                                <div class="tab-pane" id="information" role="tabpanel" aria-labelledby="information-tab">
+
+
+                                    <ul class="list-group list-group-flush">
+
+
+
+                                        @{
+                                            foreach (var item in Model.Attributes)
+                                            {
+                                                <li class="list-group-item">
+                                                    <h6>@item.NameOfAttribute &emsp; @item.Text</h6>
+                                                </li>
+
+
+
+                                            }
+                                        }
+
+                                    </ul>
+
+
                                 </div>
 
-                                <div class="tab-pane" id="deals" role="tabpanel" aria-labelledby="deals-tab">
-                                    <p class="card-text">Immerse yourself in the colours, aromas and traditions of Emilia-Romagna with a holiday in Bologna, and discover the city's rich artistic heritage.</p>
-                                    <a href="#" class="btn btn-danger btn-sm">Get Deals</a>
-                                </div>
 
                             </div>
                         </div>
@@ -90,7 +103,7 @@
 
             <br />
 
-            <p align="center" class="variantstitle"><strong>Bitte wählen Sie eine Farbe aus.</strong></p>
+            <p class="text-center"><strong>Bitte wählen Sie eine Farbe aus.</strong></p>
 
             <div class="row">
 
@@ -111,24 +124,71 @@
                                     </div>
                                 </a>
 
-                                </li>
+                            </li>
 
-                                }
+                        }
 
 
-                        </ul>
-
-                    </div>
-
+                    </ul>
 
                 </div>
 
-            </div>
 
+
+                <div class="container">
+
+
+                    <br />
+                    <br />
+
+                    <div class="text-center">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Farbname</th>
+                                    <th scope="col">Lagerstand</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
+                                    <td>Pink</td>
+                                    <td>987654321</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
+                                    <td>Pink</td>
+                                    <td>987654321</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
+                                    <td>Pink</td>
+                                    <td>987654321</td>
+                                </tr>
+
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
 
 
     </div>
+
+
+</div>
 
 
