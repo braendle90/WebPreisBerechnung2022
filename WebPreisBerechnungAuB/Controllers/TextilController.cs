@@ -31,6 +31,52 @@ namespace WebPreisBerechnungAuB.Controllers
             this._getFromDB = new GetFromDB(_context, userManager);
             this._helper = new helper(_context, userManager);
         }
+
+        public IActionResult loadArticelTextil()
+        {
+
+            List<ArticelTextil> mainArticelList = new List<ArticelTextil>();
+
+
+            string textFile = "C:\\Users\\domin\\Downloads\\AT_Major_09_2023.csv";
+
+            // Read file using StreamReader. Reads file line by line
+            using (StreamReader file = new StreamReader(textFile))
+            {
+                int counter = 0;
+                string ln;
+
+                while ((ln = file.ReadLine()) != null)
+                {
+                    char[] spearator = { ',' };
+                    Int32 count = 104;
+
+                    // Using the Method
+                    String[] strlist = ln.Split(spearator,
+                           count, StringSplitOptions.None);
+
+
+
+
+                   // mainArticelList.Add(new ArticelTextil());
+
+
+
+                    if (counter == 10)
+                    {
+                        break;
+                    }
+
+                    //Console.WriteLine(ln);
+                    counter++;
+                }
+                file.Close();
+
+            }
+
+
+            return View();
+        }
         public IActionResult Index()
         {
             List<ArticelMain> mainArticelList = new List<ArticelMain>();
@@ -53,7 +99,7 @@ namespace WebPreisBerechnungAuB.Controllers
                     String[] strlist = ln.Split(spearator,
                            count, StringSplitOptions.None);
 
-               
+
 
                     mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
 
@@ -68,7 +114,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 file.Close();
 
             }
-        
+
 
 
 
@@ -150,10 +196,10 @@ namespace WebPreisBerechnungAuB.Controllers
 
         }
 
-        public IActionResult fillDatabasefromExel() 
+        public IActionResult fillDatabasefromExel()
         {
 
-            string textFile =  "C:\\Users\\domin\\Downloads\\Articel_09_2023.csv";
+            string textFile = "C:\\Users\\domin\\Downloads\\Articel_09_2023.csv";
 
             if (System.IO.File.Exists(textFile))
             {
@@ -165,7 +211,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
                     while ((ln = file.ReadLine()) != null)
                     {
-                        char[] spearator = { ','};
+                        char[] spearator = { ',' };
                         Int32 count = 3;
 
                         // Using the Method
@@ -182,7 +228,7 @@ namespace WebPreisBerechnungAuB.Controllers
                         counter++;
                     }
                     file.Close();
-                   
+
                 }
             }
 
