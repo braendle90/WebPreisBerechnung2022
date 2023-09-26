@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.NetworkInformation;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
@@ -35,7 +37,11 @@ namespace WebPreisBerechnungAuB.Controllers
         public IActionResult loadArticelTextil()
         {
 
-            List<ArticelTextil> mainArticelList = new List<ArticelTextil>();
+
+
+           
+
+            List<ArticleTextil> mainArticelList = new List<ArticleTextil>();
 
 
             string textFile = "C:\\Users\\domin\\Downloads\\AT_Major_09_2023.csv";
@@ -48,17 +54,12 @@ namespace WebPreisBerechnungAuB.Controllers
 
                 while ((ln = file.ReadLine()) != null)
                 {
-                    char[] spearator = { ',' };
+                    char[] spearator = { ';' };
                     Int32 count = 104;
 
                     // Using the Method
                     String[] strlist = ln.Split(spearator,
                            count, StringSplitOptions.None);
-
-
-
-
-                   // mainArticelList.Add(new ArticelTextil());
 
 
 
@@ -82,6 +83,8 @@ namespace WebPreisBerechnungAuB.Controllers
             List<ArticelMain> mainArticelList = new List<ArticelMain>();
 
 
+
+
             string textFile = "C:\\Users\\domin\\Downloads\\Articel_09_2023.csv";
 
             // Read file using StreamReader. Reads file line by line
@@ -103,10 +106,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
                     mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
 
-                    if (counter == 10)
-                    {
-                        break;
-                    }
+         
 
                     //Console.WriteLine(ln);
                     counter++;

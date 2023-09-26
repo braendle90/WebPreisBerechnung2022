@@ -11,6 +11,8 @@ namespace WebPreisBerechnungAuB.Data
         {
         }
 
+        public DbSet<ArticleTextil> ArticleTextil { get; set; }
+        public DbSet<ArticelMain> ArticelMain { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Logo> Logos { get; set; }
         public DbSet<ExtraCharge> ExtraCharge { get; set; }
