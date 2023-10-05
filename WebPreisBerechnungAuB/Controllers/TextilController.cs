@@ -96,7 +96,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 while ((ln = file.ReadLine()) != null)
                 {
                     char[] spearator = { ',' };
-                    Int32 count = 3;
+                    Int32 count = 4;
 
                     // Using the Method
                     String[] strlist = ln.Split(spearator,
@@ -104,7 +104,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-                    mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
+                    mainArticelList.Add(new ArticelMain(strlist[1], strlist[2], strlist[3]));
 
          
 
