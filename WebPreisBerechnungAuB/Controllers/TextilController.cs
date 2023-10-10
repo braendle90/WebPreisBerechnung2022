@@ -85,7 +85,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-            string textFile = "C:\\Users\\domin\\Downloads\\Articel_09_2023.csv";
+            string textFile = "C:\\Users\\domin\\Downloads\\articleWithoutDupplicates.csv";
 
             // Read file using StreamReader. Reads file line by line
             using (StreamReader file = new StreamReader(textFile))
@@ -96,7 +96,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 while ((ln = file.ReadLine()) != null)
                 {
                     char[] spearator = { ',' };
-                    Int32 count = 4;
+                    Int32 count = 3;
 
                     // Using the Method
                     String[] strlist = ln.Split(spearator,
@@ -104,7 +104,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-                    mainArticelList.Add(new ArticelMain(strlist[1], strlist[2], strlist[3]));
+                    mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
 
          
 
