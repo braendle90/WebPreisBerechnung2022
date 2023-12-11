@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -656,6 +657,15 @@ namespace WebPreisBerechnungAuB.Repo
 
 
             return priceTableTransferList;
+        }
+
+        public async Task<List<Color>> LoadColorsByFilter(Func<Color, bool> filter = null)
+        {
+            if (filter != null)
+            {
+                return _context.Colors.Where(filter).ToList();
+            }
+            return await _context.Colors.ToListAsync();
         }
 
         #endregion // Ende von PriceTableTransfer

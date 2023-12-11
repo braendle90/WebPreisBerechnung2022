@@ -30,7 +30,10 @@ namespace WebPreisBerechnungAuB.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-
+            var colorId = 2;
+            var text = "Farbig";
+            var colors = await _getFromDB.LoadColorsByFilter(x => x.ColorName.Contains(text));
+            var allColors = await _getFromDB.LoadColorsByFilter();
 
             //var liste = _context.OrderPositionLogos
             //    .Include(x => x.Order)

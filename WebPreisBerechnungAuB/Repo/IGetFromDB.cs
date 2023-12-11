@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
@@ -47,5 +48,6 @@ namespace WebPreisBerechnungAuB.Repo
         Task removeOrderPositionFromOrderAndUser(int orderId, ApplicationUser user);
         Task updateOplToDB(OrderPositionLogo model);
         Task writeOplToDb(OrderPositionLogo model);
+        Task<List<Color>> LoadColorsByFilter(Func<Color, bool> filter = null);
     }
 }

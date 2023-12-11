@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebPreisBerechnungAuB.Data;
 
@@ -11,9 +12,10 @@ using WebPreisBerechnungAuB.Data;
 namespace WebPreisBerechnungAuB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231122215057_updatePrductListAddProductColor1")]
+    partial class updatePrductListAddProductColor1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1063,9 +1065,6 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("CareInstruction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CatalogNr")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("ColorId")
                         .HasColumnType("int");
 
@@ -1090,14 +1089,11 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("PictureName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ArticleNr");
 

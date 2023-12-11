@@ -632,6 +632,36 @@ jQueryAjaxPost = form => {
 }
 
 
+
+
+jQueryAjaxLoadSizes = (form, catalogNr) => {
+
+    try {
+
+
+        $.ajax({
+            url: "/Textil/loadProductSize/",
+            type: 'POST',
+            data: { color: form, catalogNr: catalogNr },
+            success: function (res) {
+               
+                $("#tableRow").html(res.jsonString);
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    } catch (ex) {
+        console.log(ex)
+    }
+
+
+    //prevent default form submit event
+    return false;
+}
+
+
 jQueryAjaxDelete = form => {
     if (confirm('Are you sure to delete this record ?')) {
         try {

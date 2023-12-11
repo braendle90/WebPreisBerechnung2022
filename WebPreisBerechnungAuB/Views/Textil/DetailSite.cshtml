@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-sm-4">
 
-                    <img src="https://shop.l-shop-team.at/out/pictures/generated/product/1/665_665_75/225177.jpg" class="card-img-top" alt="...">
+                    <img src="/img/webbilder_70x90/@(Model.CatalogNr).jpg" class="card-img-top" alt="...">
 
                 </div>
                 <div class="col-sm-8">
@@ -110,19 +110,27 @@
                 <div class="container">
 
                     <ul style=" flex-wrap: wrap;" class="list-group list-group-horizontal">
+                        @*                 <button onclick="jQueryAjaxLoadSizes('test')">
 
+                        Test
+                        </button>*@
 
                         @foreach (var item in @Model.ArticleColors)
                         {
                             <li style="display: inline-block; vertical-align: top;width: 10%; margin-left: 2%;" class="list-item">
-                                <a href="#">
+
+                                <a href="#" onclick="jQueryAjaxLoadSizes('@item.Name','@Model.CatalogNr')">
+
+
                                     <div style="display: table; width: 100% ;background: @item.HexColor; height: 50px;" class="field">
                                         <span style="background: #253E33;"></span>
                                     </div>
-                                    <div style="white-space: normal;color: gray;text-align: left;padding-left: 0;line-height: 1.4em;display: inline-block;" class="label">
-                                        @item.Name
-                                    </div>
                                 </a>
+
+
+                                <div style="white-space: normal;color: gray;text-align: left;padding-left: 0;line-height: 1.4em;display: inline-block;" class="label">
+                                    @item.Name
+                                </div>
 
                             </li>
 
@@ -146,30 +154,16 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Farbname</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Size</th>
                                     <th scope="col">Lagerstand</th>
+                                    <th scope="col">Gewicht</th>
 
                                 </tr>
 
                             </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
-                                    <td>Pink</td>
-                                    <td>987654321</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
-                                    <td>Pink</td>
-                                    <td>987654321</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 3em; height: 3em;" bgcolor="green"></td>
-                                    <td>Pink</td>
-                                    <td>987654321</td>
-                                </tr>
+                            <tbody id="tableRow">
 
 
                             </tbody>

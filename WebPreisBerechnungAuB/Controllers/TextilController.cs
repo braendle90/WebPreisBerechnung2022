@@ -4,14 +4,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using MimeKit;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using WebPreisBerechnungAuB.Data;
 using WebPreisBerechnungAuB.Models;
 using WebPreisBerechnungAuB.Repo;
+using WebPreisBerechnungAuB.Services;
+using System.Security.Cryptography;
+using System.Drawing;
+using NuGet.Configuration;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -39,7 +49,7 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-           
+
 
             List<ArticleTextil> mainArticelList = new List<ArticleTextil>();
 
@@ -78,40 +88,106 @@ namespace WebPreisBerechnungAuB.Controllers
 
             return View();
         }
+
         public IActionResult Index()
         {
+
             List<ArticelMain> mainArticelList = new List<ArticelMain>();
 
 
+            var query = _context.Products
+                               .Where(p => _context.Products
+                                                  .GroupBy(p => p.CatalogNr)
+                                                  .Select(g => g.Min(p => p.ArticleNr))
+                                                  .Contains(p.ArticleNr))
+                               .OrderBy(p => p.Brand) // Fügen Sie eine Sortierung hinzu, um konsistente Ergebnisse zu gewährleisten
+                               .Skip(0)  // Überspringt die ersten 100 Datensätze
+                               .Take(100)  // Nimmt die nächsten 100 Datensätze
+                               .ToList();
 
-
-            string textFile = "C:\\Users\\domin\\Downloads\\articleWithoutDupplicates.csv";
-
-            // Read file using StreamReader. Reads file line by line
-            using (StreamReader file = new StreamReader(textFile))
+            foreach (var item in query)
             {
-                int counter = 0;
-                string ln;
 
-                while ((ln = file.ReadLine()) != null)
-                {
-                    char[] spearator = { ',' };
-                    Int32 count = 3;
-
-                    // Using the Method
-                    String[] strlist = ln.Split(spearator,
-                           count, StringSplitOptions.None);
+                mainArticelList.Add(new ArticelMain(item.Description, item.Brand, item.CatalogNr));
+            }
 
 
 
-                    mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
+            return View(mainArticelList);
+        }
 
-         
+        //public IActionResult Index()
+        //{
+        //    List<ArticelMain> mainArticelList = new List<ArticelMain>();
 
-                    //Console.WriteLine(ln);
-                    counter++;
-                }
-                file.Close();
+
+
+
+        //    string textFile = "C:\\Users\\domin\\Downloads\\articleWithoutDupplicates.csv";
+
+        //    // Read file using StreamReader. Reads file line by line
+        //    using (StreamReader file = new StreamReader(textFile))
+        //    {
+        //        int counter = 0;
+        //        string ln;
+
+        //        while ((ln = file.ReadLine()) != null)
+        //        {
+        //            char[] spearator = { ',' };
+        //            Int32 count = 3;
+
+        //            // Using the Method
+        //            String[] strlist = ln.Split(spearator,
+        //                   count, StringSplitOptions.None);
+
+
+
+        //            mainArticelList.Add(new ArticelMain(strlist[0], strlist[1], strlist[2]));
+
+
+
+        //            //Console.WriteLine(ln);
+        //            counter++;
+        //        }
+        //        file.Close();
+
+        //    }
+
+
+
+
+
+        //    return View(mainArticelList);
+        //}
+
+        public IActionResult DetailSite(string catalogNr)
+        {
+
+
+            List<Product> product = _context.Products
+                .Include(x => x.Color)
+                .Where(x => x.CatalogNr == catalogNr)
+                .ToList();
+
+            var article = new Article();
+
+            article.Name = product.FirstOrDefault().Description;
+            article.Price = product.Min(x => x.EK);
+            article.CatalogNr = product.FirstOrDefault().CatalogNr;
+
+
+            var description = product.FirstOrDefault().LongDescription;
+
+            char[] spearator = { '|' };
+            // Int32 count = 21;
+
+            // Using the Method
+            String[] descriptionlist = description.Split(spearator, StringSplitOptions.None);
+
+
+            foreach (var item in descriptionlist)
+            {
+                article.Descriptions.Add(item);
 
             }
 
@@ -119,40 +195,23 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-            return View(mainArticelList);
-        }
 
-        public IActionResult DetailSite()
-        {
 
-            var article = new Article();
-
-            article.Name = "Imperial T-Shirt";
-            article.Price = 2.3;
+            var distinctObjects = product.GroupBy(obj => new { obj.Color.Color1, obj.Color.HexCol1 })
+                                         .Select(group => group.First())
+                                         .ToList();
 
 
 
-            article.Descriptions.Add("Verstärkendes Nackenband");
-            article.Descriptions.Add("Kragenbündchen mit Elasthan");
-            article.Descriptions.Add("Schlauchware");
-            article.Descriptions.Add("Heavy-Jersey");
+            foreach (var item in distinctObjects)
+            {
+
+                article.ArticleColors.Add(new ArticleColor(item.Color.Color1, "#" + item.Color.HexCol1));
 
 
+            }
 
 
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-            article.ArticleColors.Add(new ArticleColor("Ancient Pink", "#9C6169"));
-            article.ArticleColors.Add(new ArticleColor(" Pink", "#707070"));
-
-
-            List<ArticleColor> articelList = new List<ArticleColor>();
 
 
             List<AttributeArticle> attributeList = new List<AttributeArticle>();
@@ -160,15 +219,63 @@ namespace WebPreisBerechnungAuB.Controllers
 
 
 
-            attributeList.Add(new AttributeArticle("Grammatur in g/m²:", "190 g/m²"));
-            attributeList.Add(new AttributeArticle("Pflegehinweis:", "40 °C waschbar\r\nBügeln erlaubt"));
+            attributeList.Add(new AttributeArticle("Grammatur in g/m²:", product.FirstOrDefault().Grammage));
+            attributeList.Add(new AttributeArticle("Pflegehinweis:", product.FirstOrDefault().CareInstruction));
 
 
             article.Attributes = attributeList;
 
 
 
+
+
             return View(article);
+        }
+        [HttpPost]
+        public IActionResult loadProductSize(string color, string catalogNr)
+        {
+            List<Product> ProductColorSize = new List<Product>();
+
+
+            ProductColorSize = _context.Products
+                .Where(x => x.Color.Color1 == color)
+                .Where(x => x.CatalogNr == catalogNr)
+                .Include(x => x.Color)
+                .ToList();
+
+
+
+            //foreach (var item in ProductColorSize)
+            //{
+            //    article.ArticleSizes.Add(new ArticleSize(item.Size, item.Color.Color1, item.Color.HexCol1, 123, 0, item.Weight.ToString()));
+
+            //}
+
+            // string jsonString = JsonSerializer.Serialize(ProductColorSize);
+
+            string text = "";
+
+            foreach (var item in ProductColorSize)
+            {
+                string tableRowA = "<tr>";
+                string tableDataFirst = "<td";
+                string tableDataA = "<td>";
+                string tableRowE = "</tr>";
+                string tableDataE = "</td>";
+
+                //<td style="width: 3em; height: 3em;" bgcolor="@item.HexColor"></td>
+
+                string text1 = tableRowA + tableDataFirst + " style='width: 3em; height: 3em;' bgcolor='" + item.Color.HexCol1 + "'" + tableDataE;
+                string text2 = tableDataA + item.Size + tableDataE;
+                string text3 = tableDataA + "123" + tableDataE;
+                string text4 = tableDataA + item.Weight + tableDataE + tableRowE;
+                
+                text = text + text1 + text2 + text3 + text4;
+
+            }
+
+            return Json(new { isValid = true, jsonString = text });
+
         }
 
 
@@ -196,10 +303,31 @@ namespace WebPreisBerechnungAuB.Controllers
 
         }
 
+        public IActionResult ImportCsvFileToProducts()
+        {
+            var productService = new ProductService();
+            var products = productService.ImportProductsFromCsv("C:\\Users\\domin\\Downloads\\AT_Major_DE_EUR_09.10.23_.csv");
+            // Now 'products' contains a list of Product objects from the CSV file
+
+            return View(products);
+
+        }
+
+        public async Task<IActionResult> LoadOnProduct()
+        {
+            List<Product> product = await _context.Products.Include(x => x.Color)
+                .Where(x => x.CatalogNr == "L190")
+                .ToListAsync();
+
+
+            return View();
+        }
+
         public IActionResult fillDatabasefromExel()
         {
 
-            string textFile = "C:\\Users\\domin\\Downloads\\Articel_09_2023.csv";
+
+            string textFile = "C:\\Users\\domin\\Downloads\\TextilSplitColums.csv";
 
             if (System.IO.File.Exists(textFile))
             {
@@ -211,17 +339,71 @@ namespace WebPreisBerechnungAuB.Controllers
 
                     while ((ln = file.ReadLine()) != null)
                     {
-                        char[] spearator = { ',' };
-                        Int32 count = 3;
+                        char[] spearator = { ';' };
+                        Int32 count = 21;
 
                         // Using the Method
                         String[] strlist = ln.Split(spearator,
                                count, StringSplitOptions.None);
 
-                        foreach (String s in strlist)
+
+                        //  "1000283768;AR019;7.88;White;;;;F5F4F8;;;;50 x 80 cm;ARTG;0.45;AR019_White.jpg;Bath Mat;Badematte | Hergestellt aus türkischer Baumwolle;100% Baumwolle;1000 g/m²;40 °C waschbar|Bügeln erlaubt;Badematten;"
+
+                        var test = double.Parse(strlist[2], CultureInfo.InvariantCulture);
+
+                        var ProductColor = new ProductColor
                         {
-                            Console.WriteLine(s);
+
+                            Color1 = strlist[3],
+                            Color2 = strlist[4],
+                            Color3 = strlist[5],
+                            Color4 = strlist[6],
+                            HexCol1 = strlist[7],
+                            HexCol2 = strlist[8],
+                            HexCol3 = strlist[9],
+                            HexCol4 = strlist[10],
+
+                        };
+
+                        var product = new Product
+                        {
+                            ArticleNr = strlist[0],
+                            CatalogNr = strlist[1],
+                            EK = double.Parse(strlist[2], CultureInfo.InvariantCulture),
+                            Color = ProductColor,
+                            Size = strlist[11],
+                            Brand = strlist[12],
+                            Weight = double.Parse(strlist[13], CultureInfo.InvariantCulture),
+                            PictureName = strlist[14],
+                            Description = strlist[15],
+                            LongDescription = strlist[16],
+                            Consistence = strlist[17],
+                            Grammage = strlist[18],
+                            CareInstruction = strlist[19],
+                            ProductType = strlist[20].Trim(new Char[] { ' ', ';', '.' })
+                        };
+
+                        var existingProduct = _context.Products.FirstOrDefault(p => p.ArticleNr == product.ArticleNr)
+;
+                        if (existingProduct == null)
+                        {
+                            _context.Add(product);
+                            _context.SaveChanges();
                         }
+                        else
+                        {
+
+                            // Behandeln Sie den Fall, dass das Produkt bereits existiert (z.B. Fehlermeldung, Update-Logik, etc.)
+                        }
+
+
+
+
+
+                        //foreach (String s in strlist)
+                        //{
+                        //    Console.WriteLine(s);
+                        //}
 
 
                         //Console.WriteLine(ln);

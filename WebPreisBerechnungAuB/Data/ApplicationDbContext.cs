@@ -29,6 +29,8 @@ namespace WebPreisBerechnungAuB.Data
         //Price Data
 
         public DbSet<File> Files { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<RangeTable> RangeTable { get; set; }
         public DbSet<ApplicationTransfer> ApplicationTransfer { get; set; }
         public DbSet<PriceTable> PriceTable { get; set; }

@@ -14,6 +14,8 @@ namespace WebPreisBerechnungAuB.Models
         [DisplayName("Name")]
         public string Name { get; set; }
 
+        public string CatalogNr { get; set; }
+
 
         public string Manufacturer { get; set; }
 
@@ -28,6 +30,8 @@ namespace WebPreisBerechnungAuB.Models
 
         public List<ArticleColor> ArticleColors = new List<ArticleColor>();
         public List<ArticleSize> ArticleSizes = new List<ArticleSize>();
+
+    
 
 
 

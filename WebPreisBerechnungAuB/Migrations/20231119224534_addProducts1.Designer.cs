@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebPreisBerechnungAuB.Data;
 
@@ -11,9 +12,10 @@ using WebPreisBerechnungAuB.Data;
 namespace WebPreisBerechnungAuB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119224534_addProducts1")]
+    partial class addProducts1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1057,62 +1059,44 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("ArticleNr")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ArtNrManufacturer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CareInstruction")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("CartonPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Cartons10Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CatNrManufacturer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CatalogNr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Consistence")
+                    b.Property<string>("CatalogPageCorporateWear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("CatalogPagePromotion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("EK")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Grammage")
+                    b.Property<string>("CatalogPageSportsWear")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LongDescription")
+                    b.Property<string>("CatalogPageTexStyles")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Material")
+                    b.Property<string>("CollarNeckline")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PictureName")
+                    b.Property<string>("Collections")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("ArticleNr");
-
-                    b.HasIndex("ColorId");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("WebPreisBerechnungAuB.Models.ProductColor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Color1")
                         .HasColumnType("nvarchar(max)");
@@ -1124,6 +1108,132 @@ namespace WebPreisBerechnungAuB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Colourfulness")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Consistence")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryOfOrigin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cutting")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Bags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Blanket")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Blouses")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Bonnet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Buttons")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_CapLock")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_CapSpecial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_CapType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Caps")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Glove")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Hats")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Jackets")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Pillow")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Pinafore")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_PoloShirts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Pullover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Saleshelper")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Scarfs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Shirt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Shoes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Skirts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Socks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_StuffedAnimals")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_SweatshirtsJackets")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_TShirts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Ties")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Towels")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Trousers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_UmbrellaHandle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Umbrellas")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Underwear")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details_Vests")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Discontinued")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("EAN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("EK")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Function")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Grammage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HexCol1")
@@ -1138,9 +1248,129 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("HexCol4")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Improving")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("ProductColors");
+                    b.Property<string>("Label")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Legs")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LongDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MainCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MakingCachet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Material")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mixture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nature")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Partner_Article")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QtyCarton")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShopNavigation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SinglePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sleeve")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubCategory")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TariffNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("VK_100_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_100_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_100_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_119_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_119_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_119_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_120_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_120_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_120_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_121_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_121_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_121_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_BASIS_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_BASIS_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_BASIS_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_PLUS_01")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_PLUS_05")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("VK_PLUS_06")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Workmanship")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArticleNr");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.RangeSurfaceSize", b =>
@@ -1405,15 +1635,6 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Navigation("RangeLogo");
 
                     b.Navigation("Texil");
-                });
-
-            modelBuilder.Entity("WebPreisBerechnungAuB.Models.Product", b =>
-                {
-                    b.HasOne("WebPreisBerechnungAuB.Models.ProductColor", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
-
-                    b.Navigation("Color");
                 });
 
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.ArticelMain", b =>

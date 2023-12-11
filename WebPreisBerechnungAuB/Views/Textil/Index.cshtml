@@ -19,6 +19,7 @@
         @foreach (var item in Model)
         {
 
+
             <div class="col-md-4">
                 <div class="card p-3 mb-2">
                     <div class="d-flex justify-content-between">
@@ -31,7 +32,12 @@
                         <div class="badge"> <span>@item.Brand</span> </div>
                     </div>
                     <div class="mt-5">
-                        <img style="height: 200px"  src="/img/webbilder_70x90/@(item.ArticelNumber).jpg">                        <div class="mt-5">
+                        <a href="https://localhost:44307/Textil/DetailSite?catalogNr=@item.ArticelNumber">
+                            <img style="height: 200px" src="/img/webbilder_70x90/@(item.ArticelNumber).jpg">
+                        </a>
+
+                        <div class="mt-5">
+
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -40,6 +46,8 @@
                     </div>
                 </div>
             </div>
+
+
 
         }
 
