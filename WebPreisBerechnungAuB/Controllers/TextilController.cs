@@ -120,12 +120,15 @@ namespace WebPreisBerechnungAuB.Controllers
             }
 
             string searchName = "";
+            string searchAttribute = "";
 
 
-            if (search != "")
+
+            if (search != null)
             {
                 string[] SearchArray = search.Split('|');
                 searchName = SearchArray[0];
+                searchAttribute = SearchArray[1];
 
             }
 
@@ -134,7 +137,7 @@ namespace WebPreisBerechnungAuB.Controllers
             if (searchName == "Brand")
             {
                 var query = _context.Products
-                                    .Where(p => p.Brand == search && _context.Products.GroupBy(p => p.CatalogNr)
+                                    .Where(p => p.Brand == searchAttribute && _context.Products.GroupBy(p => p.CatalogNr)
                                     .Select(g => g.Min(p => p.ArticleNr))
                                     .Contains(p.ArticleNr))
                                     .OrderBy(p => p.Brand) // Sort by Brand for consistent results
