@@ -19,7 +19,9 @@ namespace WebPreisBerechnungAuB.Models
 
         public List<File> file { get; set; }
         public string Name { get; set; }
-        public string Brand { get; set; }   
+        public string Brand { get; set; } 
+        
+//        public List<string> BrandListUnique { get; set; }
 
         public string ArticelNumber { get; set; }   
     }

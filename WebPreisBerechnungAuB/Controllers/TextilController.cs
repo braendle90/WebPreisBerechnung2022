@@ -22,6 +22,7 @@ using WebPreisBerechnungAuB.Services;
 using System.Security.Cryptography;
 using System.Drawing;
 using NuGet.Configuration;
+using WebPreisBerechnungAuB.Models.ViewModel;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -89,29 +90,69 @@ namespace WebPreisBerechnungAuB.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
 
-            List<ArticelMain> mainArticelList = new List<ArticelMain>();
+            List<ArticelMainViewModel> mainArticelList = new List<ArticelMainViewModel>();
 
-
-            var query = _context.Products
-                               .Where(p => _context.Products
-                                                  .GroupBy(p => p.CatalogNr)
-                                                  .Select(g => g.Min(p => p.ArticleNr))
-                                                  .Contains(p.ArticleNr))
-                               .OrderBy(p => p.Brand) // Fügen Sie eine Sortierung hinzu, um konsistente Ergebnisse zu gewährleisten
-                               .Skip(0)  // Überspringt die ersten 100 Datensätze
-                               .Take(100)  // Nimmt die nächsten 100 Datensätze
-                               .ToList();
-
-            foreach (var item in query)
+            if (search == null)
             {
+                var query = _context.Products
+                                   .Where(p => _context.Products
+                                                      .GroupBy(p => p.CatalogNr)
+                                                      .Select(g => g.Min(p => p.ArticleNr))
+                                                      .Contains(p.ArticleNr))
+                                   .OrderBy(p => p.Brand) // Fügen Sie eine Sortierung hinzu, um konsistente Ergebnisse zu gewährleisten
+                                   .Skip(0)  // Überspringt die ersten 100 Datensätze
+                                   .Take(1000)  // Nimmt die nächsten 100 Datensätze
+                                   .ToList();
 
-                mainArticelList.Add(new ArticelMain(item.Description, item.Brand, item.CatalogNr));
+                foreach (var item in query)
+                {
+
+                    mainArticelList.Add(new ArticelMainViewModel(item.Description, item.Brand, item.CatalogNr));
+                }
+
+                List<string> uniqueBrandListe = _context.Products.Select(p => p.Brand).Distinct().ToList();
+
+                mainArticelList.FirstOrDefault().BrandListUnique = uniqueBrandListe;
+
+            }
+
+            string searchName = "";
+
+
+            if (search != "")
+            {
+                string[] SearchArray = search.Split('|');
+                searchName = SearchArray[0];
+
             }
 
 
+
+            if (searchName == "Brand")
+            {
+                var query = _context.Products
+                                    .Where(p => p.Brand == search && _context.Products.GroupBy(p => p.CatalogNr)
+                                    .Select(g => g.Min(p => p.ArticleNr))
+                                    .Contains(p.ArticleNr))
+                                    .OrderBy(p => p.Brand) // Sort by Brand for consistent results
+                                    .Skip(0)  // Skip the first 0 records (could be omitted)
+                                    .Take(1000)  // Take the first 1000 records
+                                    .ToList();
+
+
+                foreach (var item in query)
+                {
+
+                    mainArticelList.Add(new ArticelMainViewModel(item.Description, item.Brand, item.CatalogNr));
+                }
+
+                List<string> uniqueBrandListe = _context.Products.Select(p => p.Brand).Distinct().ToList();
+
+                mainArticelList.FirstOrDefault().BrandListUnique = uniqueBrandListe;
+            }
 
             return View(mainArticelList);
         }
@@ -269,7 +310,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 string text2 = tableDataA + item.Size + tableDataE;
                 string text3 = tableDataA + "123" + tableDataE;
                 string text4 = tableDataA + item.Weight + tableDataE + tableRowE;
-                
+
                 text = text + text1 + text2 + text3 + text4;
 
             }
