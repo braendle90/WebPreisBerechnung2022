@@ -36,6 +36,7 @@ namespace WebPreisBerechnungAuB.Data
         public DbSet<PriceTable> PriceTable { get; set; }
         public DbSet<PriceTableTransfer> PriceTableTransfer { get; set; }
         public DbSet<RangeSurfaceSize> RangeSurfaceSizes { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
 
 
     }

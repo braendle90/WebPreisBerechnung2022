@@ -21,6 +21,8 @@ namespace WebPreisBerechnungAuB.Models
         public double Weight { get; set; }
         public string Material { get; set; }
         public string CatalogNr { get; set; }
+
+        public Inventory Inventory { get; set; }
     }
 
 }

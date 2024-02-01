@@ -287,6 +287,55 @@ namespace WebPreisBerechnungAuB.Controllers
                 .Include(x => x.Color)
                 .ToList();
 
+            //C:\Users\domin\source\repos\braendle90\WebPreisBerechnung2022\WebPreisBerechnungAuB\wwwroot\inventory\stockfile.csv
+
+
+            string textFile = "C:\\Users\\domin\\source\\repos\\braendle90\\WebPreisBerechnung2022\\WebPreisBerechnungAuB\\wwwroot\\inventory\\stockfile.csv";
+
+            if (System.IO.File.Exists(textFile))
+            {
+                // Read file using StreamReader. Reads file line by line
+                using (StreamReader file = new StreamReader(textFile))
+                {
+                    int counter = 0;
+                    string ln;
+
+                    while ((ln = file.ReadLine()) != null)
+                    {
+                        char[] spearator = { ';' };
+                        Int32 count = 3;
+
+                        // Using the Method
+                        String[] strlist = ln.Split(spearator,
+                               count, StringSplitOptions.None);
+
+
+                        foreach (var item in ProductColorSize)
+                        {
+
+                            if (item.ArticleNr == strlist[0])
+                            {
+                                Inventory inventory = new Inventory();
+                                inventory.stock = int.Parse(strlist[1]);
+                                item.Inventory = inventory;
+
+                                var test123 = inventory;
+
+                            }
+
+                        }
+
+                        var test = ProductColorSize;
+
+                        counter++;
+                    }
+                    file.Close();
+
+                }
+            }
+
+
+
 
 
             //foreach (var item in ProductColorSize)
@@ -307,11 +356,13 @@ namespace WebPreisBerechnungAuB.Controllers
                 string tableRowE = "</tr>";
                 string tableDataE = "</td>";
 
-                //<td style="width: 3em; height: 3em;" bgcolor="@item.HexColor"></td>
-
+                //ColorField
                 string text1 = tableRowA + tableDataFirst + " style='width: 3em; height: 3em;' bgcolor='" + item.Color.HexCol1 + "'" + tableDataE;
+                //Size
                 string text2 = tableDataA + item.Size + tableDataE;
-                string text3 = tableDataA + "123" + tableDataE;
+                //Lagerstand
+                string text3 = tableDataA + item.Inventory.stock + "    "+ item.ArticleNr + tableDataE;
+                //Gewicht
                 string text4 = tableDataA + item.Weight + tableDataE + tableRowE;
 
                 text = text + text1 + text2 + text3 + text4;
@@ -320,51 +371,6 @@ namespace WebPreisBerechnungAuB.Controllers
 
             return Json(new { isValid = true, jsonString = text });
 
-        }
-
-
-        public Article DemoArticle()
-        {
-
-
-            var article = new Article();
-
-            article.Name = "Imperial T-Shirt";
-            article.Price = 2.3;
-            article.Manufacturer = "SOL´S";
-
-            article.Descriptions.Add("Verstärkendes Nackenband");
-            article.Descriptions.Add("Kragenbündchen mit Elasthan");
-            article.Descriptions.Add("Schlauchware");
-            article.Descriptions.Add("Heavy-Jersey");
-
-
-
-
-
-
-            return article;
-
-        }
-
-        public IActionResult ImportCsvFileToProducts()
-        {
-            var productService = new ProductService();
-            var products = productService.ImportProductsFromCsv("C:\\Users\\domin\\Downloads\\AT_Major_DE_EUR_09.10.23_.csv");
-            // Now 'products' contains a list of Product objects from the CSV file
-
-            return View(products);
-
-        }
-
-        public async Task<IActionResult> LoadOnProduct()
-        {
-            List<Product> product = await _context.Products.Include(x => x.Color)
-                .Where(x => x.CatalogNr == "L190")
-                .ToListAsync();
-
-
-            return View();
         }
 
         public IActionResult fillDatabasefromExel()
@@ -440,17 +446,6 @@ namespace WebPreisBerechnungAuB.Controllers
                             // Behandeln Sie den Fall, dass das Produkt bereits existiert (z.B. Fehlermeldung, Update-Logik, etc.)
                         }
 
-
-
-
-
-                        //foreach (String s in strlist)
-                        //{
-                        //    Console.WriteLine(s);
-                        //}
-
-
-                        //Console.WriteLine(ln);
                         counter++;
                     }
                     file.Close();
@@ -460,8 +455,6 @@ namespace WebPreisBerechnungAuB.Controllers
 
             return View("Index");
         }
-
-
 
     }
 }

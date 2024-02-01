@@ -788,6 +788,19 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.ToTable("Files");
                 });
 
+            modelBuilder.Entity("WebPreisBerechnungAuB.Models.Inventory", b =>
+                {
+                    b.Property<string>("article")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("article");
+
+                    b.ToTable("Inventory");
+                });
+
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.Logo", b =>
                 {
                     b.Property<int>("Id")
@@ -1081,6 +1094,9 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("Grammage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Inventoryarticle")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("LongDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -1102,6 +1118,8 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.HasKey("ArticleNr");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("Inventoryarticle");
 
                     b.ToTable("Products");
                 });
@@ -1413,7 +1431,13 @@ namespace WebPreisBerechnungAuB.Migrations
                         .WithMany()
                         .HasForeignKey("ColorId");
 
+                    b.HasOne("WebPreisBerechnungAuB.Models.Inventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("Inventoryarticle");
+
                     b.Navigation("Color");
+
+                    b.Navigation("Inventory");
                 });
 
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.ArticelMain", b =>
