@@ -316,7 +316,7 @@ namespace WebPreisBerechnungAuB.Controllers
                             if (item.ArticleNr == strlist[0])
                             {
                                 Inventory inventory = new Inventory();
-                                inventory.stock = int.Parse(strlist[1]);
+                                inventory.Stock = int.Parse(strlist[1]);
                                 item.Inventory = inventory;
 
                                 var test123 = inventory;
@@ -361,7 +361,7 @@ namespace WebPreisBerechnungAuB.Controllers
                 //Size
                 string text2 = tableDataA + item.Size + tableDataE;
                 //Lagerstand
-                string text3 = tableDataA + item.Inventory.stock + "    "+ item.ArticleNr + tableDataE;
+                string text3 = tableDataA + item.Inventory.Stock + "    "+ item.ArticleNr + tableDataE;
                 //Gewicht
                 string text4 = tableDataA + item.Weight + tableDataE + tableRowE;
 

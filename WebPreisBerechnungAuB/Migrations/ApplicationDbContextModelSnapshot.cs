@@ -790,13 +790,20 @@ namespace WebPreisBerechnungAuB.Migrations
 
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.Inventory", b =>
                 {
-                    b.Property<string>("article")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("stock")
+                    b.Property<int>("Article")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasKey("article");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Article"), 1L, 1);
+
+                    b.Property<string>("Catalog")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("Article");
 
                     b.ToTable("Inventory");
                 });
@@ -1094,8 +1101,8 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.Property<string>("Grammage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Inventoryarticle")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("InventoryArticle")
+                        .HasColumnType("int");
 
                     b.Property<string>("LongDescription")
                         .HasColumnType("nvarchar(max)");
@@ -1119,7 +1126,7 @@ namespace WebPreisBerechnungAuB.Migrations
 
                     b.HasIndex("ColorId");
 
-                    b.HasIndex("Inventoryarticle");
+                    b.HasIndex("InventoryArticle");
 
                     b.ToTable("Products");
                 });
@@ -1203,6 +1210,22 @@ namespace WebPreisBerechnungAuB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RangeTable");
+                });
+
+            modelBuilder.Entity("WebPreisBerechnungAuB.Models.StockFileHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockFileHistories");
                 });
 
             modelBuilder.Entity("WebPreisBerechnungAuB.Models.Textil", b =>
@@ -1433,7 +1456,7 @@ namespace WebPreisBerechnungAuB.Migrations
 
                     b.HasOne("WebPreisBerechnungAuB.Models.Inventory", "Inventory")
                         .WithMany()
-                        .HasForeignKey("Inventoryarticle");
+                        .HasForeignKey("InventoryArticle");
 
                     b.Navigation("Color");
 

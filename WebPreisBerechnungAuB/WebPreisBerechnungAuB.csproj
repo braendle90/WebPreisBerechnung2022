@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Coravel" Version="5.0.2" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="GhostScriptSharp" Version="1.3.1.4" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.3.0" />
@@ -34,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="NewFolder\" />
     <Folder Include="wwwroot\img\" />
     <Folder Include="GhostScript" />
   </ItemGroup>

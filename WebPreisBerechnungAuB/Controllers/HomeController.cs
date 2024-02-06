@@ -5,7 +5,9 @@ using Microsoft.Extensions.Logging;
 using MimeKit;
 using MimeKit.Text;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Services.Interface;
 
 namespace WebPreisBerechnungAuB.Controllers
 {
@@ -13,10 +15,12 @@ namespace WebPreisBerechnungAuB.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IFtpService _ftpService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IFtpService ftpService)
         {
             _logger = logger;
+            _ftpService = ftpService;
         }
 
         public IActionResult SendEmail(string body)
@@ -39,8 +43,9 @@ namespace WebPreisBerechnungAuB.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult>Index()
         {
+            await _ftpService.GetFileAsync();
             return View();
         }
 

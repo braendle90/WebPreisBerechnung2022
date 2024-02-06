@@ -6,7 +6,10 @@ namespace WebPreisBerechnungAuB.Models
     {
 
         [Key]
-        public string article { get; set; }
-        public int stock { get; set; }
+        public int Article { get; set; }
+        public int Stock { get; set; }
+        [MaxLength(50)]
+        public string Catalog { get; set; } = string.Empty;
+
     }
 }

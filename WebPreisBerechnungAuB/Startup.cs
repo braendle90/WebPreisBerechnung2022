@@ -1,3 +1,5 @@
+using Coravel;
+using Coravel.Scheduling.Schedule;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
@@ -5,10 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading.Tasks;
 using WebPreisBerechnungAuB.Data;
+using WebPreisBerechnungAuB.Extensions;
 using WebPreisBerechnungAuB.Helpers;
 using WebPreisBerechnungAuB.Models;
+using WebPreisBerechnungAuB.Repository;
 using WebPreisBerechnungAuB.Services;
+using WebPreisBerechnungAuB.Services.Interface;
 
 namespace WebPreisBerechnungAuB
 {
@@ -35,6 +42,14 @@ namespace WebPreisBerechnungAuB
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
 
+            services.AddScheduler();
+
+            //var ftpConnection = Configuration
+            //    .GetSection("FtpConnection")
+            //    .Get<FtpConnection>();
+            //services.AddSingleton(ftpConnection);
+            //services.Configure<FtpConnection>(Configuration.GetSection("FtpConnection"));
+
             services.Configure<FormOptions>(o =>
             {
                 o.ValueLengthLimit = int.MaxValue;
@@ -47,12 +62,17 @@ namespace WebPreisBerechnungAuB
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-
             services.AddScoped<Services.IUserService, UserService>();
             services.AddScoped<ICalculationService, CalculationService>();
             services.AddScoped<ITemplateReader, TemplateReader>();
             services.AddScoped<ILoadAndModifyImage, LoadAndModifyImage>();
-            RegisterServices(services);
+            services.AddScoped<IFtpService, FtpService>();
+            services.RegisterServices();
+
+            services.AddScoped<FtpService>();
+            //services.AdAddTransientdScoped<IFtpService, FtpService>(); // oder .AddSingleton oder .AddTransient, je nach gewünschter Lebensdauer
+
+
 
             //Authorization
             //services.AddAuthorization(options =>
@@ -63,10 +83,10 @@ namespace WebPreisBerechnungAuB
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IFtpService ftpService)
         {
 
-            context.Database.Migrate();
+            // context.Database.Migrate();
 
             if (env.IsDevelopment())
             {
@@ -98,10 +118,30 @@ namespace WebPreisBerechnungAuB
                     pattern: "{controller=OrderTextil}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-        }
-        private void RegisterServices(IServiceCollection services)
-        {
-            services.AddTransient<Services.IUserService, UserService>();
+
+
+            var provider = app.ApplicationServices;
+            provider.UseScheduler(scheduler =>
+            {
+                scheduler.Schedule<FtpService>()
+                .EveryThirtyMinutes()
+                .RunOnceAtStart();
+
+
+
+            });
+
+
+
+
+            //var schedulerProvider = app.ApplicationServices;
+            //schedulerProvider.UseScheduler(s =>
+            //{
+            //    s.Schedule(
+            //        async () => await ftpService.GetFileAsync()
+            //        //() => Console.WriteLine("Every minute during the week.")
+            //        ).EveryThirtySeconds();
+            //});
         }
     }
 }

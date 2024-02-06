@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using WebPreisBerechnungAuB.Models;
 
 namespace WebPreisBerechnungAuB.Data
@@ -37,7 +38,7 @@ namespace WebPreisBerechnungAuB.Data
         public DbSet<PriceTableTransfer> PriceTableTransfer { get; set; }
         public DbSet<RangeSurfaceSize> RangeSurfaceSizes { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
-
+        public DbSet<StockFileHistory> StockFileHistories { get; set; }
 
     }
 }
